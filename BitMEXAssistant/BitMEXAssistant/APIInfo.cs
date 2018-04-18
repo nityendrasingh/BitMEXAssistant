@@ -33,17 +33,17 @@ namespace BitMEXAssistant
                     this.Close();
                     // TODO: API is valid, open the form with assistant tools at that point.
                 }
-            }
+        }
             catch(Exception ex)
             {
                 // If it shoots an error, API is invalid.
                 APIValid = false;
                 lblAPIStatus.Text = "API info is invalid!";
             }
-            
 
 
-        }
+
+}
 
         // Check account balance/validity
         private void GetAPIValidity()

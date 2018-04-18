@@ -58,7 +58,6 @@
             // 
             // txtKey
             // 
-            this.txtKey.Enabled = false;
             this.txtKey.Location = new System.Drawing.Point(59, 12);
             this.txtKey.Name = "txtKey";
             this.txtKey.Size = new System.Drawing.Size(391, 20);
@@ -96,8 +95,8 @@
             // lblAPIStatus
             // 
             this.lblAPIStatus.Name = "lblAPIStatus";
-            this.lblAPIStatus.Size = new System.Drawing.Size(118, 17);
-            this.lblAPIStatus.Text = "toolStripStatusLabel1";
+            this.lblAPIStatus.Size = new System.Drawing.Size(155, 17);
+            this.lblAPIStatus.Text = "Please enter your API secret.";
             // 
             // APIInfo
             // 
