@@ -60,17 +60,21 @@
             // 
             this.txtKey.Location = new System.Drawing.Point(59, 12);
             this.txtKey.Name = "txtKey";
+            this.txtKey.PasswordChar = '*';
             this.txtKey.Size = new System.Drawing.Size(391, 20);
             this.txtKey.TabIndex = 2;
             this.txtKey.Text = "AKL23@LWLJCMQPQIOSCU3829";
+            this.txtKey.TextChanged += new System.EventHandler(this.txtKey_TextChanged);
             // 
             // txtSecret
             // 
             this.txtSecret.Location = new System.Drawing.Point(59, 37);
             this.txtSecret.Name = "txtSecret";
+            this.txtSecret.PasswordChar = '*';
             this.txtSecret.Size = new System.Drawing.Size(391, 20);
             this.txtSecret.TabIndex = 3;
             this.txtSecret.Text = "AKL23@LWLJCMQPQIOSCU3829";
+            this.txtSecret.TextChanged += new System.EventHandler(this.txtSecret_TextChanged);
             // 
             // btnValidate
             // 
@@ -95,8 +99,8 @@
             // lblAPIStatus
             // 
             this.lblAPIStatus.Name = "lblAPIStatus";
-            this.lblAPIStatus.Size = new System.Drawing.Size(155, 17);
-            this.lblAPIStatus.Text = "Please enter your API secret.";
+            this.lblAPIStatus.Size = new System.Drawing.Size(199, 17);
+            this.lblAPIStatus.Text = "Please enter your API key and secret.";
             // 
             // APIInfo
             // 

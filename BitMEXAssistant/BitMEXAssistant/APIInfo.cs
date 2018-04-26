@@ -20,6 +20,13 @@ namespace BitMEXAssistant
         public APIInfo()
         {
             InitializeComponent();
+            InitializeSettings();
+        }
+
+        private void InitializeSettings()
+        {
+            txtKey.Text = Properties.Settings.Default.APIKey;
+            txtSecret.Text = Properties.Settings.Default.APISecret;
         }
 
         private void btnValidate_Click(object sender, EventArgs e)
@@ -30,8 +37,9 @@ namespace BitMEXAssistant
                 GetAPIValidity();
                 if(APIValid)
                 {
-                    this.Close();
-                    // TODO: API is valid, open the form with assistant tools at that point.
+                    Bot b = new Bot();
+                    b.Show();
+                    this.Hide();
                 }
         }
             catch(Exception ex)
@@ -71,5 +79,21 @@ namespace BitMEXAssistant
             }
         }
 
+        private void SaveSettings()
+        {
+            Properties.Settings.Default.Save();
+        }
+
+        private void txtKey_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.APIKey = txtKey.Text.Trim();
+            SaveSettings();
+        }
+
+        private void txtSecret_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.APISecret = txtSecret.Text.Trim();
+            SaveSettings();
+        }
     }
 }
