@@ -17,6 +17,9 @@ namespace BitMEXAssistant
         string APIKey = "";
         string APISecret = "";
         BitMEXApi bitmex;
+        List<Instrument> ActiveInstruments = new List<Instrument>();
+        Instrument ActiveInstrument = new Instrument();
+        string Timeframe = "1m";
 
         public Bot()
         {
@@ -32,7 +35,14 @@ namespace BitMEXAssistant
 
         private void Bot_Load(object sender, EventArgs e)
         {
+            InitializeDropdownsAndSettings();
             InitializeAPI();
+            InitializeSymbolInformation();
+        }
+
+        private void InitializeDropdownsAndSettings()
+        {
+            ddlCandleTimes.SelectedIndex = 0;
         }
 
         private void InitializeAPI()
@@ -40,11 +50,48 @@ namespace BitMEXAssistant
             try
             {
                 bitmex = new BitMEXApi(APIKey, APISecret);
-                label1.Text = bitmex.GetAccountBalance().ToString();
+                UpdateBalance();
+
+                // Start our HeartBeat
+                Heartbeat.Start();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
             }
-}
+        }
+
+        private void InitializeSymbolInformation()
+        {
+            ActiveInstruments = bitmex.GetActiveInstruments().OrderByDescending(a => a.Volume24H).ToList();
+            ddlSymbol.DataSource = ActiveInstruments;
+            ddlSymbol.DisplayMember = "Symbol";
+            ddlSymbol.SelectedIndex = 0;
+            ActiveInstrument = ActiveInstruments[0];
+        }
+
+        private void ddlSymbol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ActiveInstrument = bitmex.GetInstrument(((Instrument)ddlSymbol.SelectedItem).Symbol)[0];
+        }
+
+        private void ddlCandleTimes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Timeframe = ddlCandleTimes.SelectedItem.ToString();
+        }
+
+        private void UpdateBalance()
+        {
+            lblBalance.Text = "Balance: " + bitmex.GetAccountBalance().ToString();
+        }
+
+        private void Heartbeat_Tick(object sender, EventArgs e)
+        {
+            if(DateTime.UtcNow.Second == 0)
+            {
+                //Update our balance each minute
+                UpdateBalance();
+            }
+            
+        }
     }
 }
