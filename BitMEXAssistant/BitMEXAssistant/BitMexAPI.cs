@@ -209,13 +209,17 @@ namespace BitMEX
             return Query("POST", "/order", param, true);
         }
 
-        public string MarketOrder(string Symbol, string Side, int Quantity)
+        public string MarketOrder(string Symbol, string Side, int Quantity, bool ReduceOnly = false)
         {
             var param = new Dictionary<string, string>();
             param["symbol"] = Symbol;
             param["side"] = Side;
             param["orderQty"] = Quantity.ToString();
             param["ordType"] = "Market";
+            if(ReduceOnly)
+            {
+                param["execInst"] = "ReduceOnly";
+            }
             return Query("POST", "/order", param, true);
         }
 

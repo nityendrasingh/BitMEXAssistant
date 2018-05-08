@@ -46,5 +46,89 @@ namespace BitMEXAssistant.Properties {
                 this["APISecret"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int DCAContracts {
+            get {
+                return ((int)(this["DCAContracts"]));
+            }
+            set {
+                this["DCAContracts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int DCAHours {
+            get {
+                return ((int)(this["DCAHours"]));
+            }
+            set {
+                this["DCAHours"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int DCAMinutes {
+            get {
+                return ((int)(this["DCAMinutes"]));
+            }
+            set {
+                this["DCAMinutes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int DCASeconds {
+            get {
+                return ((int)(this["DCASeconds"]));
+            }
+            set {
+                this["DCASeconds"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int DCATimes {
+            get {
+                return ((int)(this["DCATimes"]));
+            }
+            set {
+                this["DCATimes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DCAReduceOnly {
+            get {
+                return ((bool)(this["DCAReduceOnly"]));
+            }
+            set {
+                this["DCAReduceOnly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DCAExecuteImmediately {
+            get {
+                return ((bool)(this["DCAExecuteImmediately"]));
+            }
+            set {
+                this["DCAExecuteImmediately"] = value;
+            }
+        }
     }
 }
