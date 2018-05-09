@@ -46,6 +46,8 @@ namespace BitMEXAssistant
             InitializeDropdownsAndSettings();
             InitializeAPI();
             InitializeSymbolInformation();
+            
+            
         }
 
         private void InitializeDropdownsAndSettings()
@@ -57,6 +59,8 @@ namespace BitMEXAssistant
             nudDCASeconds.Value = Properties.Settings.Default.DCASeconds;
             nudDCATimes.Value = Properties.Settings.Default.DCATimes;
             chkDCAReduceOnly.Checked = Properties.Settings.Default.DCAReduceOnly;
+
+            UpdateDateAndTime();
         }
 
         private void InitializeAPI()
@@ -81,11 +85,14 @@ namespace BitMEXAssistant
             ddlSymbol.DisplayMember = "Symbol";
             ddlSymbol.SelectedIndex = 0;
             ActiveInstrument = ActiveInstruments[0];
+
+            UpdatePositionInfo();
         }
 
         private void ddlSymbol_SelectedIndexChanged(object sender, EventArgs e)
         {
             ActiveInstrument = bitmex.GetInstrument(((Instrument)ddlSymbol.SelectedItem).Symbol)[0];
+            UpdatePositionInfo();
         }
 
         private void ddlCandleTimes_SelectedIndexChanged(object sender, EventArgs e)
@@ -104,8 +111,13 @@ namespace BitMEXAssistant
             {
                 //Update our balance each minute
                 UpdateBalance();
+                UpdatePositionInfo();
             }
-            
+
+            // Update the time every second.
+            UpdateDateAndTime();
+
+
         }
 
         private void SaveSettings()
@@ -143,7 +155,7 @@ namespace BitMEXAssistant
             }
             else
             {
-                lblDCASummary.Text = (DCAContractsPer * DCATimes).ToString() + " Contracts over " + DCATimes.ToString() + " orders during a total of " + Duration.Hours.ToString() + " hours " + Duration.Minutes.ToString() + " minutes " + Duration.Seconds.ToString() + " seconds.";
+                lblDCASummary.Text = (DCAContractsPer * DCATimes).ToString() + " Contracts over " + DCATimes.ToString() + " orders during a total of " + ((int)Math.Floor(Duration.TotalHours)).ToString() + " hours " + Duration.Minutes.ToString() + " minutes " + Duration.Seconds.ToString() + " seconds.";
             }
 
 
@@ -281,6 +293,91 @@ namespace BitMEXAssistant
             chkDCAExecuteImmediately.Enabled = !Lock;
         }
 
-        
+        private void UpdateDateAndTime()
+        {
+            lblTimeUTC.Text = DateTime.UtcNow.ToShortDateString() + " " + DateTime.UtcNow.ToLongTimeString();
+        }
+
+        private void UpdatePositionInfo()
+        {
+            nudPositionLimitPrice.Increment = ActiveInstrument.TickSize;
+            List<Position> Positions = bitmex.GetOpenPositions(ActiveInstrument.Symbol);
+            if(Positions.Any())
+            {
+                gbxPosition.Visible = true;
+                txtPositionSize.Text = Positions[0].CurrentQty.ToString();
+                txtPositionEntryPrice.Text = Positions[0].AvgEntryPrice.ToString();
+                txtPositionMarkPrice.Text = Positions[0].MarkPrice.ToString();
+                txtPositionLiquidation.Text = Positions[0].LiquidationPrice.ToString();
+                txtPositionMargin.Text = Positions[0].Leverage.ToString();
+                txtPositionUnrealizedPnL.Text = Positions[0].UsefulUnrealisedPnl.ToString();
+                txtPositionUnrealizedPnLPercent.Text = Positions[0].UnrealisedPnlPcnt.ToString() + "%";
+                if(nudPositionLimitPrice.Value == 0m) // Only updates when default value is present
+                {
+                    nudPositionLimitPrice.Value = Convert.ToDecimal(((int)Math.Floor((double)Positions[0].MarkPrice)).ToString() + ".0");
+                }
+                
+            }
+            else
+            {
+                gbxPosition.Visible = false;
+            }
+            
+        }
+
+        private void btnPositionMarketClose_Click(object sender, EventArgs e)
+        {
+            UpdatePositionInfo(); // Make sure info is up to date as possible.
+
+            int Size = Convert.ToInt32(txtPositionSize.Text);
+            string Side = "Buy";
+
+            if(Size < 0) // We are short
+            {
+                Side = "Buy";
+                Size = (int)Math.Abs((decimal)Size); // Makes sure size is positive number
+            }
+            else if(Size > 0)
+            {
+                Side = "Sell";
+                Size = (int)Math.Abs((decimal)Size); // Makes sure size is positive number
+            }
+            bitmex.MarketOrder(ActiveInstrument.Symbol, Side, Size, true);
+            UpdatePositionInfo(); // Update our position information again.
+        }
+
+        private void btnPositionLimitClose_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal Price = nudPositionLimitPrice.Value;
+
+                    // We have entered a valid price
+                    int Size = Convert.ToInt32(txtPositionSize.Text);
+                    string Side = "Buy";
+
+                    if (Size < 0) // We are short
+                    {
+                        Side = "Buy";
+                        Size = (int)Math.Abs((decimal)Size); // Makes sure size is positive number
+                    }
+                    else if (Size > 0)
+                    {
+                        Side = "Sell";
+                        Size = (int)Math.Abs((decimal)Size); // Makes sure size is positive number
+                    }
+                    bitmex.LimitOrder(ActiveInstrument.Symbol, Side, Size, Price, true);
+
+                    UpdatePositionInfo(); // Make sure info is up to date as possible.
+
+
+                
+            }
+            catch(Exception ex)
+            {
+
+            }
+            
+        }
     }
 }

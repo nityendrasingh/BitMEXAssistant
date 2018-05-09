@@ -223,6 +223,21 @@ namespace BitMEX
             return Query("POST", "/order", param, true);
         }
 
+        public string LimitOrder(string Symbol, string Side, int Quantity, decimal Price, bool ReduceOnly = false)
+        {
+            var param = new Dictionary<string, string>();
+            param["symbol"] = Symbol;
+            param["side"] = Side;
+            param["orderQty"] = Quantity.ToString();
+            param["ordType"] = "Limit";
+            param["price"] = Price.ToString();
+            if (ReduceOnly)
+            {
+                param["execInst"] = "ReduceOnly";
+            }
+            return Query("POST", "/order", param, true);
+        }
+
         public string CancelAllOpenOrders(string symbol, string Note = "")
         {
             var param = new Dictionary<string, string>();
@@ -366,7 +381,7 @@ namespace BitMEX
     public class Instrument
     {
         public string Symbol { get; set; }
-        public double TickSize { get; set; }
+        public decimal TickSize { get; set; }
         public double Volume24H { get; set; }
     }
 
@@ -458,8 +473,14 @@ namespace BitMEX
         public double? AvgEntryPrice { get; set; }
         public double? BreakEvenPrice { get; set; }
         public double? LiquidationPrice { get; set; }
+        public double? RealizedPnl { get; set; }
 
         public string Symbol { get; set; }
+
+        public double? UsefulUnrealisedPnl
+        {
+            get { return Math.Round(((double)UnrealisedPnl / 100000000), 4); }
+        }
     }
 
     public class Order
