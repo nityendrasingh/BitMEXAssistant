@@ -130,5 +130,41 @@ namespace BitMEXAssistant.Properties {
                 this["DCAExecuteImmediately"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OverloadRetry {
+            get {
+                return ((bool)(this["OverloadRetry"]));
+            }
+            set {
+                this["OverloadRetry"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int OverloadRetryAttempts {
+            get {
+                return ((int)(this["OverloadRetryAttempts"]));
+            }
+            set {
+                this["OverloadRetryAttempts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        public int RetryAttemptWaitTime {
+            get {
+                return ((int)(this["RetryAttemptWaitTime"]));
+            }
+            set {
+                this["RetryAttemptWaitTime"] = value;
+            }
+        }
     }
 }

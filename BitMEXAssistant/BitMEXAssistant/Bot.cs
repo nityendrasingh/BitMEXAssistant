@@ -60,6 +60,11 @@ namespace BitMEXAssistant
             nudDCATimes.Value = Properties.Settings.Default.DCATimes;
             chkDCAReduceOnly.Checked = Properties.Settings.Default.DCAReduceOnly;
 
+            //Setting Tab
+            chkSettingOverloadRetry.Checked = Properties.Settings.Default.OverloadRetry;
+            nudSettingsOverloadRetryAttempts.Value = Properties.Settings.Default.OverloadRetryAttempts;
+            nudSettingsRetryWaitTime.Value = Properties.Settings.Default.RetryAttemptWaitTime;
+
             UpdateDateAndTime();
         }
 
@@ -378,6 +383,24 @@ namespace BitMEXAssistant
 
             }
             
+        }
+
+        private void chkSettingOverloadRetry_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.OverloadRetry = chkSettingOverloadRetry.Checked;
+            SaveSettings();
+        }
+
+        private void nudSettingsOverloadRetryAttempts_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.OverloadRetryAttempts = (int)nudSettingsOverloadRetryAttempts.Value;
+            SaveSettings();
+        }
+
+        private void nudSettingsRetryWaitTime_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.RetryAttemptWaitTime = (int)nudSettingsRetryWaitTime.Value;
+            SaveSettings();
         }
     }
 }

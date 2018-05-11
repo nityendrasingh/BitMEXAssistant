@@ -77,6 +77,11 @@
             this.txtPositionSize = new System.Windows.Forms.TextBox();
             this.lblTimeUTC = new System.Windows.Forms.Label();
             this.nudPositionLimitPrice = new System.Windows.Forms.NumericUpDown();
+            this.nudSettingsOverloadRetryAttempts = new System.Windows.Forms.NumericUpDown();
+            this.chkSettingOverloadRetry = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.nudSettingsRetryWaitTime = new System.Windows.Forms.NumericUpDown();
             this.StatusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabDCA.SuspendLayout();
@@ -86,8 +91,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudDCASeconds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDCATimes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDCAMinutes)).BeginInit();
+            this.tabSettings.SuspendLayout();
             this.gbxPosition.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPositionLimitPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSettingsOverloadRetryAttempts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSettingsRetryWaitTime)).BeginInit();
             this.SuspendLayout();
             // 
             // StatusStrip
@@ -424,6 +432,11 @@
             // 
             // tabSettings
             // 
+            this.tabSettings.Controls.Add(this.label8);
+            this.tabSettings.Controls.Add(this.nudSettingsRetryWaitTime);
+            this.tabSettings.Controls.Add(this.label7);
+            this.tabSettings.Controls.Add(this.chkSettingOverloadRetry);
+            this.tabSettings.Controls.Add(this.nudSettingsOverloadRetryAttempts);
             this.tabSettings.Location = new System.Drawing.Point(4, 22);
             this.tabSettings.Name = "tabSettings";
             this.tabSettings.Padding = new System.Windows.Forms.Padding(3);
@@ -665,6 +678,86 @@
             this.nudPositionLimitPrice.Size = new System.Drawing.Size(61, 18);
             this.nudPositionLimitPrice.TabIndex = 19;
             // 
+            // nudSettingsOverloadRetryAttempts
+            // 
+            this.nudSettingsOverloadRetryAttempts.Location = new System.Drawing.Point(42, 62);
+            this.nudSettingsOverloadRetryAttempts.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.nudSettingsOverloadRetryAttempts.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudSettingsOverloadRetryAttempts.Name = "nudSettingsOverloadRetryAttempts";
+            this.nudSettingsOverloadRetryAttempts.Size = new System.Drawing.Size(45, 20);
+            this.nudSettingsOverloadRetryAttempts.TabIndex = 0;
+            this.nudSettingsOverloadRetryAttempts.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudSettingsOverloadRetryAttempts.ValueChanged += new System.EventHandler(this.nudSettingsOverloadRetryAttempts_ValueChanged);
+            // 
+            // chkSettingOverloadRetry
+            // 
+            this.chkSettingOverloadRetry.AutoSize = true;
+            this.chkSettingOverloadRetry.Location = new System.Drawing.Point(42, 39);
+            this.chkSettingOverloadRetry.Name = "chkSettingOverloadRetry";
+            this.chkSettingOverloadRetry.Size = new System.Drawing.Size(118, 17);
+            this.chkSettingOverloadRetry.TabIndex = 1;
+            this.chkSettingOverloadRetry.Text = "Retry on Overload?";
+            this.chkSettingOverloadRetry.UseVisualStyleBackColor = true;
+            this.chkSettingOverloadRetry.CheckedChanged += new System.EventHandler(this.chkSettingOverloadRetry_CheckedChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(94, 65);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(48, 13);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Attempts";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(148, 91);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(105, 13);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "Retry Wait Time (ms)";
+            // 
+            // nudSettingsRetryWaitTime
+            // 
+            this.nudSettingsRetryWaitTime.Increment = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.nudSettingsRetryWaitTime.Location = new System.Drawing.Point(42, 88);
+            this.nudSettingsRetryWaitTime.Maximum = new decimal(new int[] {
+            -727379969,
+            232,
+            0,
+            0});
+            this.nudSettingsRetryWaitTime.Minimum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.nudSettingsRetryWaitTime.Name = "nudSettingsRetryWaitTime";
+            this.nudSettingsRetryWaitTime.Size = new System.Drawing.Size(100, 20);
+            this.nudSettingsRetryWaitTime.TabIndex = 3;
+            this.nudSettingsRetryWaitTime.Value = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.nudSettingsRetryWaitTime.ValueChanged += new System.EventHandler(this.nudSettingsRetryWaitTime_ValueChanged);
+            // 
             // Bot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -693,9 +786,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudDCASeconds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDCATimes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDCAMinutes)).EndInit();
+            this.tabSettings.ResumeLayout(false);
+            this.tabSettings.PerformLayout();
             this.gbxPosition.ResumeLayout(false);
             this.gbxPosition.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPositionLimitPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSettingsOverloadRetryAttempts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSettingsRetryWaitTime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -751,5 +848,10 @@
         private System.Windows.Forms.TextBox txtPositionEntryPrice;
         private System.Windows.Forms.TextBox txtPositionSize;
         private System.Windows.Forms.NumericUpDown nudPositionLimitPrice;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown nudSettingsRetryWaitTime;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.CheckBox chkSettingOverloadRetry;
+        private System.Windows.Forms.NumericUpDown nudSettingsOverloadRetryAttempts;
     }
 }
