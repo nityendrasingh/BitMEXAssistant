@@ -37,6 +37,30 @@
             this.label2 = new System.Windows.Forms.Label();
             this.Heartbeat = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabSpread = new System.Windows.Forms.TabPage();
+            this.chkSpreadCancelWhileOrdering = new System.Windows.Forms.CheckBox();
+            this.btnSpreadCloseAllOpenOrders = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chkSpreadSellPostOnly = new System.Windows.Forms.CheckBox();
+            this.chkSpreadSellExecute = new System.Windows.Forms.CheckBox();
+            this.nudSpreadSellOrderCount = new System.Windows.Forms.NumericUpDown();
+            this.chkSpreadSellReduceOnly = new System.Windows.Forms.CheckBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.nudSpreadSellValueApart = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.nudSpreadSellContractsEach = new System.Windows.Forms.NumericUpDown();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkSpreadyBuyPostOnly = new System.Windows.Forms.CheckBox();
+            this.chkSpreadBuyExecute = new System.Windows.Forms.CheckBox();
+            this.nudSpreadBuyOrderCount = new System.Windows.Forms.NumericUpDown();
+            this.chkSpreadBuyReduceOnly = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.nudSpreadBuyValueApart = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.nudSpreadBuyContractsEach = new System.Windows.Forms.NumericUpDown();
+            this.btnSpreadPlaceOrders = new System.Windows.Forms.Button();
             this.tabDCA = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkDCAExecuteImmediately = new System.Windows.Forms.CheckBox();
@@ -57,8 +81,14 @@
             this.btnDCASell = new System.Windows.Forms.Button();
             this.btnDCABuy = new System.Windows.Forms.Button();
             this.tabSettings = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.nudSettingsRetryWaitTime = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.chkSettingOverloadRetry = new System.Windows.Forms.CheckBox();
+            this.nudSettingsOverloadRetryAttempts = new System.Windows.Forms.NumericUpDown();
             this.tmrDCA = new System.Windows.Forms.Timer(this.components);
             this.gbxPosition = new System.Windows.Forms.GroupBox();
+            this.nudPositionLimitPrice = new System.Windows.Forms.NumericUpDown();
             this.btnPositionMarketClose = new System.Windows.Forms.Button();
             this.btnPositionLimitClose = new System.Windows.Forms.Button();
             this.textBox8 = new System.Windows.Forms.TextBox();
@@ -76,14 +106,17 @@
             this.txtPositionEntryPrice = new System.Windows.Forms.TextBox();
             this.txtPositionSize = new System.Windows.Forms.TextBox();
             this.lblTimeUTC = new System.Windows.Forms.Label();
-            this.nudPositionLimitPrice = new System.Windows.Forms.NumericUpDown();
-            this.nudSettingsOverloadRetryAttempts = new System.Windows.Forms.NumericUpDown();
-            this.chkSettingOverloadRetry = new System.Windows.Forms.CheckBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.nudSettingsRetryWaitTime = new System.Windows.Forms.NumericUpDown();
             this.StatusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabSpread.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpreadSellOrderCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpreadSellValueApart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpreadSellContractsEach)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpreadBuyOrderCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpreadBuyValueApart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpreadBuyContractsEach)).BeginInit();
             this.tabDCA.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudDCAContracts)).BeginInit();
@@ -92,10 +125,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudDCATimes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDCAMinutes)).BeginInit();
             this.tabSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSettingsRetryWaitTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSettingsOverloadRetryAttempts)).BeginInit();
             this.gbxPosition.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPositionLimitPrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSettingsOverloadRetryAttempts)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSettingsRetryWaitTime)).BeginInit();
             this.SuspendLayout();
             // 
             // StatusStrip
@@ -164,6 +197,7 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Controls.Add(this.tabSpread);
             this.tabControl1.Controls.Add(this.tabDCA);
             this.tabControl1.Controls.Add(this.tabSettings);
             this.tabControl1.Location = new System.Drawing.Point(12, 69);
@@ -171,6 +205,357 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(638, 202);
             this.tabControl1.TabIndex = 14;
+            // 
+            // tabSpread
+            // 
+            this.tabSpread.Controls.Add(this.chkSpreadCancelWhileOrdering);
+            this.tabSpread.Controls.Add(this.btnSpreadCloseAllOpenOrders);
+            this.tabSpread.Controls.Add(this.groupBox3);
+            this.tabSpread.Controls.Add(this.groupBox2);
+            this.tabSpread.Controls.Add(this.btnSpreadPlaceOrders);
+            this.tabSpread.Location = new System.Drawing.Point(4, 22);
+            this.tabSpread.Name = "tabSpread";
+            this.tabSpread.Size = new System.Drawing.Size(630, 176);
+            this.tabSpread.TabIndex = 2;
+            this.tabSpread.Text = "Spread";
+            this.tabSpread.UseVisualStyleBackColor = true;
+            // 
+            // chkSpreadCancelWhileOrdering
+            // 
+            this.chkSpreadCancelWhileOrdering.AutoSize = true;
+            this.chkSpreadCancelWhileOrdering.Checked = true;
+            this.chkSpreadCancelWhileOrdering.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSpreadCancelWhileOrdering.Location = new System.Drawing.Point(379, 47);
+            this.chkSpreadCancelWhileOrdering.Name = "chkSpreadCancelWhileOrdering";
+            this.chkSpreadCancelWhileOrdering.Size = new System.Drawing.Size(208, 17);
+            this.chkSpreadCancelWhileOrdering.TabIndex = 12;
+            this.chkSpreadCancelWhileOrdering.Text = "Cancel All Open Orders Before Placing";
+            this.chkSpreadCancelWhileOrdering.UseVisualStyleBackColor = true;
+            this.chkSpreadCancelWhileOrdering.CheckedChanged += new System.EventHandler(this.chkSpreadCancelWhileOrdering_CheckedChanged);
+            // 
+            // btnSpreadCloseAllOpenOrders
+            // 
+            this.btnSpreadCloseAllOpenOrders.Location = new System.Drawing.Point(485, 147);
+            this.btnSpreadCloseAllOpenOrders.Name = "btnSpreadCloseAllOpenOrders";
+            this.btnSpreadCloseAllOpenOrders.Size = new System.Drawing.Size(139, 23);
+            this.btnSpreadCloseAllOpenOrders.TabIndex = 11;
+            this.btnSpreadCloseAllOpenOrders.Text = "Close All Open Orders";
+            this.btnSpreadCloseAllOpenOrders.UseVisualStyleBackColor = true;
+            this.btnSpreadCloseAllOpenOrders.Click += new System.EventHandler(this.btnSpreadCloseAllOpenOrders_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.chkSpreadSellPostOnly);
+            this.groupBox3.Controls.Add(this.chkSpreadSellExecute);
+            this.groupBox3.Controls.Add(this.nudSpreadSellOrderCount);
+            this.groupBox3.Controls.Add(this.chkSpreadSellReduceOnly);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.nudSpreadSellValueApart);
+            this.groupBox3.Controls.Add(this.label13);
+            this.groupBox3.Controls.Add(this.label14);
+            this.groupBox3.Controls.Add(this.nudSpreadSellContractsEach);
+            this.groupBox3.Location = new System.Drawing.Point(196, 13);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(176, 160);
+            this.groupBox3.TabIndex = 9;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Sell";
+            // 
+            // chkSpreadSellPostOnly
+            // 
+            this.chkSpreadSellPostOnly.AutoSize = true;
+            this.chkSpreadSellPostOnly.Checked = true;
+            this.chkSpreadSellPostOnly.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSpreadSellPostOnly.Location = new System.Drawing.Point(76, 113);
+            this.chkSpreadSellPostOnly.Name = "chkSpreadSellPostOnly";
+            this.chkSpreadSellPostOnly.Size = new System.Drawing.Size(71, 17);
+            this.chkSpreadSellPostOnly.TabIndex = 10;
+            this.chkSpreadSellPostOnly.Text = "Post Only";
+            this.chkSpreadSellPostOnly.UseVisualStyleBackColor = true;
+            this.chkSpreadSellPostOnly.CheckedChanged += new System.EventHandler(this.chkSpreadSellPostOnly_CheckedChanged);
+            // 
+            // chkSpreadSellExecute
+            // 
+            this.chkSpreadSellExecute.AutoSize = true;
+            this.chkSpreadSellExecute.Checked = true;
+            this.chkSpreadSellExecute.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSpreadSellExecute.Location = new System.Drawing.Point(76, 132);
+            this.chkSpreadSellExecute.Name = "chkSpreadSellExecute";
+            this.chkSpreadSellExecute.Size = new System.Drawing.Size(65, 17);
+            this.chkSpreadSellExecute.TabIndex = 8;
+            this.chkSpreadSellExecute.Text = "Execute";
+            this.chkSpreadSellExecute.UseVisualStyleBackColor = true;
+            this.chkSpreadSellExecute.CheckedChanged += new System.EventHandler(this.chkSpreadSellExecute_CheckedChanged);
+            // 
+            // nudSpreadSellOrderCount
+            // 
+            this.nudSpreadSellOrderCount.Location = new System.Drawing.Point(44, 17);
+            this.nudSpreadSellOrderCount.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudSpreadSellOrderCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudSpreadSellOrderCount.Name = "nudSpreadSellOrderCount";
+            this.nudSpreadSellOrderCount.Size = new System.Drawing.Size(46, 20);
+            this.nudSpreadSellOrderCount.TabIndex = 0;
+            this.nudSpreadSellOrderCount.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.nudSpreadSellOrderCount.ValueChanged += new System.EventHandler(this.nudSpreadSellOrderCount_ValueChanged);
+            // 
+            // chkSpreadSellReduceOnly
+            // 
+            this.chkSpreadSellReduceOnly.AutoSize = true;
+            this.chkSpreadSellReduceOnly.Location = new System.Drawing.Point(76, 95);
+            this.chkSpreadSellReduceOnly.Name = "chkSpreadSellReduceOnly";
+            this.chkSpreadSellReduceOnly.Size = new System.Drawing.Size(88, 17);
+            this.chkSpreadSellReduceOnly.TabIndex = 7;
+            this.chkSpreadSellReduceOnly.Text = "Reduce Only";
+            this.chkSpreadSellReduceOnly.UseVisualStyleBackColor = true;
+            this.chkSpreadSellReduceOnly.CheckedChanged += new System.EventHandler(this.chkSpreadSellReduceOnly_CheckedChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(92, 21);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(38, 13);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "Orders";
+            // 
+            // nudSpreadSellValueApart
+            // 
+            this.nudSpreadSellValueApart.DecimalPlaces = 1;
+            this.nudSpreadSellValueApart.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.nudSpreadSellValueApart.Location = new System.Drawing.Point(9, 43);
+            this.nudSpreadSellValueApart.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
+            this.nudSpreadSellValueApart.Name = "nudSpreadSellValueApart";
+            this.nudSpreadSellValueApart.Size = new System.Drawing.Size(81, 20);
+            this.nudSpreadSellValueApart.TabIndex = 2;
+            this.nudSpreadSellValueApart.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            this.nudSpreadSellValueApart.ValueChanged += new System.EventHandler(this.nudSpreadSellValueApart_ValueChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(92, 73);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(80, 13);
+            this.label13.TabIndex = 5;
+            this.label13.Text = "Contracts Each";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(92, 47);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(32, 13);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "Apart";
+            // 
+            // nudSpreadSellContractsEach
+            // 
+            this.nudSpreadSellContractsEach.Location = new System.Drawing.Point(9, 69);
+            this.nudSpreadSellContractsEach.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
+            this.nudSpreadSellContractsEach.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudSpreadSellContractsEach.Name = "nudSpreadSellContractsEach";
+            this.nudSpreadSellContractsEach.Size = new System.Drawing.Size(81, 20);
+            this.nudSpreadSellContractsEach.TabIndex = 4;
+            this.nudSpreadSellContractsEach.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudSpreadSellContractsEach.ValueChanged += new System.EventHandler(this.nudSpreadSellContractsEach_ValueChanged);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.chkSpreadyBuyPostOnly);
+            this.groupBox2.Controls.Add(this.chkSpreadBuyExecute);
+            this.groupBox2.Controls.Add(this.nudSpreadBuyOrderCount);
+            this.groupBox2.Controls.Add(this.chkSpreadBuyReduceOnly);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.nudSpreadBuyValueApart);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.nudSpreadBuyContractsEach);
+            this.groupBox2.Location = new System.Drawing.Point(14, 13);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(176, 160);
+            this.groupBox2.TabIndex = 8;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Buy";
+            // 
+            // chkSpreadyBuyPostOnly
+            // 
+            this.chkSpreadyBuyPostOnly.AutoSize = true;
+            this.chkSpreadyBuyPostOnly.Checked = true;
+            this.chkSpreadyBuyPostOnly.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSpreadyBuyPostOnly.Location = new System.Drawing.Point(76, 114);
+            this.chkSpreadyBuyPostOnly.Name = "chkSpreadyBuyPostOnly";
+            this.chkSpreadyBuyPostOnly.Size = new System.Drawing.Size(71, 17);
+            this.chkSpreadyBuyPostOnly.TabIndex = 9;
+            this.chkSpreadyBuyPostOnly.Text = "Post Only";
+            this.chkSpreadyBuyPostOnly.UseVisualStyleBackColor = true;
+            this.chkSpreadyBuyPostOnly.CheckedChanged += new System.EventHandler(this.chkSpreadyBuyPostOnly_CheckedChanged);
+            // 
+            // chkSpreadBuyExecute
+            // 
+            this.chkSpreadBuyExecute.AutoSize = true;
+            this.chkSpreadBuyExecute.Checked = true;
+            this.chkSpreadBuyExecute.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSpreadBuyExecute.Location = new System.Drawing.Point(76, 133);
+            this.chkSpreadBuyExecute.Name = "chkSpreadBuyExecute";
+            this.chkSpreadBuyExecute.Size = new System.Drawing.Size(65, 17);
+            this.chkSpreadBuyExecute.TabIndex = 8;
+            this.chkSpreadBuyExecute.Text = "Execute";
+            this.chkSpreadBuyExecute.UseVisualStyleBackColor = true;
+            this.chkSpreadBuyExecute.CheckedChanged += new System.EventHandler(this.chkSpreadBuyExecute_CheckedChanged);
+            // 
+            // nudSpreadBuyOrderCount
+            // 
+            this.nudSpreadBuyOrderCount.Location = new System.Drawing.Point(44, 17);
+            this.nudSpreadBuyOrderCount.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudSpreadBuyOrderCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudSpreadBuyOrderCount.Name = "nudSpreadBuyOrderCount";
+            this.nudSpreadBuyOrderCount.Size = new System.Drawing.Size(46, 20);
+            this.nudSpreadBuyOrderCount.TabIndex = 0;
+            this.nudSpreadBuyOrderCount.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.nudSpreadBuyOrderCount.ValueChanged += new System.EventHandler(this.nudSpreadBuyOrderCount_ValueChanged);
+            // 
+            // chkSpreadBuyReduceOnly
+            // 
+            this.chkSpreadBuyReduceOnly.AutoSize = true;
+            this.chkSpreadBuyReduceOnly.Location = new System.Drawing.Point(76, 95);
+            this.chkSpreadBuyReduceOnly.Name = "chkSpreadBuyReduceOnly";
+            this.chkSpreadBuyReduceOnly.Size = new System.Drawing.Size(88, 17);
+            this.chkSpreadBuyReduceOnly.TabIndex = 7;
+            this.chkSpreadBuyReduceOnly.Text = "Reduce Only";
+            this.chkSpreadBuyReduceOnly.UseVisualStyleBackColor = true;
+            this.chkSpreadBuyReduceOnly.CheckedChanged += new System.EventHandler(this.chkSpreadBuyReduceOnly_CheckedChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(92, 21);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(38, 13);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Orders";
+            // 
+            // nudSpreadBuyValueApart
+            // 
+            this.nudSpreadBuyValueApart.DecimalPlaces = 1;
+            this.nudSpreadBuyValueApart.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.nudSpreadBuyValueApart.Location = new System.Drawing.Point(9, 43);
+            this.nudSpreadBuyValueApart.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
+            this.nudSpreadBuyValueApart.Name = "nudSpreadBuyValueApart";
+            this.nudSpreadBuyValueApart.Size = new System.Drawing.Size(81, 20);
+            this.nudSpreadBuyValueApart.TabIndex = 2;
+            this.nudSpreadBuyValueApart.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            this.nudSpreadBuyValueApart.ValueChanged += new System.EventHandler(this.nudSpreadBuyValueApart_ValueChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(92, 73);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(80, 13);
+            this.label11.TabIndex = 5;
+            this.label11.Text = "Contracts Each";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(92, 47);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(32, 13);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "Apart";
+            // 
+            // nudSpreadBuyContractsEach
+            // 
+            this.nudSpreadBuyContractsEach.Location = new System.Drawing.Point(9, 69);
+            this.nudSpreadBuyContractsEach.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
+            this.nudSpreadBuyContractsEach.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudSpreadBuyContractsEach.Name = "nudSpreadBuyContractsEach";
+            this.nudSpreadBuyContractsEach.Size = new System.Drawing.Size(81, 20);
+            this.nudSpreadBuyContractsEach.TabIndex = 4;
+            this.nudSpreadBuyContractsEach.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudSpreadBuyContractsEach.ValueChanged += new System.EventHandler(this.nudSpreadBuyContractsEach_ValueChanged);
+            // 
+            // btnSpreadPlaceOrders
+            // 
+            this.btnSpreadPlaceOrders.Location = new System.Drawing.Point(378, 18);
+            this.btnSpreadPlaceOrders.Name = "btnSpreadPlaceOrders";
+            this.btnSpreadPlaceOrders.Size = new System.Drawing.Size(139, 23);
+            this.btnSpreadPlaceOrders.TabIndex = 6;
+            this.btnSpreadPlaceOrders.Text = "Place Spread Orders";
+            this.btnSpreadPlaceOrders.UseVisualStyleBackColor = true;
+            this.btnSpreadPlaceOrders.Click += new System.EventHandler(this.btnSpreadPlaceOrders_Click);
             // 
             // tabDCA
             // 
@@ -445,6 +830,86 @@
             this.tabSettings.Text = "Settings";
             this.tabSettings.UseVisualStyleBackColor = true;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(148, 91);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(105, 13);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "Retry Wait Time (ms)";
+            // 
+            // nudSettingsRetryWaitTime
+            // 
+            this.nudSettingsRetryWaitTime.Increment = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.nudSettingsRetryWaitTime.Location = new System.Drawing.Point(42, 88);
+            this.nudSettingsRetryWaitTime.Maximum = new decimal(new int[] {
+            -727379969,
+            232,
+            0,
+            0});
+            this.nudSettingsRetryWaitTime.Minimum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.nudSettingsRetryWaitTime.Name = "nudSettingsRetryWaitTime";
+            this.nudSettingsRetryWaitTime.Size = new System.Drawing.Size(100, 20);
+            this.nudSettingsRetryWaitTime.TabIndex = 3;
+            this.nudSettingsRetryWaitTime.Value = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.nudSettingsRetryWaitTime.ValueChanged += new System.EventHandler(this.nudSettingsRetryWaitTime_ValueChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(94, 65);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(48, 13);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Attempts";
+            // 
+            // chkSettingOverloadRetry
+            // 
+            this.chkSettingOverloadRetry.AutoSize = true;
+            this.chkSettingOverloadRetry.Location = new System.Drawing.Point(42, 39);
+            this.chkSettingOverloadRetry.Name = "chkSettingOverloadRetry";
+            this.chkSettingOverloadRetry.Size = new System.Drawing.Size(118, 17);
+            this.chkSettingOverloadRetry.TabIndex = 1;
+            this.chkSettingOverloadRetry.Text = "Retry on Overload?";
+            this.chkSettingOverloadRetry.UseVisualStyleBackColor = true;
+            this.chkSettingOverloadRetry.CheckedChanged += new System.EventHandler(this.chkSettingOverloadRetry_CheckedChanged);
+            // 
+            // nudSettingsOverloadRetryAttempts
+            // 
+            this.nudSettingsOverloadRetryAttempts.Location = new System.Drawing.Point(42, 62);
+            this.nudSettingsOverloadRetryAttempts.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.nudSettingsOverloadRetryAttempts.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudSettingsOverloadRetryAttempts.Name = "nudSettingsOverloadRetryAttempts";
+            this.nudSettingsOverloadRetryAttempts.Size = new System.Drawing.Size(45, 20);
+            this.nudSettingsOverloadRetryAttempts.TabIndex = 0;
+            this.nudSettingsOverloadRetryAttempts.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudSettingsOverloadRetryAttempts.ValueChanged += new System.EventHandler(this.nudSettingsOverloadRetryAttempts_ValueChanged);
+            // 
             // tmrDCA
             // 
             this.tmrDCA.Tick += new System.EventHandler(this.tmrDCA_Tick);
@@ -475,6 +940,26 @@
             this.gbxPosition.TabStop = false;
             this.gbxPosition.Text = "Position";
             this.gbxPosition.Visible = false;
+            // 
+            // nudPositionLimitPrice
+            // 
+            this.nudPositionLimitPrice.DecimalPlaces = 1;
+            this.nudPositionLimitPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudPositionLimitPrice.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.nudPositionLimitPrice.Location = new System.Drawing.Point(386, 31);
+            this.nudPositionLimitPrice.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.nudPositionLimitPrice.Name = "nudPositionLimitPrice";
+            this.nudPositionLimitPrice.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.nudPositionLimitPrice.Size = new System.Drawing.Size(61, 18);
+            this.nudPositionLimitPrice.TabIndex = 19;
             // 
             // btnPositionMarketClose
             // 
@@ -658,106 +1143,6 @@
             this.lblTimeUTC.TabIndex = 16;
             this.lblTimeUTC.Text = "UTCTime";
             // 
-            // nudPositionLimitPrice
-            // 
-            this.nudPositionLimitPrice.DecimalPlaces = 1;
-            this.nudPositionLimitPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudPositionLimitPrice.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.nudPositionLimitPrice.Location = new System.Drawing.Point(386, 31);
-            this.nudPositionLimitPrice.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.nudPositionLimitPrice.Name = "nudPositionLimitPrice";
-            this.nudPositionLimitPrice.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.nudPositionLimitPrice.Size = new System.Drawing.Size(61, 18);
-            this.nudPositionLimitPrice.TabIndex = 19;
-            // 
-            // nudSettingsOverloadRetryAttempts
-            // 
-            this.nudSettingsOverloadRetryAttempts.Location = new System.Drawing.Point(42, 62);
-            this.nudSettingsOverloadRetryAttempts.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.nudSettingsOverloadRetryAttempts.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudSettingsOverloadRetryAttempts.Name = "nudSettingsOverloadRetryAttempts";
-            this.nudSettingsOverloadRetryAttempts.Size = new System.Drawing.Size(45, 20);
-            this.nudSettingsOverloadRetryAttempts.TabIndex = 0;
-            this.nudSettingsOverloadRetryAttempts.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudSettingsOverloadRetryAttempts.ValueChanged += new System.EventHandler(this.nudSettingsOverloadRetryAttempts_ValueChanged);
-            // 
-            // chkSettingOverloadRetry
-            // 
-            this.chkSettingOverloadRetry.AutoSize = true;
-            this.chkSettingOverloadRetry.Location = new System.Drawing.Point(42, 39);
-            this.chkSettingOverloadRetry.Name = "chkSettingOverloadRetry";
-            this.chkSettingOverloadRetry.Size = new System.Drawing.Size(118, 17);
-            this.chkSettingOverloadRetry.TabIndex = 1;
-            this.chkSettingOverloadRetry.Text = "Retry on Overload?";
-            this.chkSettingOverloadRetry.UseVisualStyleBackColor = true;
-            this.chkSettingOverloadRetry.CheckedChanged += new System.EventHandler(this.chkSettingOverloadRetry_CheckedChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(94, 65);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(48, 13);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Attempts";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(148, 91);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(105, 13);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "Retry Wait Time (ms)";
-            // 
-            // nudSettingsRetryWaitTime
-            // 
-            this.nudSettingsRetryWaitTime.Increment = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.nudSettingsRetryWaitTime.Location = new System.Drawing.Point(42, 88);
-            this.nudSettingsRetryWaitTime.Maximum = new decimal(new int[] {
-            -727379969,
-            232,
-            0,
-            0});
-            this.nudSettingsRetryWaitTime.Minimum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.nudSettingsRetryWaitTime.Name = "nudSettingsRetryWaitTime";
-            this.nudSettingsRetryWaitTime.Size = new System.Drawing.Size(100, 20);
-            this.nudSettingsRetryWaitTime.TabIndex = 3;
-            this.nudSettingsRetryWaitTime.Value = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.nudSettingsRetryWaitTime.ValueChanged += new System.EventHandler(this.nudSettingsRetryWaitTime_ValueChanged);
-            // 
             // Bot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -777,6 +1162,18 @@
             this.StatusStrip.ResumeLayout(false);
             this.StatusStrip.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.tabSpread.ResumeLayout(false);
+            this.tabSpread.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpreadSellOrderCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpreadSellValueApart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpreadSellContractsEach)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpreadBuyOrderCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpreadBuyValueApart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpreadBuyContractsEach)).EndInit();
             this.tabDCA.ResumeLayout(false);
             this.tabDCA.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -788,11 +1185,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudDCAMinutes)).EndInit();
             this.tabSettings.ResumeLayout(false);
             this.tabSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSettingsRetryWaitTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSettingsOverloadRetryAttempts)).EndInit();
             this.gbxPosition.ResumeLayout(false);
             this.gbxPosition.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPositionLimitPrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSettingsOverloadRetryAttempts)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSettingsRetryWaitTime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -853,5 +1250,29 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox chkSettingOverloadRetry;
         private System.Windows.Forms.NumericUpDown nudSettingsOverloadRetryAttempts;
+        private System.Windows.Forms.TabPage tabSpread;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown nudSpreadBuyValueApart;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown nudSpreadBuyOrderCount;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.NumericUpDown nudSpreadBuyContractsEach;
+        private System.Windows.Forms.Button btnSpreadPlaceOrders;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckBox chkSpreadSellExecute;
+        private System.Windows.Forms.NumericUpDown nudSpreadSellOrderCount;
+        private System.Windows.Forms.CheckBox chkSpreadSellReduceOnly;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.NumericUpDown nudSpreadSellValueApart;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.NumericUpDown nudSpreadSellContractsEach;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox chkSpreadBuyExecute;
+        private System.Windows.Forms.CheckBox chkSpreadBuyReduceOnly;
+        private System.Windows.Forms.Button btnSpreadCloseAllOpenOrders;
+        private System.Windows.Forms.CheckBox chkSpreadCancelWhileOrdering;
+        private System.Windows.Forms.CheckBox chkSpreadSellPostOnly;
+        private System.Windows.Forms.CheckBox chkSpreadyBuyPostOnly;
     }
 }

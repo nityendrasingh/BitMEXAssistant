@@ -53,6 +53,24 @@ namespace BitMEXAssistant
         private void InitializeDropdownsAndSettings()
         {
             ddlCandleTimes.SelectedIndex = 0;
+
+            // Spread Settings
+            nudSpreadBuyOrderCount.Value = Properties.Settings.Default.SpreadBuyOrders;
+            nudSpreadSellOrderCount.Value = Properties.Settings.Default.SpreadSellOrders;
+            nudSpreadBuyValueApart.Value = Properties.Settings.Default.SpreadBuyValueApart;
+            nudSpreadSellValueApart.Value = Properties.Settings.Default.SpreadSellValueApart;
+            nudSpreadBuyContractsEach.Value = Properties.Settings.Default.SpreadBuyContractsEach;
+            nudSpreadSellContractsEach.Value = Properties.Settings.Default.SpreadSellContractsEach;
+            chkSpreadBuyReduceOnly.Checked = Properties.Settings.Default.SpreadBuyReduceOnly;
+            chkSpreadSellReduceOnly.Checked = Properties.Settings.Default.SpreadSellReduceOnly;
+            chkSpreadyBuyPostOnly.Checked = Properties.Settings.Default.SpreadBuyPostOnly;
+            chkSpreadSellPostOnly.Checked = Properties.Settings.Default.SpreadSellPostOnly;
+            chkSpreadBuyExecute.Checked = Properties.Settings.Default.SpreadBuyExecute;
+            chkSpreadSellExecute.Checked = Properties.Settings.Default.SpreadSellExecute;
+            chkSpreadCancelWhileOrdering.Checked = Properties.Settings.Default.SpreadCancelBeforeOrdering;
+
+
+            // DCA Settings
             nudDCAContracts.Value = Properties.Settings.Default.DCAContracts;
             nudDCAHours.Value = Properties.Settings.Default.DCAHours;
             nudDCAMinutes.Value = Properties.Settings.Default.DCAMinutes;
@@ -60,7 +78,7 @@ namespace BitMEXAssistant
             nudDCATimes.Value = Properties.Settings.Default.DCATimes;
             chkDCAReduceOnly.Checked = Properties.Settings.Default.DCAReduceOnly;
 
-            //Setting Tab
+            // Setting Tab Settings
             chkSettingOverloadRetry.Checked = Properties.Settings.Default.OverloadRetry;
             nudSettingsOverloadRetryAttempts.Value = Properties.Settings.Default.OverloadRetryAttempts;
             nudSettingsRetryWaitTime.Value = Properties.Settings.Default.RetryAttemptWaitTime;
@@ -98,6 +116,21 @@ namespace BitMEXAssistant
         {
             ActiveInstrument = bitmex.GetInstrument(((Instrument)ddlSymbol.SelectedItem).Symbol)[0];
             UpdatePositionInfo();
+            int DecimalPlacesInTickSize = BitConverter.GetBytes(decimal.GetBits(ActiveInstrument.TickSize)[3])[2];
+            UpdateFormsForTickSize(ActiveInstrument.TickSize, DecimalPlacesInTickSize);
+
+        }
+
+        private void UpdateFormsForTickSize(decimal TickSize, int Decimals)
+        {
+            nudPositionLimitPrice.DecimalPlaces = Decimals;
+            nudPositionLimitPrice.Increment = TickSize;
+
+            nudSpreadBuyValueApart.DecimalPlaces = Decimals;
+            nudSpreadBuyValueApart.Increment = TickSize;
+
+            nudSpreadSellValueApart.DecimalPlaces = Decimals;
+            nudSpreadSellValueApart.Increment = TickSize;
         }
 
         private void ddlCandleTimes_SelectedIndexChanged(object sender, EventArgs e)
@@ -401,6 +434,194 @@ namespace BitMEXAssistant
         {
             Properties.Settings.Default.RetryAttemptWaitTime = (int)nudSettingsRetryWaitTime.Value;
             SaveSettings();
+        }
+
+        private void nudSpreadBuyOrderCount_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.SpreadBuyOrders = (int)nudSpreadBuyOrderCount.Value;
+            SaveSettings();
+        }
+
+        private void nudSpreadSellOrderCount_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.SpreadSellOrders = (int)nudSpreadSellOrderCount.Value;
+            SaveSettings();
+        }
+
+        private void nudSpreadBuyValueApart_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.SpreadBuyValueApart = nudSpreadBuyValueApart.Value;
+            SaveSettings();
+        }
+
+        private void nudSpreadSellValueApart_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.SpreadSellValueApart = nudSpreadSellValueApart.Value;
+            SaveSettings();
+        }
+
+        private void nudSpreadBuyContractsEach_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.SpreadBuyContractsEach = (int)nudSpreadBuyContractsEach.Value;
+            SaveSettings();
+        }
+
+        private void nudSpreadSellContractsEach_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.SpreadSellContractsEach = (int)nudSpreadSellContractsEach.Value;
+            SaveSettings();
+        }
+
+        private void chkSpreadBuyReduceOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.SpreadBuyReduceOnly = chkSpreadBuyReduceOnly.Checked;
+            SaveSettings();
+        }
+
+        private void chkSpreadSellReduceOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.SpreadSellReduceOnly = chkSpreadSellReduceOnly.Checked;
+            SaveSettings();
+        }
+
+        private void chkSpreadyBuyPostOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.SpreadBuyPostOnly = chkSpreadyBuyPostOnly.Checked;
+            SaveSettings();
+        }
+
+        private void chkSpreadSellPostOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.SpreadSellPostOnly = chkSpreadSellPostOnly.Checked;
+            SaveSettings();
+        }
+
+        private void chkSpreadBuyExecute_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.SpreadBuyExecute = chkSpreadBuyExecute.Checked;
+            SaveSettings();
+        }
+
+        private void chkSpreadSellExecute_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.SpreadSellExecute = chkSpreadSellExecute.Checked;
+            SaveSettings();
+        }
+
+        private void chkSpreadCancelWhileOrdering_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.SpreadCancelBeforeOrdering = chkSpreadCancelWhileOrdering.Checked;
+            SaveSettings();
+        }
+
+        private void btnSpreadCloseAllOpenOrders_Click(object sender, EventArgs e)
+        {
+            bitmex.CancelAllOpenOrders(ActiveInstrument.Symbol);
+        }
+
+        private void btnSpreadPlaceOrders_Click(object sender, EventArgs e)
+        {
+            // do our logic for creating a bulk order to submit
+            List<Order> BulkOrders = new List<Order>();
+
+            // Step 1, see if we need to cancel all open orders and do it if so
+            if (chkSpreadCancelWhileOrdering.Checked)
+            {
+                // Cancel all open orders
+                bitmex.CancelAllOpenOrders(ActiveInstrument.Symbol);
+            }
+
+            // Step 2, check to see if we even need to bother building buy or sell orders
+            // Step 3, if we do, respectively create each individual order necessary based on settings logic
+            decimal CurrentPrice = bitmex.GetCurrentPrice(ActiveInstrument.Symbol);
+
+            if(chkSpreadBuyExecute.Checked)
+            {
+                // build our buy orders
+                for(int i = 1; i <= (int)nudSpreadBuyOrderCount.Value; i++)
+                {
+                    Order o = new Order();
+                    o.Side = "Buy";
+                    o.OrderQty = (int?)nudSpreadBuyContractsEach.Value;
+                    o.Symbol = ActiveInstrument.Symbol;
+                    o.Price = (double?)(CurrentPrice - (nudSpreadBuyValueApart.Value * i));
+                    if(chkSpreadBuyReduceOnly.Checked && chkSpreadyBuyPostOnly.Checked)
+                    {
+                        o.ExecInst = "ReduceOnly,ParticipateDoNotInitiate";
+                    }
+                    else if(!chkSpreadBuyReduceOnly.Checked && chkSpreadyBuyPostOnly.Checked)
+                    {
+                        o.ExecInst = "ParticipateDoNotInitiate";
+                    }
+                    else if(chkSpreadBuyReduceOnly.Checked && !chkSpreadyBuyPostOnly.Checked)
+                    {
+                        o.ExecInst = "ReduceOnly";
+                    }
+                    BulkOrders.Add(o);
+                }
+            }
+            if(chkSpreadSellExecute.Checked)
+            {
+                // build our sell orders
+                for (int i = 1; i <= (int)nudSpreadSellOrderCount.Value; i++)
+                {
+                    Order o = new Order();
+                    o.Side = "Sell";
+                    o.OrderQty = (int?)nudSpreadSellContractsEach.Value;
+                    o.Symbol = ActiveInstrument.Symbol;
+                    o.Price = (double?)(CurrentPrice + (nudSpreadSellValueApart.Value * i));
+                    if (chkSpreadSellReduceOnly.Checked && chkSpreadSellPostOnly.Checked)
+                    {
+                        o.ExecInst = "ReduceOnly,ParticipateDoNotInitiate";
+                    }
+                    else if (!chkSpreadSellReduceOnly.Checked && chkSpreadSellPostOnly.Checked)
+                    {
+                        o.ExecInst = "ParticipateDoNotInitiate";
+                    }
+                    else if (chkSpreadSellReduceOnly.Checked && !chkSpreadSellPostOnly.Checked)
+                    {
+                        o.ExecInst = "ReduceOnly";
+                    }
+                    BulkOrders.Add(o);
+                }
+            }
+
+            // Step 4, call the bulk order submit button
+            string BulkOrderString = BuildBulkOrder(BulkOrders);
+            bitmex.BulkOrder(BulkOrderString);
+
+        }
+
+        private string BuildBulkOrder(List<Order> Orders, bool Amend = false)
+        {
+            StringBuilder str = new StringBuilder();
+
+            str.Append("[");
+
+            int i = 1;
+            foreach (Order o in Orders)
+            {
+                if (i > 1)
+                {
+                    str.Append(", ");
+                }
+                str.Append("{");
+                if (Amend == true)
+                {
+                    str.Append("\"orderID\": \"" + o.OrderId.ToString() + "\", ");
+                }
+                str.Append("\"orderQty\": " + o.OrderQty.ToString() + ", \"price\": " + o.Price.ToString() + ", \"side\": \"" + o.Side + "\", \"symbol\": \"" + o.Symbol + "\"");
+                if(o.ExecInst.Trim() != "")
+                {
+                    str.Append(", \"execInst\": \"" + o.ExecInst + "\"");
+                }
+                str.Append("}");
+                i++;
+            }
+
+            str.Append("]");
+
+            return str.ToString();
         }
     }
 }

@@ -38,5 +38,44 @@
     <Setting Name="RetryAttemptWaitTime" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">500</Value>
     </Setting>
+    <Setting Name="SpreadBuyOrders" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="SpreadSellOrders" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="SpreadBuyValueApart" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">25.0</Value>
+    </Setting>
+    <Setting Name="SpreadSellValueApart" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">25.0</Value>
+    </Setting>
+    <Setting Name="SpreadBuyContractsEach" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="SpreadSellContractsEach" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="SpreadBuyReduceOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SpreadSellReduceOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SpreadBuyPostOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SpreadSellPostOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SpreadBuyExecute" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SpreadSellExecute" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SpreadCancelBeforeOrdering" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

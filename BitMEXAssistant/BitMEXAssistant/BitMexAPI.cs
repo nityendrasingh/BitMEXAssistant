@@ -250,6 +250,75 @@ namespace BitMEX
             }
             return res;
         }
+
+        public string CancelAllOpenOrders(string symbol, string Note = "")
+        {
+            var param = new Dictionary<string, string>();
+            param["symbol"] = symbol;
+            param["text"] = Note;
+            string res = Query("DELETE", "/order/all", param, true, true);
+            int RetryAttemptCount = 0;
+            int MaxRetries = RetryAttempts(res);
+            while (res.Contains("error") && RetryAttemptCount < MaxRetries)
+            {
+                errors.Add(res);
+                Thread.Sleep(BitMEXAssistant.Properties.Settings.Default.RetryAttemptWaitTime); // Force app to wait 500ms
+                res = Query("DELETE", "/order/all", param, true, true);
+                RetryAttemptCount++;
+                if (RetryAttemptCount == MaxRetries)
+                {
+                    errors.Add("Max rety attempts of " + MaxRetries.ToString() + " reached.");
+                    break;
+                }
+            }
+            return res;
+        }
+
+        public string BulkOrder(string Orders)
+        {
+            var param = new Dictionary<string, string>();
+            param["orders"] = Orders;
+            string res = Query("POST", "/order/bulk", param, true);
+            int RetryAttemptCount = 0;
+            int MaxRetries = RetryAttempts(res);
+            while (res.Contains("error") && RetryAttemptCount < MaxRetries)
+            {
+                errors.Add(res);
+                Thread.Sleep(BitMEXAssistant.Properties.Settings.Default.RetryAttemptWaitTime); // Force app to wait 500ms
+                res = Query("POST", "/order/bulk", param, true);
+                RetryAttemptCount++;
+                if (RetryAttemptCount == MaxRetries)
+                {
+                    errors.Add("Max rety attempts of " + MaxRetries.ToString() + " reached.");
+                    break;
+                }
+            }
+            return res;
+        }
+
+        public string AmendBulkOrder(string Orders)
+        {
+            var param = new Dictionary<string, string>();
+            param["orders"] = Orders;
+            string res = Query("PUT", "/order/bulk", param, true);
+            int RetryAttemptCount = 0;
+            int MaxRetries = RetryAttempts(res);
+            while (res.Contains("error") && RetryAttemptCount < MaxRetries)
+            {
+                errors.Add(res);
+                Thread.Sleep(BitMEXAssistant.Properties.Settings.Default.RetryAttemptWaitTime); // Force app to wait 500ms
+                res = Query("PUT", "/order/bulk", param, true);
+                RetryAttemptCount++;
+                if (RetryAttemptCount == MaxRetries)
+                {
+                    errors.Add("Max rety attempts of " + MaxRetries.ToString() + " reached.");
+                    break;
+                }
+            }
+            return res;
+        }
+
+
         #endregion
 
 
@@ -338,8 +407,24 @@ namespace BitMEX
             }
         }
 
+        public decimal GetCurrentPrice(string symbol)
+        {
+            var param = new Dictionary<string, string>();
+            param["symbol"] = symbol;
+            param["reverse"] = true.ToString();
+            param["count"] = "1";
+            string res = Query("GET", "/trade", param, true);
+            if(res.Contains("error"))
+            {
+                return 0;
+            }
+            else
+            {
+                return JsonConvert.DeserializeObject<List<Trade>>(res).FirstOrDefault().Price;
+            }
+            
+        }
 
-        
         // Getting Account Balance
         public decimal GetAccountBalance()
         {
@@ -544,5 +629,11 @@ namespace BitMEX
         public double? Price { get; set; }
         public int? OrderQty { get; set; }
         public int? DisplayQty { get; set; }
+        public string ExecInst { get; set; }
+    }
+
+    public class Trade
+    {
+        public decimal Price { get; set; }
     }
 }

@@ -166,5 +166,161 @@ namespace BitMEXAssistant.Properties {
                 this["RetryAttemptWaitTime"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int SpreadBuyOrders {
+            get {
+                return ((int)(this["SpreadBuyOrders"]));
+            }
+            set {
+                this["SpreadBuyOrders"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int SpreadSellOrders {
+            get {
+                return ((int)(this["SpreadSellOrders"]));
+            }
+            set {
+                this["SpreadSellOrders"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25.0")]
+        public decimal SpreadBuyValueApart {
+            get {
+                return ((decimal)(this["SpreadBuyValueApart"]));
+            }
+            set {
+                this["SpreadBuyValueApart"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25.0")]
+        public decimal SpreadSellValueApart {
+            get {
+                return ((decimal)(this["SpreadSellValueApart"]));
+            }
+            set {
+                this["SpreadSellValueApart"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int SpreadBuyContractsEach {
+            get {
+                return ((int)(this["SpreadBuyContractsEach"]));
+            }
+            set {
+                this["SpreadBuyContractsEach"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int SpreadSellContractsEach {
+            get {
+                return ((int)(this["SpreadSellContractsEach"]));
+            }
+            set {
+                this["SpreadSellContractsEach"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SpreadBuyReduceOnly {
+            get {
+                return ((bool)(this["SpreadBuyReduceOnly"]));
+            }
+            set {
+                this["SpreadBuyReduceOnly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SpreadSellReduceOnly {
+            get {
+                return ((bool)(this["SpreadSellReduceOnly"]));
+            }
+            set {
+                this["SpreadSellReduceOnly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SpreadBuyPostOnly {
+            get {
+                return ((bool)(this["SpreadBuyPostOnly"]));
+            }
+            set {
+                this["SpreadBuyPostOnly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SpreadSellPostOnly {
+            get {
+                return ((bool)(this["SpreadSellPostOnly"]));
+            }
+            set {
+                this["SpreadSellPostOnly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SpreadBuyExecute {
+            get {
+                return ((bool)(this["SpreadBuyExecute"]));
+            }
+            set {
+                this["SpreadBuyExecute"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SpreadSellExecute {
+            get {
+                return ((bool)(this["SpreadSellExecute"]));
+            }
+            set {
+                this["SpreadSellExecute"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SpreadCancelBeforeOrdering {
+            get {
+                return ((bool)(this["SpreadCancelBeforeOrdering"]));
+            }
+            set {
+                this["SpreadCancelBeforeOrdering"] = value;
+            }
+        }
     }
 }
