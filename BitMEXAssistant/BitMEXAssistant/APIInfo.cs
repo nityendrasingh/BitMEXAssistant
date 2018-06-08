@@ -1,9 +1,11 @@
 ﻿using BitMEX;
+using CsvHelper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +39,7 @@ namespace BitMEXAssistant
                 GetAPIValidity();
                 if(APIValid)
                 {
+
                     Bot b = new Bot();
                     b.Show();
                     this.Hide();
@@ -95,5 +98,9 @@ namespace BitMEXAssistant
             Properties.Settings.Default.APISecret = txtSecret.Text.Trim();
             SaveSettings();
         }
+
+       
     }
+
+    
 }

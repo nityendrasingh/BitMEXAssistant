@@ -81,6 +81,7 @@
             this.btnDCASell = new System.Windows.Forms.Button();
             this.btnDCABuy = new System.Windows.Forms.Button();
             this.tabSettings = new System.Windows.Forms.TabPage();
+            this.btnExportCandles = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.nudSettingsRetryWaitTime = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
@@ -817,6 +818,7 @@
             // 
             // tabSettings
             // 
+            this.tabSettings.Controls.Add(this.btnExportCandles);
             this.tabSettings.Controls.Add(this.label8);
             this.tabSettings.Controls.Add(this.nudSettingsRetryWaitTime);
             this.tabSettings.Controls.Add(this.label7);
@@ -830,10 +832,20 @@
             this.tabSettings.Text = "Settings";
             this.tabSettings.UseVisualStyleBackColor = true;
             // 
+            // btnExportCandles
+            // 
+            this.btnExportCandles.Location = new System.Drawing.Point(523, 6);
+            this.btnExportCandles.Name = "btnExportCandles";
+            this.btnExportCandles.Size = new System.Drawing.Size(101, 23);
+            this.btnExportCandles.TabIndex = 5;
+            this.btnExportCandles.Text = "Export Candles";
+            this.btnExportCandles.UseVisualStyleBackColor = true;
+            this.btnExportCandles.Click += new System.EventHandler(this.btnExportCandles_Click);
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(148, 91);
+            this.label8.Location = new System.Drawing.Point(112, 58);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(105, 13);
             this.label8.TabIndex = 4;
@@ -846,7 +858,7 @@
             0,
             0,
             0});
-            this.nudSettingsRetryWaitTime.Location = new System.Drawing.Point(42, 88);
+            this.nudSettingsRetryWaitTime.Location = new System.Drawing.Point(6, 55);
             this.nudSettingsRetryWaitTime.Maximum = new decimal(new int[] {
             -727379969,
             232,
@@ -870,7 +882,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(94, 65);
+            this.label7.Location = new System.Drawing.Point(58, 32);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(48, 13);
             this.label7.TabIndex = 2;
@@ -879,7 +891,7 @@
             // chkSettingOverloadRetry
             // 
             this.chkSettingOverloadRetry.AutoSize = true;
-            this.chkSettingOverloadRetry.Location = new System.Drawing.Point(42, 39);
+            this.chkSettingOverloadRetry.Location = new System.Drawing.Point(6, 6);
             this.chkSettingOverloadRetry.Name = "chkSettingOverloadRetry";
             this.chkSettingOverloadRetry.Size = new System.Drawing.Size(118, 17);
             this.chkSettingOverloadRetry.TabIndex = 1;
@@ -889,7 +901,7 @@
             // 
             // nudSettingsOverloadRetryAttempts
             // 
-            this.nudSettingsOverloadRetryAttempts.Location = new System.Drawing.Point(42, 62);
+            this.nudSettingsOverloadRetryAttempts.Location = new System.Drawing.Point(6, 29);
             this.nudSettingsOverloadRetryAttempts.Maximum = new decimal(new int[] {
             20,
             0,
@@ -1274,5 +1286,6 @@
         private System.Windows.Forms.CheckBox chkSpreadCancelWhileOrdering;
         private System.Windows.Forms.CheckBox chkSpreadSellPostOnly;
         private System.Windows.Forms.CheckBox chkSpreadyBuyPostOnly;
+        private System.Windows.Forms.Button btnExportCandles;
     }
 }

@@ -1,11 +1,14 @@
 ﻿using BitMEX;
+using CsvHelper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -622,6 +625,163 @@ namespace BitMEXAssistant
             str.Append("]");
 
             return str.ToString();
+        }
+
+        private void ExportCandleData()
+        {
+            // First see if we have the file we want where we want it. To do that, we need to get the filepath to our app folder in my documents
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // We are working in My Documents.
+            if (!Directory.Exists(path + "\\BitMEXAssistant"))
+            {
+                // If our Kizashi Logs folder doesn't exist, create it.
+                Directory.CreateDirectory(path + "\\BitMEXAssistant");
+            }
+
+            // Optionally, you could loop through all symbols and timeframes to get all files at once here
+            string ourfilepath = Path.Combine(path, "BitMEXAssistant", "Assistant" + ActiveInstrument.Symbol + Timeframe + "CandleHistory.csv");
+            // Get candle info, and Account balance
+            if (!File.Exists(ourfilepath))
+            {
+                // If our files doesn't exist, we'll creat it now with the stream writer
+                using (StreamWriter write = new StreamWriter(ourfilepath))
+                {
+                    CsvWriter csw = new CsvWriter(write);
+
+                    csw.WriteHeader<SimpleCandle>(); // writes the csv header for this class
+                    csw.NextRecord();
+
+                    // loop through all candles, add those items to the csv while we are getting 500 candles (full datasets)
+                    List<SimpleCandle> Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe);
+                    while(Candles.Count > 0)
+                    {
+
+                        csw.WriteRecords(Candles);
+
+                        // Get candles with a start time of the last candle plus 1 min
+                        switch(Timeframe)
+                        {
+                            case "1m":
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(1));
+                                break;
+                            case "5m":
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(5));
+                                break;
+                            case "1h":
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddHours(1));
+                                break;
+                            case "1d":
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddDays(1));
+                                break;
+                            default:
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(1));
+                                break;
+                        }
+
+                        // Lets sleep for a bit, 5 seconds, don't want to get rate limited
+                        Thread.Sleep(2500);
+                    }
+                        
+                }
+            }
+            else
+            {
+                // our file exists, let read existing contents, add them back in, with the new candles.
+                string ourtemppath = Path.Combine(path, "BitMEXAssistant", "Assistant" + ActiveInstrument.Symbol + Timeframe + "CandleHistory.csv");
+                // Open our file, and append data to it.
+                using (StreamReader reader = new StreamReader(ourfilepath))
+                {
+                    using (StreamWriter write = new StreamWriter(ourtemppath))
+                    {
+                        CsvWriter csw = new CsvWriter(write);
+                        CsvReader csr = new CsvReader(reader);
+
+                        // Recreate existing records, then add new ones.
+                        List<SimpleCandle> records = csr.GetRecords<SimpleCandle>().ToList();
+
+                        csw.WriteRecords(records);
+
+                        // Now to any new since the most recent record
+                        List<SimpleCandle> Candles = new List<SimpleCandle>();
+                        // Get candles with a start time of the last candle plus 1 min
+                        switch (Timeframe)
+                        {
+                            case "1m":
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, records.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(1));
+                                break;
+                            case "5m":
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, records.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(5));
+                                break;
+                            case "1h":
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, records.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddHours(1));
+                                break;
+                            case "1d":
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, records.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddDays(1));
+                                break;
+                            default:
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, records.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(1));
+                                break;
+                        }
+
+                        // loop through all candles, add those items to the csv while we are getting 500 candles (full datasets)
+                        
+                        while (Candles.Count > 0)
+                        {
+
+                            csw.WriteRecords(Candles);
+
+                            // Get candles with a start time of the last candle plus 1 min
+                            switch (Timeframe)
+                            {
+                                case "1m":
+                                    Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(1));
+                                    break;
+                                case "5m":
+                                    Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(5));
+                                    break;
+                                case "1h":
+                                    Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddHours(1));
+                                    break;
+                                case "1d":
+                                    Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddDays(1));
+                                    break;
+                                default:
+                                    Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(1));
+                                    break;
+                            }
+
+                            // Lets sleep for a bit, 5 seconds, don't want to get rate limited
+                            Thread.Sleep(2500);
+                        }
+
+                    }
+                }
+
+                File.Delete(ourfilepath);
+                File.Copy(ourtemppath, ourfilepath);
+                File.Delete(ourtemppath);
+            }
+            
+            
+        }
+
+        private List<SimpleCandle> GetSimpleCandles(string Symbol, string Timeframe, DateTime Start = new DateTime())
+        {
+            List<SimpleCandle> Candles = new List<SimpleCandle>();
+            if(Start != new DateTime())
+            {
+                Candles = bitmex.GetCandleHistory(Symbol, Timeframe, Start);
+            }
+            else
+            {
+                Candles = bitmex.GetCandleHistory(Symbol, Timeframe);
+            }
+
+            return Candles;
+        }
+
+        private void btnExportCandles_Click(object sender, EventArgs e)
+        {
+            ExportCandleData();
         }
     }
 }

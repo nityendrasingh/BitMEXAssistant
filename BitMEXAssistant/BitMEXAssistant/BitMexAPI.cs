@@ -443,6 +443,43 @@ namespace BitMEX
 
         }
 
+        public List<SimpleCandle> GetCandleHistory(string symbol, string size, DateTime Start = new DateTime())
+        {
+            var param = new Dictionary<string, string>();
+            param["symbol"] = symbol;
+            param["count"] = 500.ToString(); // 500 max
+            param["reverse"] = "false";
+            if (Start != new DateTime())
+            {
+                param["startTime"] = Start.ToString();
+            }
+            param["binSize"] = size;
+            string res = Query("GET", "/trade/bucketed", param);
+            int RetryAttemptCount = 0;
+            int MaxRetries = RetryAttempts(res);
+            while (res.Contains("error") && RetryAttemptCount < MaxRetries)
+            {
+                errors.Add(res);
+                Thread.Sleep(500); // Force app to wait 500ms
+                res = Query("GET", "/trade/bucketed", param);
+                RetryAttemptCount++;
+                if (RetryAttemptCount == MaxRetries)
+                {
+                    errors.Add("Max rety attempts of " + MaxRetries.ToString() + " reached.");
+                    break;
+                }
+            }
+            try
+            {
+                return JsonConvert.DeserializeObject<List<SimpleCandle>>(res).OrderBy(a => a.TimeStamp).ToList();
+            }
+            catch (Exception ex)
+            {
+                return new List<SimpleCandle>();
+            }
+
+        }
+
         #endregion
 
 
@@ -635,5 +672,17 @@ namespace BitMEX
     public class Trade
     {
         public decimal Price { get; set; }
+    }
+
+    public class SimpleCandle
+    {
+        public DateTime TimeStamp { get; set; }
+        public decimal Open { get; set; }
+        public decimal Close { get; set; }
+        public decimal High { get; set; }
+        public decimal Low { get; set; }
+        public decimal Volume { get; set; }
+        public int Trades { get; set; }
+       
     }
 }
