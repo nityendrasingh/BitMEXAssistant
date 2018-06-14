@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.lblBalance = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblUTCTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.ddlCandleTimes = new System.Windows.Forms.ComboBox();
             this.ddlSymbol = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -106,7 +107,8 @@
             this.txtPositionMarkPrice = new System.Windows.Forms.TextBox();
             this.txtPositionEntryPrice = new System.Windows.Forms.TextBox();
             this.txtPositionSize = new System.Windows.Forms.TextBox();
-            this.lblTimeUTC = new System.Windows.Forms.Label();
+            this.tmrClientUpdates = new System.Windows.Forms.Timer(this.components);
+            this.nudCurrentPrice = new System.Windows.Forms.NumericUpDown();
             this.StatusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabSpread.SuspendLayout();
@@ -130,12 +132,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudSettingsOverloadRetryAttempts)).BeginInit();
             this.gbxPosition.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPositionLimitPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCurrentPrice)).BeginInit();
             this.SuspendLayout();
             // 
             // StatusStrip
             // 
             this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblBalance});
+            this.lblBalance,
+            this.lblUTCTime});
             this.StatusStrip.Location = new System.Drawing.Point(0, 274);
             this.StatusStrip.Name = "StatusStrip";
             this.StatusStrip.Size = new System.Drawing.Size(662, 22);
@@ -147,6 +151,12 @@
             this.lblBalance.Name = "lblBalance";
             this.lblBalance.Size = new System.Drawing.Size(61, 17);
             this.lblBalance.Text = "lblBalance";
+            // 
+            // lblUTCTime
+            // 
+            this.lblUTCTime.Name = "lblUTCTime";
+            this.lblUTCTime.Size = new System.Drawing.Size(69, 17);
+            this.lblUTCTime.Text = "lblUTCTime";
             // 
             // ddlCandleTimes
             // 
@@ -1146,21 +1156,37 @@
             this.txtPositionSize.Size = new System.Drawing.Size(55, 18);
             this.txtPositionSize.TabIndex = 0;
             // 
-            // lblTimeUTC
+            // tmrClientUpdates
             // 
-            this.lblTimeUTC.AutoSize = true;
-            this.lblTimeUTC.Location = new System.Drawing.Point(9, 51);
-            this.lblTimeUTC.Name = "lblTimeUTC";
-            this.lblTimeUTC.Size = new System.Drawing.Size(52, 13);
-            this.lblTimeUTC.TabIndex = 16;
-            this.lblTimeUTC.Text = "UTCTime";
+            this.tmrClientUpdates.Enabled = true;
+            this.tmrClientUpdates.Tick += new System.EventHandler(this.tmrClientUpdates_Tick);
+            // 
+            // nudCurrentPrice
+            // 
+            this.nudCurrentPrice.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.nudCurrentPrice.Location = new System.Drawing.Point(12, 46);
+            this.nudCurrentPrice.Maximum = new decimal(new int[] {
+            -1530494977,
+            232830,
+            0,
+            0});
+            this.nudCurrentPrice.Minimum = new decimal(new int[] {
+            -1486618625,
+            232830643,
+            0,
+            -2147483648});
+            this.nudCurrentPrice.Name = "nudCurrentPrice";
+            this.nudCurrentPrice.ReadOnly = true;
+            this.nudCurrentPrice.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.nudCurrentPrice.Size = new System.Drawing.Size(125, 20);
+            this.nudCurrentPrice.TabIndex = 17;
             // 
             // Bot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(662, 296);
-            this.Controls.Add(this.lblTimeUTC);
+            this.Controls.Add(this.nudCurrentPrice);
             this.Controls.Add(this.gbxPosition);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label2);
@@ -1170,6 +1196,7 @@
             this.Controls.Add(this.StatusStrip);
             this.Name = "Bot";
             this.Text = "Bot";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Bot_FormClosing);
             this.Load += new System.EventHandler(this.Bot_Load);
             this.StatusStrip.ResumeLayout(false);
             this.StatusStrip.PerformLayout();
@@ -1202,6 +1229,7 @@
             this.gbxPosition.ResumeLayout(false);
             this.gbxPosition.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPositionLimitPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCurrentPrice)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1239,7 +1267,6 @@
         private System.Windows.Forms.CheckBox chkDCAReduceOnly;
         private System.Windows.Forms.CheckBox chkDCAExecuteImmediately;
         private System.Windows.Forms.GroupBox gbxPosition;
-        private System.Windows.Forms.Label lblTimeUTC;
         private System.Windows.Forms.Button btnPositionMarketClose;
         private System.Windows.Forms.Button btnPositionLimitClose;
         private System.Windows.Forms.TextBox textBox8;
@@ -1287,5 +1314,8 @@
         private System.Windows.Forms.CheckBox chkSpreadSellPostOnly;
         private System.Windows.Forms.CheckBox chkSpreadyBuyPostOnly;
         private System.Windows.Forms.Button btnExportCandles;
+        private System.Windows.Forms.ToolStripStatusLabel lblUTCTime;
+        private System.Windows.Forms.Timer tmrClientUpdates;
+        private System.Windows.Forms.NumericUpDown nudCurrentPrice;
     }
 }

@@ -1,16 +1,16 @@
 ﻿using BitMEX;
 using CsvHelper;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using WebSocketSharp;
 
 namespace BitMEXAssistant
 {
@@ -32,6 +32,10 @@ namespace BitMEXAssistant
         int DCATimes = 0;
         string DCASide = "Buy";
 
+        WebSocket ws;
+        Dictionary<string, decimal> Prices = new Dictionary<string, decimal>();
+        //List<Alert> Alerts = new List<Alert>();
+
         public Bot()
         {
             InitializeComponent();
@@ -49,7 +53,56 @@ namespace BitMEXAssistant
             InitializeDropdownsAndSettings();
             InitializeAPI();
             InitializeSymbolInformation();
-            
+
+
+            InitializeWebSocket();
+
+            //Alert nea = new Alert();
+            //nea.Symbol = "XBTUSD";
+            //nea.Side = "Above";
+            //nea.Price = 3000m;
+            //nea.Triggered = false;
+            //Alerts.Add(nea);
+        }
+
+        private void InitializeWebSocket()
+        {
+            ws = new WebSocket("wss://www.bitmex.com/realtime");
+            ws.OnMessage += (sender, e) =>
+            {
+                try
+                {
+                    JObject Message = JObject.Parse(e.Data);
+                    if (Message.ContainsKey("table"))
+                    {
+                        if ((string)Message["table"] == "trade")
+                        {
+                            if (Message.ContainsKey("data"))
+                            {
+                                JArray TD = (JArray)Message["data"];
+                                if (TD.Any())
+                                {
+                                    decimal Price = (decimal)TD.Children().LastOrDefault()["price"];
+                                    string Symbol = (string)TD.Children().LastOrDefault()["symbol"];
+                                    Prices[Symbol] = Price;
+                                }
+                            }
+                        }
+                    }
+                }
+                catch(Exception ex)
+                {
+                    //MessageBox.Show(ex.Message);
+                }
+            };
+
+            ws.Connect();
+
+            // Assemble our price dictionary
+            foreach (Instrument i in ActiveInstruments)
+            {
+                ws.Send("{\"op\": \"subscribe\", \"args\": [\"trade:" + i.Symbol + "\"]}");
+            }
             
         }
 
@@ -112,6 +165,12 @@ namespace BitMEXAssistant
             ddlSymbol.SelectedIndex = 0;
             ActiveInstrument = ActiveInstruments[0];
 
+            // Assemble our price dictionary
+            foreach(Instrument i in ActiveInstruments)
+            {
+                Prices.Add(i.Symbol, 0); // just setting up the item, 0 is fine here.
+            }
+
             UpdatePositionInfo();
         }
 
@@ -134,6 +193,10 @@ namespace BitMEXAssistant
 
             nudSpreadSellValueApart.DecimalPlaces = Decimals;
             nudSpreadSellValueApart.Increment = TickSize;
+
+            nudCurrentPrice.DecimalPlaces = Decimals;
+            nudCurrentPrice.Increment = TickSize;
+            nudCurrentPrice.Controls[0].Enabled = false;
         }
 
         private void ddlCandleTimes_SelectedIndexChanged(object sender, EventArgs e)
@@ -336,7 +399,7 @@ namespace BitMEXAssistant
 
         private void UpdateDateAndTime()
         {
-            lblTimeUTC.Text = DateTime.UtcNow.ToShortDateString() + " " + DateTime.UtcNow.ToLongTimeString();
+            lblUTCTime.Text = DateTime.UtcNow.ToShortDateString() + " " + DateTime.UtcNow.ToLongTimeString();
         }
 
         private void UpdatePositionInfo()
@@ -783,5 +846,59 @@ namespace BitMEXAssistant
         {
             ExportCandleData();
         }
+
+        private void Bot_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ws.Close(); // Make sure our websocket is closed.
+        }
+
+        private void UpdatePrice()
+        {
+            nudCurrentPrice.Value = Prices[ActiveInstrument.Symbol];
+        }
+
+        private void tmrClientUpdates_Tick(object sender, EventArgs e)
+        {
+            UpdatePrice();
+            //TriggerAlerts();
+        }
+
+        private void TriggerAlerts()
+        {
+            //if(Alerts.Where(a => a.Triggered == false).Any())
+            //{
+
+            //    foreach(Alert a in Alerts)
+            //    {
+            //        a.Triggered = true;
+            //        switch (a.Side)
+            //        {
+            //            case "Above":
+            //                if(Prices[a.Symbol] > a.Price)
+            //                {
+            //                    MessageBox.Show("Alert! " + a.Symbol + " price is now above " + a.Price.ToString() + ".");
+            //                }
+            //                break;
+            //            case "Below":
+            //                if (Prices[a.Symbol] < a.Price)
+            //                {
+            //                    MessageBox.Show("Alert! " + a.Symbol + " price is now below " + a.Price.ToString() + ".");
+            //                }
+            //                break;
+            //        }
+
+                    
+
+            //    }
+            //}
+        }
+    }
+
+    public class Alert
+    {
+        public string Symbol { get; set; }
+        public string Side { get; set; }
+        public decimal Price { get; set; }
+        public bool Triggered { get; set; }
     }
 }
