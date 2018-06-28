@@ -27,34 +27,62 @@ namespace BitMEXAssistant
 
         private void InitializeSettings()
         {
-            txtKey.Text = Properties.Settings.Default.APIKey;
-            txtSecret.Text = Properties.Settings.Default.APISecret;
+
+            chkConsent.Checked = Properties.Settings.Default.Consent;
+
+            switch(Properties.Settings.Default.Network)
+            {
+                case "Real":
+                    rbNetworkReal.Checked = true;
+                    rbNetworkTest.Checked = false;
+                    txtKey.Text = Properties.Settings.Default.APIKey;
+                    txtSecret.Text = Properties.Settings.Default.APISecret;
+                    break;
+                case "Test":
+                    rbNetworkReal.Checked = false;
+                    rbNetworkTest.Checked = true;
+                    txtKey.Text = Properties.Settings.Default.TestAPIKey;
+                    txtSecret.Text = Properties.Settings.Default.TestAPISecret;
+                    break;
+                default:
+                    rbNetworkReal.Checked = false;
+                    rbNetworkTest.Checked = true;
+                    txtKey.Text = Properties.Settings.Default.TestAPIKey;
+                    txtSecret.Text = Properties.Settings.Default.TestAPISecret;
+                    break;
+            }
         }
 
         private void btnValidate_Click(object sender, EventArgs e)
         {
-            try
+
+            if(chkConsent.Checked)
             {
-                bitmex = new BitMEXApi(txtKey.Text.Trim(), txtSecret.Text.Trim());
-                GetAPIValidity();
-                if(APIValid)
+                try
                 {
+                    bool RealNetwork = (Properties.Settings.Default.Network == "Real"); // Set the bool = true if the setting is real network, false if test
+                    bitmex = new BitMEXApi(txtKey.Text.Trim(), txtSecret.Text.Trim(), RealNetwork);
+                    GetAPIValidity();
+                    if (APIValid)
+                    {
 
-                    Bot b = new Bot();
-                    b.Show();
-                    this.Hide();
+                        Bot b = new Bot();
+                        b.Show();
+                        this.Hide();
+                    }
                 }
-        }
-            catch(Exception ex)
-            {
-                // If it shoots an error, API is invalid.
-                APIValid = false;
-                lblAPIStatus.Text = "API info is invalid!";
+                catch (Exception ex)
+                {
+                    // If it shoots an error, API is invalid.
+                    APIValid = false;
+                    lblAPIStatus.Text = "API info is invalid!";
+                }
             }
-
-
-
-}
+            else
+            {
+                MessageBox.Show("Please acknowledge the risks of using this application and accept responsibility for trades made by the application if you wish to continue.  \n\nDo this by reading the warning on the API Info form and checking the box under the warning that is followed by ''I understand'' if you acknowledge the risks and accept responsibility for trades made with the application.");
+            }
+        }
 
         // Check account balance/validity
         private void GetAPIValidity()
@@ -89,17 +117,72 @@ namespace BitMEXAssistant
 
         private void txtKey_TextChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.APIKey = txtKey.Text.Trim();
+            switch (Properties.Settings.Default.Network)
+            {
+                case "Real":
+                    Properties.Settings.Default.APIKey = txtKey.Text.Trim();
+                    break;
+                case "Test":
+                    Properties.Settings.Default.TestAPIKey = txtKey.Text.Trim();
+                    break;
+                default:
+                    Properties.Settings.Default.TestAPIKey = txtKey.Text.Trim();
+                    break;
+            }
+            
             SaveSettings();
         }
 
         private void txtSecret_TextChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.APISecret = txtSecret.Text.Trim();
+            switch (Properties.Settings.Default.Network)
+            {
+                case "Real":
+                    Properties.Settings.Default.APISecret = txtSecret.Text.Trim();
+                    break;
+                case "Test":
+                    Properties.Settings.Default.TestAPISecret = txtSecret.Text.Trim();
+                    break;
+                default:
+                    Properties.Settings.Default.TestAPISecret = txtSecret.Text.Trim();
+                    break;
+            }
+            
             SaveSettings();
         }
 
-       
+        private void APIInfo_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbNetworkReal_CheckedChanged(object sender, EventArgs e)
+        {
+            if(rbNetworkReal.Checked)
+            {
+                Properties.Settings.Default.Network = "Real";
+                SaveSettings();
+                txtKey.Text = Properties.Settings.Default.APIKey;
+                txtSecret.Text = Properties.Settings.Default.APISecret;
+            }
+        }
+
+        private void rbNetworkTest_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbNetworkTest.Checked)
+            {
+                Properties.Settings.Default.Network = "Test";
+                SaveSettings();
+                txtKey.Text = Properties.Settings.Default.TestAPIKey;
+                txtSecret.Text = Properties.Settings.Default.TestAPISecret;
+            }
+        }
+
+        private void chkConsent_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Consent = chkConsent.Checked;
+            SaveSettings();
+        }
     }
 
     

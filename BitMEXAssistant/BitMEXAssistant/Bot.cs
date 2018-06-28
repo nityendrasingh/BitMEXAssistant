@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using WebSocketSharp;
+using TicTacTec.TA.Library;
 
 namespace BitMEXAssistant
 {
@@ -23,6 +24,7 @@ namespace BitMEXAssistant
         List<Instrument> ActiveInstruments = new List<Instrument>();
         Instrument ActiveInstrument = new Instrument();
         string Timeframe = "1m";
+        bool RealNetwork = false;
 
         int DCACounter = 0;
         int DCAContractsPer = 0;
@@ -44,8 +46,18 @@ namespace BitMEXAssistant
 
         private void InitializeSettings()
         {
-            APIKey = Properties.Settings.Default.APIKey;
-            APISecret = Properties.Settings.Default.APISecret;
+            
+            RealNetwork = (Properties.Settings.Default.Network == "Real"); // Set the bool = true if the setting is real network, false if test
+            if(RealNetwork)
+            {
+                APIKey = Properties.Settings.Default.APIKey;
+                APISecret = Properties.Settings.Default.APISecret;
+            }
+            else
+            {
+                APIKey = Properties.Settings.Default.TestAPIKey;
+                APISecret = Properties.Settings.Default.TestAPISecret;
+            }
         }
 
         private void Bot_Load(object sender, EventArgs e)
@@ -146,7 +158,7 @@ namespace BitMEXAssistant
         {
             try
             {
-                bitmex = new BitMEXApi(APIKey, APISecret);
+                bitmex = new BitMEXApi(APIKey, APISecret, RealNetwork);
                 UpdateBalance();
 
                 // Start our HeartBeat
@@ -714,7 +726,7 @@ namespace BitMEXAssistant
                     csw.NextRecord();
 
                     // loop through all candles, add those items to the csv while we are getting 500 candles (full datasets)
-                    List<SimpleCandle> Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe);
+                    List<SimpleCandle> Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe).Where(a => a.Trades > 0).ToList();
                     while(Candles.Count > 0)
                     {
 
@@ -724,19 +736,19 @@ namespace BitMEXAssistant
                         switch(Timeframe)
                         {
                             case "1m":
-                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(1));
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(1)).Where(a => a.Trades > 0).ToList();
                                 break;
                             case "5m":
-                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(5));
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(5)).Where(a => a.Trades > 0).ToList();
                                 break;
                             case "1h":
-                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddHours(1));
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddHours(1)).Where(a => a.Trades > 0).ToList();
                                 break;
                             case "1d":
-                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddDays(1));
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddDays(1)).Where(a => a.Trades > 0).ToList();
                                 break;
                             default:
-                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(1));
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(1)).Where(a => a.Trades > 0).ToList();
                                 break;
                         }
 
@@ -769,19 +781,19 @@ namespace BitMEXAssistant
                         switch (Timeframe)
                         {
                             case "1m":
-                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, records.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(1));
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, records.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(1)).Where(a => a.Trades > 0).ToList();
                                 break;
                             case "5m":
-                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, records.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(5));
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, records.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(5)).Where(a => a.Trades > 0).ToList();
                                 break;
                             case "1h":
-                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, records.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddHours(1));
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, records.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddHours(1)).Where(a => a.Trades > 0).ToList();
                                 break;
                             case "1d":
-                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, records.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddDays(1));
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, records.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddDays(1)).Where(a => a.Trades > 0).ToList();
                                 break;
                             default:
-                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, records.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(1));
+                                Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, records.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(1)).Where(a => a.Trades > 0).ToList();
                                 break;
                         }
 
@@ -796,19 +808,19 @@ namespace BitMEXAssistant
                             switch (Timeframe)
                             {
                                 case "1m":
-                                    Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(1));
+                                    Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(1)).Where(a => a.Trades > 0).ToList();
                                     break;
                                 case "5m":
-                                    Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(5));
+                                    Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(5)).Where(a => a.Trades > 0).ToList();
                                     break;
                                 case "1h":
-                                    Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddHours(1));
+                                    Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddHours(1)).Where(a => a.Trades > 0).ToList();
                                     break;
                                 case "1d":
-                                    Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddDays(1));
+                                    Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddDays(1)).Where(a => a.Trades > 0).ToList();
                                     break;
                                 default:
-                                    Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(1));
+                                    Candles = GetSimpleCandles(ActiveInstrument.Symbol, Timeframe, Candles.OrderByDescending(a => a.TimeStamp).FirstOrDefault().TimeStamp.AddMinutes(1)).Where(a => a.Trades > 0).ToList();
                                     break;
                             }
 
@@ -891,6 +903,11 @@ namespace BitMEXAssistant
 
             //    }
             //}
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab("tabDonate");
         }
     }
 

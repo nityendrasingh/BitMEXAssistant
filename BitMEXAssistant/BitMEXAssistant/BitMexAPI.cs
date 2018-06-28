@@ -25,16 +25,21 @@ namespace BitMEX
     public class BitMEXApi
     {
         private string domain = "https://www.bitmex.com";
+        private string testdomain = "https://testnet.bitmex.com";
         private string apiKey;
         private string apiSecret;
         private int rateLimit;
         List<string> errors = new List<string>();
 
-        public BitMEXApi(string bitmexKey = "", string bitmexSecret = "", int rateLimit = 5000)
+        public BitMEXApi(string bitmexKey = "", string bitmexSecret = "", bool RealNetwork = true, int rateLimit = 5000)
         {
             this.apiKey = bitmexKey;
             this.apiSecret = bitmexSecret;
             this.rateLimit = rateLimit;
+            if(!RealNetwork)
+            {
+                this.domain = testdomain;
+            }
         }
 
         #region API Connector - Don't touch

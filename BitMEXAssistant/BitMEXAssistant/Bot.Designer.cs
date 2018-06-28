@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Bot));
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.lblBalance = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUTCTime = new System.Windows.Forms.ToolStripStatusLabel();
@@ -109,6 +110,11 @@
             this.txtPositionSize = new System.Windows.Forms.TextBox();
             this.tmrClientUpdates = new System.Windows.Forms.Timer(this.components);
             this.nudCurrentPrice = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.tabDonate = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.StatusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabSpread.SuspendLayout();
@@ -133,6 +139,8 @@
             this.gbxPosition.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPositionLimitPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCurrentPrice)).BeginInit();
+            this.tabDonate.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // StatusStrip
@@ -140,7 +148,7 @@
             this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblBalance,
             this.lblUTCTime});
-            this.StatusStrip.Location = new System.Drawing.Point(0, 274);
+            this.StatusStrip.Location = new System.Drawing.Point(0, 289);
             this.StatusStrip.Name = "StatusStrip";
             this.StatusStrip.Size = new System.Drawing.Size(662, 22);
             this.StatusStrip.TabIndex = 0;
@@ -211,6 +219,7 @@
             this.tabControl1.Controls.Add(this.tabSpread);
             this.tabControl1.Controls.Add(this.tabDCA);
             this.tabControl1.Controls.Add(this.tabSettings);
+            this.tabControl1.Controls.Add(this.tabDonate);
             this.tabControl1.Location = new System.Drawing.Point(12, 69);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1181,11 +1190,64 @@
             this.nudCurrentPrice.Size = new System.Drawing.Size(125, 20);
             this.nudCurrentPrice.TabIndex = 17;
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.DarkTurquoise;
+            this.label15.Location = new System.Drawing.Point(201, 274);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(257, 13);
+            this.label15.TabIndex = 18;
+            this.label15.Text = "Please consider donating BTC to support this project.";
+            this.label15.Click += new System.EventHandler(this.label15_Click);
+            // 
+            // tabDonate
+            // 
+            this.tabDonate.Controls.Add(this.label17);
+            this.tabDonate.Controls.Add(this.label16);
+            this.tabDonate.Controls.Add(this.pictureBox1);
+            this.tabDonate.Location = new System.Drawing.Point(4, 22);
+            this.tabDonate.Name = "tabDonate";
+            this.tabDonate.Size = new System.Drawing.Size(630, 176);
+            this.tabDonate.TabIndex = 3;
+            this.tabDonate.Text = "Donate";
+            this.tabDonate.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(14, 13);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(150, 150);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(239, 79);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(299, 13);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "Any BTC donations are appreciated for supporting this project.";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(171, 149);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(257, 13);
+            this.label17.TabIndex = 2;
+            this.label17.Text = "BTC: 33biFCDFEZn3hLJcGKLR5Muu9oeRWBAFEX";
+            // 
             // Bot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(662, 296);
+            this.ClientSize = new System.Drawing.Size(662, 311);
+            this.Controls.Add(this.label15);
             this.Controls.Add(this.nudCurrentPrice);
             this.Controls.Add(this.gbxPosition);
             this.Controls.Add(this.tabControl1);
@@ -1230,6 +1292,9 @@
             this.gbxPosition.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPositionLimitPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCurrentPrice)).EndInit();
+            this.tabDonate.ResumeLayout(false);
+            this.tabDonate.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1317,5 +1382,10 @@
         private System.Windows.Forms.ToolStripStatusLabel lblUTCTime;
         private System.Windows.Forms.Timer tmrClientUpdates;
         private System.Windows.Forms.NumericUpDown nudCurrentPrice;
+        private System.Windows.Forms.TabPage tabDonate;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label15;
     }
 }

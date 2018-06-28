@@ -322,5 +322,53 @@ namespace BitMEXAssistant.Properties {
                 this["SpreadCancelBeforeOrdering"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Real")]
+        public string Network {
+            get {
+                return ((string)(this["Network"]));
+            }
+            set {
+                this["Network"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TestAPIKey {
+            get {
+                return ((string)(this["TestAPIKey"]));
+            }
+            set {
+                this["TestAPIKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TestAPISecret {
+            get {
+                return ((string)(this["TestAPISecret"]));
+            }
+            set {
+                this["TestAPISecret"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Consent {
+            get {
+                return ((bool)(this["Consent"]));
+            }
+            set {
+                this["Consent"] = value;
+            }
+        }
     }
 }
