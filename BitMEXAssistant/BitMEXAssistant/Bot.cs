@@ -11,7 +11,6 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using WebSocketSharp;
-using TicTacTec.TA.Library;
 
 namespace BitMEXAssistant
 {
