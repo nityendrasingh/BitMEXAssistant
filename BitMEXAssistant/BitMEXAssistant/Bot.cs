@@ -40,29 +40,13 @@ namespace BitMEXAssistant
         public Bot()
         {
             InitializeComponent();
-            InitializeSettings();
-        }
-
-        private void InitializeSettings()
-        {
-            
-            RealNetwork = (Properties.Settings.Default.Network == "Real"); // Set the bool = true if the setting is real network, false if test
-            if(RealNetwork)
-            {
-                APIKey = Properties.Settings.Default.APIKey;
-                APISecret = Properties.Settings.Default.APISecret;
-            }
-            else
-            {
-                APIKey = Properties.Settings.Default.TestAPIKey;
-                APISecret = Properties.Settings.Default.TestAPISecret;
-            }
         }
 
         private void Bot_Load(object sender, EventArgs e)
         {
             InitializeDropdownsAndSettings();
             InitializeAPI();
+            InitializePostAPIDropdownsAndSettings();
             InitializeSymbolInformation();
 
 
@@ -78,7 +62,15 @@ namespace BitMEXAssistant
 
         private void InitializeWebSocket()
         {
-            ws = new WebSocket("wss://www.bitmex.com/realtime");
+            if(Properties.Settings.Default.Network == "Real")
+            {
+                ws = new WebSocket("wss://www.bitmex.com/realtime");
+            }
+            else
+            {
+                ws = new WebSocket("wss://testnet.bitmex.com/realtime");
+            }
+            
             ws.OnMessage += (sender, e) =>
             {
                 try
@@ -119,6 +111,20 @@ namespace BitMEXAssistant
 
         private void InitializeDropdownsAndSettings()
         {
+            // Network/API Settings
+            RealNetwork = (Properties.Settings.Default.Network == "Real"); // Set the bool = true if the setting is real network, false if test
+            if (RealNetwork)
+            {
+                APIKey = Properties.Settings.Default.APIKey;
+                APISecret = Properties.Settings.Default.APISecret;
+            }
+            else
+            {
+                APIKey = Properties.Settings.Default.TestAPIKey;
+                APISecret = Properties.Settings.Default.TestAPISecret;
+            }
+
+
             ddlCandleTimes.SelectedIndex = 0;
 
             // Spread Settings
@@ -150,10 +156,26 @@ namespace BitMEXAssistant
             nudSettingsOverloadRetryAttempts.Value = Properties.Settings.Default.OverloadRetryAttempts;
             nudSettingsRetryWaitTime.Value = Properties.Settings.Default.RetryAttemptWaitTime;
 
+            // Manual Ordering Settings
+            chkManualMarketBuyReduceOnly.Checked = Properties.Settings.Default.ManualMarketReduceOnly;
+            //nudManualMarketBuyContracts.Value = Properties.Settings.Default.ManualMarketContracts; // Moved this to Post API settings, because intrument data is required.
+            nudManualLimitContracts.Value = Properties.Settings.Default.ManualLimitContracts;
+            nudManualLimitPrice.Value = Properties.Settings.Default.ManualLimitPrice;
+            chkManualLimitReduceOnly.Checked = Properties.Settings.Default.ManualLimitReduceOnly;
+            chkManualLimitPostOnly.Checked = Properties.Settings.Default.ManualLimitPostOnly;
+            chkManualLimitCancelWhileOrdering.Checked = Properties.Settings.Default.ManualLimitCancelOpenOrders;
+
+
             UpdateDateAndTime();
         }
 
-        private void InitializeAPI()
+        private void InitializePostAPIDropdownsAndSettings()
+        {
+            // Manual Ordering Settings
+            nudManualMarketBuyContracts.Value = Properties.Settings.Default.ManualMarketContracts;
+        }
+
+            private void InitializeAPI()
         {
             try
             {
@@ -189,8 +211,7 @@ namespace BitMEXAssistant
         {
             ActiveInstrument = bitmex.GetInstrument(((Instrument)ddlSymbol.SelectedItem).Symbol)[0];
             UpdatePositionInfo();
-            int DecimalPlacesInTickSize = BitConverter.GetBytes(decimal.GetBits(ActiveInstrument.TickSize)[3])[2];
-            UpdateFormsForTickSize(ActiveInstrument.TickSize, DecimalPlacesInTickSize);
+            UpdateFormsForTickSize(ActiveInstrument.TickSize, ActiveInstrument.DecimalPlacesInTickSize);
 
         }
 
@@ -208,6 +229,9 @@ namespace BitMEXAssistant
             nudCurrentPrice.DecimalPlaces = Decimals;
             nudCurrentPrice.Increment = TickSize;
             nudCurrentPrice.Controls[0].Enabled = false;
+
+            nudManualLimitPrice.DecimalPlaces = Decimals;
+            nudManualLimitPrice.Increment = TickSize;
         }
 
         private void ddlCandleTimes_SelectedIndexChanged(object sender, EventArgs e)
@@ -871,6 +895,7 @@ namespace BitMEXAssistant
         private void tmrClientUpdates_Tick(object sender, EventArgs e)
         {
             UpdatePrice();
+            UpdateManualMarketBuyButtons();  // Update our buy buttons on manual market buys
             //TriggerAlerts();
         }
 
@@ -907,6 +932,90 @@ namespace BitMEXAssistant
         private void label15_Click(object sender, EventArgs e)
         {
             tabControl1.SelectTab("tabDonate");
+        }
+
+        private void UpdateManualMarketBuyButtons()
+        {
+            btnManualMarketBuy.Text = "Market Buy" + Environment.NewLine + ((int)nudManualMarketBuyContracts.Value).ToString() + " @" + nudCurrentPrice.Value.ToString("F"+ActiveInstrument.DecimalPlacesInTickSize.ToString());
+            btnManualMarketSell.Text = "Market Sell" + Environment.NewLine + ((int)nudManualMarketBuyContracts.Value).ToString() + " @" + nudCurrentPrice.Value.ToString("F" + ActiveInstrument.DecimalPlacesInTickSize.ToString());
+        }
+
+        private void btnManualMarketBuy_Click(object sender, EventArgs e)
+        {
+            bitmex.MarketOrder(ActiveInstrument.Symbol, "Buy", (int)nudManualMarketBuyContracts.Value, chkManualMarketBuyReduceOnly.Checked);
+        }
+
+        private void btnManualMarketSell_Click(object sender, EventArgs e)
+        {
+            bitmex.MarketOrder(ActiveInstrument.Symbol, "Sell", (int)nudManualMarketBuyContracts.Value, chkManualMarketBuyReduceOnly.Checked);
+        }
+
+        private void nudManualMarketBuyContracts_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ManualMarketContracts = (int)nudManualMarketBuyContracts.Value;
+            SaveSettings();
+            UpdateManualMarketBuyButtons();
+        }
+
+        private void chkManualMarketBuyReduceOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ManualMarketReduceOnly = chkManualMarketBuyReduceOnly.Checked;
+            SaveSettings();
+        }
+
+        private void btnManualLimitSetCurrentPrice_Click(object sender, EventArgs e)
+        {
+            nudManualLimitPrice.Value = Prices[ActiveInstrument.Symbol];
+        }
+
+        private void nudManualLimitContracts_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ManualLimitContracts = (int)nudManualLimitContracts.Value;
+            SaveSettings();
+        }
+
+        private void nudManualLimitPrice_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ManualLimitPrice = nudManualLimitPrice.Value;
+            SaveSettings();
+        }
+
+        private void chkManualLimitReduceOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ManualLimitReduceOnly = chkManualLimitReduceOnly.Checked;
+            SaveSettings();
+        }
+
+        private void chkManualLimitPostOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ManualLimitPostOnly = chkManualLimitPostOnly.Checked;
+            SaveSettings();
+        }
+
+        private void chkManualLimitCancelWhileOrdering_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ManualLimitCancelOpenOrders = chkManualLimitCancelWhileOrdering.Checked;
+            SaveSettings();
+        }
+
+        private void btnManualLimitBuy_Click(object sender, EventArgs e)
+        {
+            if(chkManualLimitCancelWhileOrdering.Checked)
+            {
+                bitmex.CancelAllOpenOrders(ActiveInstrument.Symbol);
+            }
+            bitmex.LimitOrder(ActiveInstrument.Symbol, "Buy", (int)nudManualLimitContracts.Value, nudManualLimitPrice.Value, chkManualLimitReduceOnly.Checked, chkManualLimitPostOnly.Checked);
+                
+        }
+
+        private void btnManualLimitSell_Click(object sender, EventArgs e)
+        {
+            if (chkManualLimitCancelWhileOrdering.Checked)
+            {
+                bitmex.CancelAllOpenOrders(ActiveInstrument.Symbol);
+            }
+            bitmex.LimitOrder(ActiveInstrument.Symbol, "Sell", (int)nudManualLimitContracts.Value, nudManualLimitPrice.Value, chkManualLimitReduceOnly.Checked, chkManualLimitPostOnly.Checked);
+
         }
     }
 

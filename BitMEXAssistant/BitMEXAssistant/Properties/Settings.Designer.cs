@@ -370,5 +370,89 @@ namespace BitMEXAssistant.Properties {
                 this["Consent"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int ManualMarketContracts {
+            get {
+                return ((int)(this["ManualMarketContracts"]));
+            }
+            set {
+                this["ManualMarketContracts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ManualMarketReduceOnly {
+            get {
+                return ((bool)(this["ManualMarketReduceOnly"]));
+            }
+            set {
+                this["ManualMarketReduceOnly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int ManualLimitContracts {
+            get {
+                return ((int)(this["ManualLimitContracts"]));
+            }
+            set {
+                this["ManualLimitContracts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public decimal ManualLimitPrice {
+            get {
+                return ((decimal)(this["ManualLimitPrice"]));
+            }
+            set {
+                this["ManualLimitPrice"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ManualLimitReduceOnly {
+            get {
+                return ((bool)(this["ManualLimitReduceOnly"]));
+            }
+            set {
+                this["ManualLimitReduceOnly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ManualLimitPostOnly {
+            get {
+                return ((bool)(this["ManualLimitPostOnly"]));
+            }
+            set {
+                this["ManualLimitPostOnly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ManualLimitCancelOpenOrders {
+            get {
+                return ((bool)(this["ManualLimitCancelOpenOrders"]));
+            }
+            set {
+                this["ManualLimitCancelOpenOrders"] = value;
+            }
+        }
     }
 }

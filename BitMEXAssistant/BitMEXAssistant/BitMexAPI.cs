@@ -225,7 +225,7 @@ namespace BitMEX
             return res;
         }
 
-        public string LimitOrder(string Symbol, string Side, int Quantity, decimal Price, bool ReduceOnly = false)
+        public string LimitOrder(string Symbol, string Side, int Quantity, decimal Price, bool ReduceOnly = false, bool PostOnly = false)
         {
             var param = new Dictionary<string, string>();
             param["symbol"] = Symbol;
@@ -233,10 +233,19 @@ namespace BitMEX
             param["orderQty"] = Quantity.ToString();
             param["ordType"] = "Limit";
             param["price"] = Price.ToString();
-            if (ReduceOnly)
+            if (ReduceOnly && !PostOnly)
             {
                 param["execInst"] = "ReduceOnly";
             }
+            else if(!ReduceOnly && PostOnly)
+            {
+                param["execInst"] = "ParticipateDoNotInitiate";
+            }
+            else if(ReduceOnly && PostOnly)
+            {
+                param["execInst"] = "ReduceOnly,ParticipateDoNotInitiate";
+            }
+
 
             string res = Query("POST", "/order", param, true);
             int RetryAttemptCount = 0;
@@ -560,6 +569,10 @@ namespace BitMEX
         public string Symbol { get; set; }
         public decimal TickSize { get; set; }
         public double Volume24H { get; set; }
+        public int DecimalPlacesInTickSize
+        {
+            get { return BitConverter.GetBytes(decimal.GetBits(TickSize)[3])[2]; }
+        }
     }
 
     public class Candle

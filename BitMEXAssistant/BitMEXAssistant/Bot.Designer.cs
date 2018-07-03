@@ -39,6 +39,23 @@
             this.label2 = new System.Windows.Forms.Label();
             this.Heartbeat = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabManual = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnManualLimitSell = new System.Windows.Forms.Button();
+            this.chkManualLimitCancelWhileOrdering = new System.Windows.Forms.CheckBox();
+            this.btnManualLimitBuy = new System.Windows.Forms.Button();
+            this.chkManualLimitPostOnly = new System.Windows.Forms.CheckBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.nudManualLimitPrice = new System.Windows.Forms.NumericUpDown();
+            this.chkManualLimitReduceOnly = new System.Windows.Forms.CheckBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.nudManualLimitContracts = new System.Windows.Forms.NumericUpDown();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnManualMarketSell = new System.Windows.Forms.Button();
+            this.btnManualMarketBuy = new System.Windows.Forms.Button();
+            this.chkManualMarketBuyReduceOnly = new System.Windows.Forms.CheckBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.nudManualMarketBuyContracts = new System.Windows.Forms.NumericUpDown();
             this.tabSpread = new System.Windows.Forms.TabPage();
             this.chkSpreadCancelWhileOrdering = new System.Windows.Forms.CheckBox();
             this.btnSpreadCloseAllOpenOrders = new System.Windows.Forms.Button();
@@ -89,6 +106,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.chkSettingOverloadRetry = new System.Windows.Forms.CheckBox();
             this.nudSettingsOverloadRetryAttempts = new System.Windows.Forms.NumericUpDown();
+            this.tabDonate = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tmrDCA = new System.Windows.Forms.Timer(this.components);
             this.gbxPosition = new System.Windows.Forms.GroupBox();
             this.nudPositionLimitPrice = new System.Windows.Forms.NumericUpDown();
@@ -111,12 +132,15 @@
             this.tmrClientUpdates = new System.Windows.Forms.Timer(this.components);
             this.nudCurrentPrice = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
-            this.tabDonate = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
+            this.btnManualLimitSetCurrentPrice = new System.Windows.Forms.Button();
             this.StatusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabManual.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudManualLimitPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudManualLimitContracts)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudManualMarketBuyContracts)).BeginInit();
             this.tabSpread.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpreadSellOrderCount)).BeginInit();
@@ -136,11 +160,11 @@
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSettingsRetryWaitTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSettingsOverloadRetryAttempts)).BeginInit();
+            this.tabDonate.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbxPosition.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPositionLimitPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCurrentPrice)).BeginInit();
-            this.tabDonate.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // StatusStrip
@@ -216,6 +240,7 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Controls.Add(this.tabManual);
             this.tabControl1.Controls.Add(this.tabSpread);
             this.tabControl1.Controls.Add(this.tabDCA);
             this.tabControl1.Controls.Add(this.tabSettings);
@@ -225,6 +250,246 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(638, 202);
             this.tabControl1.TabIndex = 14;
+            // 
+            // tabManual
+            // 
+            this.tabManual.Controls.Add(this.groupBox5);
+            this.tabManual.Controls.Add(this.groupBox4);
+            this.tabManual.Location = new System.Drawing.Point(4, 22);
+            this.tabManual.Name = "tabManual";
+            this.tabManual.Size = new System.Drawing.Size(630, 176);
+            this.tabManual.TabIndex = 4;
+            this.tabManual.Text = "Manual Ordering";
+            this.tabManual.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.btnManualLimitSetCurrentPrice);
+            this.groupBox5.Controls.Add(this.btnManualLimitSell);
+            this.groupBox5.Controls.Add(this.chkManualLimitCancelWhileOrdering);
+            this.groupBox5.Controls.Add(this.btnManualLimitBuy);
+            this.groupBox5.Controls.Add(this.chkManualLimitPostOnly);
+            this.groupBox5.Controls.Add(this.label20);
+            this.groupBox5.Controls.Add(this.nudManualLimitPrice);
+            this.groupBox5.Controls.Add(this.chkManualLimitReduceOnly);
+            this.groupBox5.Controls.Add(this.label18);
+            this.groupBox5.Controls.Add(this.nudManualLimitContracts);
+            this.groupBox5.Location = new System.Drawing.Point(196, 13);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(431, 160);
+            this.groupBox5.TabIndex = 10;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Limit";
+            // 
+            // btnManualLimitSell
+            // 
+            this.btnManualLimitSell.BackColor = System.Drawing.Color.Red;
+            this.btnManualLimitSell.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnManualLimitSell.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnManualLimitSell.Location = new System.Drawing.Point(345, 71);
+            this.btnManualLimitSell.Name = "btnManualLimitSell";
+            this.btnManualLimitSell.Size = new System.Drawing.Size(81, 80);
+            this.btnManualLimitSell.TabIndex = 11;
+            this.btnManualLimitSell.Text = "Limit Sell";
+            this.btnManualLimitSell.UseVisualStyleBackColor = false;
+            this.btnManualLimitSell.Click += new System.EventHandler(this.btnManualLimitSell_Click);
+            // 
+            // chkManualLimitCancelWhileOrdering
+            // 
+            this.chkManualLimitCancelWhileOrdering.AutoSize = true;
+            this.chkManualLimitCancelWhileOrdering.Checked = true;
+            this.chkManualLimitCancelWhileOrdering.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkManualLimitCancelWhileOrdering.Location = new System.Drawing.Point(137, 136);
+            this.chkManualLimitCancelWhileOrdering.Name = "chkManualLimitCancelWhileOrdering";
+            this.chkManualLimitCancelWhileOrdering.Size = new System.Drawing.Size(122, 17);
+            this.chkManualLimitCancelWhileOrdering.TabIndex = 11;
+            this.chkManualLimitCancelWhileOrdering.Text = "Cancel Open Orders";
+            this.chkManualLimitCancelWhileOrdering.UseVisualStyleBackColor = true;
+            this.chkManualLimitCancelWhileOrdering.CheckedChanged += new System.EventHandler(this.chkManualLimitCancelWhileOrdering_CheckedChanged);
+            // 
+            // btnManualLimitBuy
+            // 
+            this.btnManualLimitBuy.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnManualLimitBuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnManualLimitBuy.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnManualLimitBuy.Location = new System.Drawing.Point(260, 71);
+            this.btnManualLimitBuy.Name = "btnManualLimitBuy";
+            this.btnManualLimitBuy.Size = new System.Drawing.Size(81, 80);
+            this.btnManualLimitBuy.TabIndex = 10;
+            this.btnManualLimitBuy.Text = "Limit Buy";
+            this.btnManualLimitBuy.UseVisualStyleBackColor = false;
+            this.btnManualLimitBuy.Click += new System.EventHandler(this.btnManualLimitBuy_Click);
+            // 
+            // chkManualLimitPostOnly
+            // 
+            this.chkManualLimitPostOnly.AutoSize = true;
+            this.chkManualLimitPostOnly.Checked = true;
+            this.chkManualLimitPostOnly.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkManualLimitPostOnly.Location = new System.Drawing.Point(137, 118);
+            this.chkManualLimitPostOnly.Name = "chkManualLimitPostOnly";
+            this.chkManualLimitPostOnly.Size = new System.Drawing.Size(71, 17);
+            this.chkManualLimitPostOnly.TabIndex = 10;
+            this.chkManualLimitPostOnly.Text = "Post Only";
+            this.chkManualLimitPostOnly.UseVisualStyleBackColor = true;
+            this.chkManualLimitPostOnly.CheckedChanged += new System.EventHandler(this.chkManualLimitPostOnly_CheckedChanged);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(344, 46);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(31, 13);
+            this.label20.TabIndex = 9;
+            this.label20.Text = "Price";
+            // 
+            // nudManualLimitPrice
+            // 
+            this.nudManualLimitPrice.Location = new System.Drawing.Point(261, 42);
+            this.nudManualLimitPrice.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
+            this.nudManualLimitPrice.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            524288});
+            this.nudManualLimitPrice.Name = "nudManualLimitPrice";
+            this.nudManualLimitPrice.Size = new System.Drawing.Size(81, 20);
+            this.nudManualLimitPrice.TabIndex = 8;
+            this.nudManualLimitPrice.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudManualLimitPrice.ValueChanged += new System.EventHandler(this.nudManualLimitPrice_ValueChanged);
+            // 
+            // chkManualLimitReduceOnly
+            // 
+            this.chkManualLimitReduceOnly.AutoSize = true;
+            this.chkManualLimitReduceOnly.Location = new System.Drawing.Point(137, 100);
+            this.chkManualLimitReduceOnly.Name = "chkManualLimitReduceOnly";
+            this.chkManualLimitReduceOnly.Size = new System.Drawing.Size(88, 17);
+            this.chkManualLimitReduceOnly.TabIndex = 7;
+            this.chkManualLimitReduceOnly.Text = "Reduce Only";
+            this.chkManualLimitReduceOnly.UseVisualStyleBackColor = true;
+            this.chkManualLimitReduceOnly.CheckedChanged += new System.EventHandler(this.chkManualLimitReduceOnly_CheckedChanged);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(344, 20);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(52, 13);
+            this.label18.TabIndex = 5;
+            this.label18.Text = "Contracts";
+            // 
+            // nudManualLimitContracts
+            // 
+            this.nudManualLimitContracts.Location = new System.Drawing.Point(261, 16);
+            this.nudManualLimitContracts.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
+            this.nudManualLimitContracts.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudManualLimitContracts.Name = "nudManualLimitContracts";
+            this.nudManualLimitContracts.Size = new System.Drawing.Size(81, 20);
+            this.nudManualLimitContracts.TabIndex = 4;
+            this.nudManualLimitContracts.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudManualLimitContracts.ValueChanged += new System.EventHandler(this.nudManualLimitContracts_ValueChanged);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btnManualMarketSell);
+            this.groupBox4.Controls.Add(this.btnManualMarketBuy);
+            this.groupBox4.Controls.Add(this.chkManualMarketBuyReduceOnly);
+            this.groupBox4.Controls.Add(this.label19);
+            this.groupBox4.Controls.Add(this.nudManualMarketBuyContracts);
+            this.groupBox4.Location = new System.Drawing.Point(14, 13);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(176, 160);
+            this.groupBox4.TabIndex = 9;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Market";
+            // 
+            // btnManualMarketSell
+            // 
+            this.btnManualMarketSell.BackColor = System.Drawing.Color.Red;
+            this.btnManualMarketSell.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnManualMarketSell.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnManualMarketSell.Location = new System.Drawing.Point(90, 71);
+            this.btnManualMarketSell.Name = "btnManualMarketSell";
+            this.btnManualMarketSell.Size = new System.Drawing.Size(81, 80);
+            this.btnManualMarketSell.TabIndex = 9;
+            this.btnManualMarketSell.Text = "Market Sell";
+            this.btnManualMarketSell.UseVisualStyleBackColor = false;
+            this.btnManualMarketSell.Click += new System.EventHandler(this.btnManualMarketSell_Click);
+            // 
+            // btnManualMarketBuy
+            // 
+            this.btnManualMarketBuy.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnManualMarketBuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnManualMarketBuy.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnManualMarketBuy.Location = new System.Drawing.Point(5, 71);
+            this.btnManualMarketBuy.Name = "btnManualMarketBuy";
+            this.btnManualMarketBuy.Size = new System.Drawing.Size(81, 80);
+            this.btnManualMarketBuy.TabIndex = 8;
+            this.btnManualMarketBuy.Text = "Market Buy";
+            this.btnManualMarketBuy.UseVisualStyleBackColor = false;
+            this.btnManualMarketBuy.Click += new System.EventHandler(this.btnManualMarketBuy_Click);
+            // 
+            // chkManualMarketBuyReduceOnly
+            // 
+            this.chkManualMarketBuyReduceOnly.AutoSize = true;
+            this.chkManualMarketBuyReduceOnly.Location = new System.Drawing.Point(76, 42);
+            this.chkManualMarketBuyReduceOnly.Name = "chkManualMarketBuyReduceOnly";
+            this.chkManualMarketBuyReduceOnly.Size = new System.Drawing.Size(88, 17);
+            this.chkManualMarketBuyReduceOnly.TabIndex = 7;
+            this.chkManualMarketBuyReduceOnly.Text = "Reduce Only";
+            this.chkManualMarketBuyReduceOnly.UseVisualStyleBackColor = true;
+            this.chkManualMarketBuyReduceOnly.CheckedChanged += new System.EventHandler(this.chkManualMarketBuyReduceOnly_CheckedChanged);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(92, 22);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(52, 13);
+            this.label19.TabIndex = 5;
+            this.label19.Text = "Contracts";
+            // 
+            // nudManualMarketBuyContracts
+            // 
+            this.nudManualMarketBuyContracts.Location = new System.Drawing.Point(9, 18);
+            this.nudManualMarketBuyContracts.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
+            this.nudManualMarketBuyContracts.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudManualMarketBuyContracts.Name = "nudManualMarketBuyContracts";
+            this.nudManualMarketBuyContracts.Size = new System.Drawing.Size(81, 20);
+            this.nudManualMarketBuyContracts.TabIndex = 4;
+            this.nudManualMarketBuyContracts.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudManualMarketBuyContracts.ValueChanged += new System.EventHandler(this.nudManualMarketBuyContracts_ValueChanged);
             // 
             // tabSpread
             // 
@@ -941,6 +1206,46 @@
             0});
             this.nudSettingsOverloadRetryAttempts.ValueChanged += new System.EventHandler(this.nudSettingsOverloadRetryAttempts_ValueChanged);
             // 
+            // tabDonate
+            // 
+            this.tabDonate.Controls.Add(this.label17);
+            this.tabDonate.Controls.Add(this.label16);
+            this.tabDonate.Controls.Add(this.pictureBox1);
+            this.tabDonate.Location = new System.Drawing.Point(4, 22);
+            this.tabDonate.Name = "tabDonate";
+            this.tabDonate.Size = new System.Drawing.Size(630, 176);
+            this.tabDonate.TabIndex = 3;
+            this.tabDonate.Text = "Donate";
+            this.tabDonate.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(171, 149);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(257, 13);
+            this.label17.TabIndex = 2;
+            this.label17.Text = "BTC: 33biFCDFEZn3hLJcGKLR5Muu9oeRWBAFEX";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(239, 79);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(299, 13);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "Any BTC donations are appreciated for supporting this project.";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(14, 13);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(150, 150);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // tmrDCA
             // 
             this.tmrDCA.Tick += new System.EventHandler(this.tmrDCA_Tick);
@@ -987,10 +1292,20 @@
             0,
             0,
             0});
+            this.nudPositionLimitPrice.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            524288});
             this.nudPositionLimitPrice.Name = "nudPositionLimitPrice";
             this.nudPositionLimitPrice.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.nudPositionLimitPrice.Size = new System.Drawing.Size(61, 18);
             this.nudPositionLimitPrice.TabIndex = 19;
+            this.nudPositionLimitPrice.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            524288});
             // 
             // btnPositionMarketClose
             // 
@@ -1202,45 +1517,15 @@
             this.label15.Text = "Please consider donating BTC to support this project.";
             this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
-            // tabDonate
+            // btnManualLimitSetCurrentPrice
             // 
-            this.tabDonate.Controls.Add(this.label17);
-            this.tabDonate.Controls.Add(this.label16);
-            this.tabDonate.Controls.Add(this.pictureBox1);
-            this.tabDonate.Location = new System.Drawing.Point(4, 22);
-            this.tabDonate.Name = "tabDonate";
-            this.tabDonate.Size = new System.Drawing.Size(630, 176);
-            this.tabDonate.TabIndex = 3;
-            this.tabDonate.Text = "Donate";
-            this.tabDonate.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(14, 13);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(150, 150);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(239, 79);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(299, 13);
-            this.label16.TabIndex = 1;
-            this.label16.Text = "Any BTC donations are appreciated for supporting this project.";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(171, 149);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(257, 13);
-            this.label17.TabIndex = 2;
-            this.label17.Text = "BTC: 33biFCDFEZn3hLJcGKLR5Muu9oeRWBAFEX";
+            this.btnManualLimitSetCurrentPrice.Location = new System.Drawing.Point(208, 41);
+            this.btnManualLimitSetCurrentPrice.Name = "btnManualLimitSetCurrentPrice";
+            this.btnManualLimitSetCurrentPrice.Size = new System.Drawing.Size(52, 21);
+            this.btnManualLimitSetCurrentPrice.TabIndex = 12;
+            this.btnManualLimitSetCurrentPrice.Text = "Current";
+            this.btnManualLimitSetCurrentPrice.UseVisualStyleBackColor = true;
+            this.btnManualLimitSetCurrentPrice.Click += new System.EventHandler(this.btnManualLimitSetCurrentPrice_Click);
             // 
             // Bot
             // 
@@ -1263,6 +1548,14 @@
             this.StatusStrip.ResumeLayout(false);
             this.StatusStrip.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.tabManual.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudManualLimitPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudManualLimitContracts)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudManualMarketBuyContracts)).EndInit();
             this.tabSpread.ResumeLayout(false);
             this.tabSpread.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -1288,13 +1581,13 @@
             this.tabSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSettingsRetryWaitTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSettingsOverloadRetryAttempts)).EndInit();
+            this.tabDonate.ResumeLayout(false);
+            this.tabDonate.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.gbxPosition.ResumeLayout(false);
             this.gbxPosition.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPositionLimitPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCurrentPrice)).EndInit();
-            this.tabDonate.ResumeLayout(false);
-            this.tabDonate.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1387,5 +1680,23 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TabPage tabManual;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btnManualMarketSell;
+        private System.Windows.Forms.Button btnManualMarketBuy;
+        private System.Windows.Forms.CheckBox chkManualMarketBuyReduceOnly;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.NumericUpDown nudManualMarketBuyContracts;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button btnManualLimitSell;
+        private System.Windows.Forms.CheckBox chkManualLimitCancelWhileOrdering;
+        private System.Windows.Forms.Button btnManualLimitBuy;
+        private System.Windows.Forms.CheckBox chkManualLimitPostOnly;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.NumericUpDown nudManualLimitPrice;
+        private System.Windows.Forms.CheckBox chkManualLimitReduceOnly;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.NumericUpDown nudManualLimitContracts;
+        private System.Windows.Forms.Button btnManualLimitSetCurrentPrice;
     }
 }
