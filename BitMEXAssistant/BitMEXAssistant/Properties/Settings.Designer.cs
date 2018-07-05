@@ -454,5 +454,77 @@ namespace BitMEXAssistant.Properties {
                 this["ManualLimitCancelOpenOrders"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ManualLimitHiddenOrder {
+            get {
+                return ((bool)(this["ManualLimitHiddenOrder"]));
+            }
+            set {
+                this["ManualLimitHiddenOrder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.25")]
+        public decimal ManualLimitPercentModifier1 {
+            get {
+                return ((decimal)(this["ManualLimitPercentModifier1"]));
+            }
+            set {
+                this["ManualLimitPercentModifier1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
+        public decimal ManualLimitPercentModifier2 {
+            get {
+                return ((decimal)(this["ManualLimitPercentModifier2"]));
+            }
+            set {
+                this["ManualLimitPercentModifier2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public decimal ManualLimitPercentModifier3 {
+            get {
+                return ((decimal)(this["ManualLimitPercentModifier3"]));
+            }
+            set {
+                this["ManualLimitPercentModifier3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2.5")]
+        public decimal ManualLimitPercentModifier4 {
+            get {
+                return ((decimal)(this["ManualLimitPercentModifier4"]));
+            }
+            set {
+                this["ManualLimitPercentModifier4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ManualLimitPercentModifierUseCurrentPrice {
+            get {
+                return ((bool)(this["ManualLimitPercentModifierUseCurrentPrice"]));
+            }
+            set {
+                this["ManualLimitPercentModifierUseCurrentPrice"] = value;
+            }
+        }
     }
 }

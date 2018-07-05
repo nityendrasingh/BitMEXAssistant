@@ -41,6 +41,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabManual = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnManualLimitSetCurrentPrice = new System.Windows.Forms.Button();
             this.btnManualLimitSell = new System.Windows.Forms.Button();
             this.chkManualLimitCancelWhileOrdering = new System.Windows.Forms.CheckBox();
             this.btnManualLimitBuy = new System.Windows.Forms.Button();
@@ -132,7 +133,22 @@
             this.tmrClientUpdates = new System.Windows.Forms.Timer(this.components);
             this.nudCurrentPrice = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
-            this.btnManualLimitSetCurrentPrice = new System.Windows.Forms.Button();
+            this.chkManualLimitHiddenOrder = new System.Windows.Forms.CheckBox();
+            this.nudManualLimitPercentModifier1 = new System.Windows.Forms.NumericUpDown();
+            this.btnManualLimitPercentModifier1Down = new System.Windows.Forms.Button();
+            this.btnManualLimitPercentModifier1Up = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.nudManualLimitPercentModifier2 = new System.Windows.Forms.NumericUpDown();
+            this.btnManualLimitPercentModifier2Up = new System.Windows.Forms.Button();
+            this.btnManualLimitPercentModifier2Down = new System.Windows.Forms.Button();
+            this.nudManualLimitPercentModifier3 = new System.Windows.Forms.NumericUpDown();
+            this.btnManualLimitPercentModifier3Up = new System.Windows.Forms.Button();
+            this.btnManualLimitPercentModifier3Down = new System.Windows.Forms.Button();
+            this.nudManualLimitPercentModifier4 = new System.Windows.Forms.NumericUpDown();
+            this.btnManualLimitPercentModifier4Up = new System.Windows.Forms.Button();
+            this.btnManualLimitPercentModifier4Down = new System.Windows.Forms.Button();
+            this.chkManualLimitPercentModifierUseCurrentPrice = new System.Windows.Forms.CheckBox();
+            this.btnManualLimitCancelOpenOrders = new System.Windows.Forms.Button();
             this.StatusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabManual.SuspendLayout();
@@ -165,6 +181,11 @@
             this.gbxPosition.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPositionLimitPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCurrentPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudManualLimitPercentModifier1)).BeginInit();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudManualLimitPercentModifier2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudManualLimitPercentModifier3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudManualLimitPercentModifier4)).BeginInit();
             this.SuspendLayout();
             // 
             // StatusStrip
@@ -264,6 +285,9 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.btnManualLimitCancelOpenOrders);
+            this.groupBox5.Controls.Add(this.groupBox6);
+            this.groupBox5.Controls.Add(this.chkManualLimitHiddenOrder);
             this.groupBox5.Controls.Add(this.btnManualLimitSetCurrentPrice);
             this.groupBox5.Controls.Add(this.btnManualLimitSell);
             this.groupBox5.Controls.Add(this.chkManualLimitCancelWhileOrdering);
@@ -280,6 +304,16 @@
             this.groupBox5.TabIndex = 10;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Limit";
+            // 
+            // btnManualLimitSetCurrentPrice
+            // 
+            this.btnManualLimitSetCurrentPrice.Location = new System.Drawing.Point(373, 42);
+            this.btnManualLimitSetCurrentPrice.Name = "btnManualLimitSetCurrentPrice";
+            this.btnManualLimitSetCurrentPrice.Size = new System.Drawing.Size(52, 21);
+            this.btnManualLimitSetCurrentPrice.TabIndex = 12;
+            this.btnManualLimitSetCurrentPrice.Text = "Current";
+            this.btnManualLimitSetCurrentPrice.UseVisualStyleBackColor = true;
+            this.btnManualLimitSetCurrentPrice.Click += new System.EventHandler(this.btnManualLimitSetCurrentPrice_Click);
             // 
             // btnManualLimitSell
             // 
@@ -299,7 +333,7 @@
             this.chkManualLimitCancelWhileOrdering.AutoSize = true;
             this.chkManualLimitCancelWhileOrdering.Checked = true;
             this.chkManualLimitCancelWhileOrdering.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkManualLimitCancelWhileOrdering.Location = new System.Drawing.Point(137, 136);
+            this.chkManualLimitCancelWhileOrdering.Location = new System.Drawing.Point(136, 70);
             this.chkManualLimitCancelWhileOrdering.Name = "chkManualLimitCancelWhileOrdering";
             this.chkManualLimitCancelWhileOrdering.Size = new System.Drawing.Size(122, 17);
             this.chkManualLimitCancelWhileOrdering.TabIndex = 11;
@@ -325,7 +359,7 @@
             this.chkManualLimitPostOnly.AutoSize = true;
             this.chkManualLimitPostOnly.Checked = true;
             this.chkManualLimitPostOnly.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkManualLimitPostOnly.Location = new System.Drawing.Point(137, 118);
+            this.chkManualLimitPostOnly.Location = new System.Drawing.Point(136, 52);
             this.chkManualLimitPostOnly.Name = "chkManualLimitPostOnly";
             this.chkManualLimitPostOnly.Size = new System.Drawing.Size(71, 17);
             this.chkManualLimitPostOnly.TabIndex = 10;
@@ -368,7 +402,7 @@
             // chkManualLimitReduceOnly
             // 
             this.chkManualLimitReduceOnly.AutoSize = true;
-            this.chkManualLimitReduceOnly.Location = new System.Drawing.Point(137, 100);
+            this.chkManualLimitReduceOnly.Location = new System.Drawing.Point(136, 34);
             this.chkManualLimitReduceOnly.Name = "chkManualLimitReduceOnly";
             this.chkManualLimitReduceOnly.Size = new System.Drawing.Size(88, 17);
             this.chkManualLimitReduceOnly.TabIndex = 7;
@@ -1509,7 +1543,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.Color.DarkTurquoise;
+            this.label15.ForeColor = System.Drawing.Color.DodgerBlue;
             this.label15.Location = new System.Drawing.Point(201, 274);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(257, 13);
@@ -1517,20 +1551,266 @@
             this.label15.Text = "Please consider donating BTC to support this project.";
             this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
-            // btnManualLimitSetCurrentPrice
+            // chkManualLimitHiddenOrder
             // 
-            this.btnManualLimitSetCurrentPrice.Location = new System.Drawing.Point(208, 41);
-            this.btnManualLimitSetCurrentPrice.Name = "btnManualLimitSetCurrentPrice";
-            this.btnManualLimitSetCurrentPrice.Size = new System.Drawing.Size(52, 21);
-            this.btnManualLimitSetCurrentPrice.TabIndex = 12;
-            this.btnManualLimitSetCurrentPrice.Text = "Current";
-            this.btnManualLimitSetCurrentPrice.UseVisualStyleBackColor = true;
-            this.btnManualLimitSetCurrentPrice.Click += new System.EventHandler(this.btnManualLimitSetCurrentPrice_Click);
+            this.chkManualLimitHiddenOrder.AutoSize = true;
+            this.chkManualLimitHiddenOrder.Location = new System.Drawing.Point(136, 16);
+            this.chkManualLimitHiddenOrder.Name = "chkManualLimitHiddenOrder";
+            this.chkManualLimitHiddenOrder.Size = new System.Drawing.Size(89, 17);
+            this.chkManualLimitHiddenOrder.TabIndex = 13;
+            this.chkManualLimitHiddenOrder.Text = "Hidden Order";
+            this.chkManualLimitHiddenOrder.UseVisualStyleBackColor = true;
+            this.chkManualLimitHiddenOrder.CheckedChanged += new System.EventHandler(this.chkManualLimitHiddenOrder_CheckedChanged);
+            // 
+            // nudManualLimitPercentModifier1
+            // 
+            this.nudManualLimitPercentModifier1.DecimalPlaces = 2;
+            this.nudManualLimitPercentModifier1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.nudManualLimitPercentModifier1.Location = new System.Drawing.Point(5, 15);
+            this.nudManualLimitPercentModifier1.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.nudManualLimitPercentModifier1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.nudManualLimitPercentModifier1.Name = "nudManualLimitPercentModifier1";
+            this.nudManualLimitPercentModifier1.Size = new System.Drawing.Size(72, 20);
+            this.nudManualLimitPercentModifier1.TabIndex = 14;
+            this.nudManualLimitPercentModifier1.Value = new decimal(new int[] {
+            11111,
+            0,
+            0,
+            131072});
+            this.nudManualLimitPercentModifier1.ValueChanged += new System.EventHandler(this.nudManualLimitPercentModifier1_ValueChanged);
+            // 
+            // btnManualLimitPercentModifier1Down
+            // 
+            this.btnManualLimitPercentModifier1Down.Location = new System.Drawing.Point(83, 14);
+            this.btnManualLimitPercentModifier1Down.Name = "btnManualLimitPercentModifier1Down";
+            this.btnManualLimitPercentModifier1Down.Size = new System.Drawing.Size(18, 22);
+            this.btnManualLimitPercentModifier1Down.TabIndex = 15;
+            this.btnManualLimitPercentModifier1Down.Text = "-";
+            this.btnManualLimitPercentModifier1Down.UseVisualStyleBackColor = true;
+            this.btnManualLimitPercentModifier1Down.Click += new System.EventHandler(this.btnManualLimitPercentModifier1Down_Click);
+            // 
+            // btnManualLimitPercentModifier1Up
+            // 
+            this.btnManualLimitPercentModifier1Up.Location = new System.Drawing.Point(101, 14);
+            this.btnManualLimitPercentModifier1Up.Name = "btnManualLimitPercentModifier1Up";
+            this.btnManualLimitPercentModifier1Up.Size = new System.Drawing.Size(18, 22);
+            this.btnManualLimitPercentModifier1Up.TabIndex = 16;
+            this.btnManualLimitPercentModifier1Up.Text = "+";
+            this.btnManualLimitPercentModifier1Up.UseVisualStyleBackColor = true;
+            this.btnManualLimitPercentModifier1Up.Click += new System.EventHandler(this.btnManualLimitPercentModifier1Up_Click);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.chkManualLimitPercentModifierUseCurrentPrice);
+            this.groupBox6.Controls.Add(this.nudManualLimitPercentModifier4);
+            this.groupBox6.Controls.Add(this.btnManualLimitPercentModifier4Up);
+            this.groupBox6.Controls.Add(this.btnManualLimitPercentModifier4Down);
+            this.groupBox6.Controls.Add(this.nudManualLimitPercentModifier3);
+            this.groupBox6.Controls.Add(this.btnManualLimitPercentModifier3Up);
+            this.groupBox6.Controls.Add(this.btnManualLimitPercentModifier3Down);
+            this.groupBox6.Controls.Add(this.nudManualLimitPercentModifier2);
+            this.groupBox6.Controls.Add(this.btnManualLimitPercentModifier2Up);
+            this.groupBox6.Controls.Add(this.btnManualLimitPercentModifier2Down);
+            this.groupBox6.Controls.Add(this.nudManualLimitPercentModifier1);
+            this.groupBox6.Controls.Add(this.btnManualLimitPercentModifier1Up);
+            this.groupBox6.Controls.Add(this.btnManualLimitPercentModifier1Down);
+            this.groupBox6.Location = new System.Drawing.Point(6, 16);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(124, 140);
+            this.groupBox6.TabIndex = 17;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "% Price Modifiers";
+            // 
+            // nudManualLimitPercentModifier2
+            // 
+            this.nudManualLimitPercentModifier2.DecimalPlaces = 2;
+            this.nudManualLimitPercentModifier2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.nudManualLimitPercentModifier2.Location = new System.Drawing.Point(5, 41);
+            this.nudManualLimitPercentModifier2.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.nudManualLimitPercentModifier2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.nudManualLimitPercentModifier2.Name = "nudManualLimitPercentModifier2";
+            this.nudManualLimitPercentModifier2.Size = new System.Drawing.Size(72, 20);
+            this.nudManualLimitPercentModifier2.TabIndex = 17;
+            this.nudManualLimitPercentModifier2.Value = new decimal(new int[] {
+            11111,
+            0,
+            0,
+            131072});
+            this.nudManualLimitPercentModifier2.ValueChanged += new System.EventHandler(this.nudManualLimitPercentModifier2_ValueChanged);
+            // 
+            // btnManualLimitPercentModifier2Up
+            // 
+            this.btnManualLimitPercentModifier2Up.Location = new System.Drawing.Point(101, 40);
+            this.btnManualLimitPercentModifier2Up.Name = "btnManualLimitPercentModifier2Up";
+            this.btnManualLimitPercentModifier2Up.Size = new System.Drawing.Size(18, 22);
+            this.btnManualLimitPercentModifier2Up.TabIndex = 19;
+            this.btnManualLimitPercentModifier2Up.Text = "+";
+            this.btnManualLimitPercentModifier2Up.UseVisualStyleBackColor = true;
+            this.btnManualLimitPercentModifier2Up.Click += new System.EventHandler(this.btnManualLimitPercentModifier2Up_Click);
+            // 
+            // btnManualLimitPercentModifier2Down
+            // 
+            this.btnManualLimitPercentModifier2Down.Location = new System.Drawing.Point(83, 40);
+            this.btnManualLimitPercentModifier2Down.Name = "btnManualLimitPercentModifier2Down";
+            this.btnManualLimitPercentModifier2Down.Size = new System.Drawing.Size(18, 22);
+            this.btnManualLimitPercentModifier2Down.TabIndex = 18;
+            this.btnManualLimitPercentModifier2Down.Text = "-";
+            this.btnManualLimitPercentModifier2Down.UseVisualStyleBackColor = true;
+            this.btnManualLimitPercentModifier2Down.Click += new System.EventHandler(this.btnManualLimitPercentModifier2Down_Click);
+            // 
+            // nudManualLimitPercentModifier3
+            // 
+            this.nudManualLimitPercentModifier3.DecimalPlaces = 2;
+            this.nudManualLimitPercentModifier3.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.nudManualLimitPercentModifier3.Location = new System.Drawing.Point(5, 67);
+            this.nudManualLimitPercentModifier3.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.nudManualLimitPercentModifier3.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.nudManualLimitPercentModifier3.Name = "nudManualLimitPercentModifier3";
+            this.nudManualLimitPercentModifier3.Size = new System.Drawing.Size(72, 20);
+            this.nudManualLimitPercentModifier3.TabIndex = 20;
+            this.nudManualLimitPercentModifier3.Value = new decimal(new int[] {
+            11111,
+            0,
+            0,
+            131072});
+            this.nudManualLimitPercentModifier3.ValueChanged += new System.EventHandler(this.nudManualLimitPercentModifier3_ValueChanged);
+            // 
+            // btnManualLimitPercentModifier3Up
+            // 
+            this.btnManualLimitPercentModifier3Up.Location = new System.Drawing.Point(101, 66);
+            this.btnManualLimitPercentModifier3Up.Name = "btnManualLimitPercentModifier3Up";
+            this.btnManualLimitPercentModifier3Up.Size = new System.Drawing.Size(18, 22);
+            this.btnManualLimitPercentModifier3Up.TabIndex = 22;
+            this.btnManualLimitPercentModifier3Up.Text = "+";
+            this.btnManualLimitPercentModifier3Up.UseVisualStyleBackColor = true;
+            this.btnManualLimitPercentModifier3Up.Click += new System.EventHandler(this.btnManualLimitPercentModifier3Up_Click);
+            // 
+            // btnManualLimitPercentModifier3Down
+            // 
+            this.btnManualLimitPercentModifier3Down.Location = new System.Drawing.Point(83, 66);
+            this.btnManualLimitPercentModifier3Down.Name = "btnManualLimitPercentModifier3Down";
+            this.btnManualLimitPercentModifier3Down.Size = new System.Drawing.Size(18, 22);
+            this.btnManualLimitPercentModifier3Down.TabIndex = 21;
+            this.btnManualLimitPercentModifier3Down.Text = "-";
+            this.btnManualLimitPercentModifier3Down.UseVisualStyleBackColor = true;
+            this.btnManualLimitPercentModifier3Down.Click += new System.EventHandler(this.btnManualLimitPercentModifier3Down_Click);
+            // 
+            // nudManualLimitPercentModifier4
+            // 
+            this.nudManualLimitPercentModifier4.DecimalPlaces = 2;
+            this.nudManualLimitPercentModifier4.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.nudManualLimitPercentModifier4.Location = new System.Drawing.Point(5, 93);
+            this.nudManualLimitPercentModifier4.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.nudManualLimitPercentModifier4.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.nudManualLimitPercentModifier4.Name = "nudManualLimitPercentModifier4";
+            this.nudManualLimitPercentModifier4.Size = new System.Drawing.Size(72, 20);
+            this.nudManualLimitPercentModifier4.TabIndex = 23;
+            this.nudManualLimitPercentModifier4.Value = new decimal(new int[] {
+            11111,
+            0,
+            0,
+            131072});
+            this.nudManualLimitPercentModifier4.ValueChanged += new System.EventHandler(this.nudManualLimitPercentModifier4_ValueChanged);
+            // 
+            // btnManualLimitPercentModifier4Up
+            // 
+            this.btnManualLimitPercentModifier4Up.Location = new System.Drawing.Point(101, 92);
+            this.btnManualLimitPercentModifier4Up.Name = "btnManualLimitPercentModifier4Up";
+            this.btnManualLimitPercentModifier4Up.Size = new System.Drawing.Size(18, 22);
+            this.btnManualLimitPercentModifier4Up.TabIndex = 25;
+            this.btnManualLimitPercentModifier4Up.Text = "+";
+            this.btnManualLimitPercentModifier4Up.UseVisualStyleBackColor = true;
+            this.btnManualLimitPercentModifier4Up.Click += new System.EventHandler(this.btnManualLimitPercentModifier4Up_Click);
+            // 
+            // btnManualLimitPercentModifier4Down
+            // 
+            this.btnManualLimitPercentModifier4Down.Location = new System.Drawing.Point(83, 92);
+            this.btnManualLimitPercentModifier4Down.Name = "btnManualLimitPercentModifier4Down";
+            this.btnManualLimitPercentModifier4Down.Size = new System.Drawing.Size(18, 22);
+            this.btnManualLimitPercentModifier4Down.TabIndex = 24;
+            this.btnManualLimitPercentModifier4Down.Text = "-";
+            this.btnManualLimitPercentModifier4Down.UseVisualStyleBackColor = true;
+            this.btnManualLimitPercentModifier4Down.Click += new System.EventHandler(this.btnManualLimitPercentModifier4Down_Click);
+            // 
+            // chkManualLimitPercentModifierUseCurrentPrice
+            // 
+            this.chkManualLimitPercentModifierUseCurrentPrice.AutoSize = true;
+            this.chkManualLimitPercentModifierUseCurrentPrice.Checked = true;
+            this.chkManualLimitPercentModifierUseCurrentPrice.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkManualLimitPercentModifierUseCurrentPrice.Location = new System.Drawing.Point(5, 117);
+            this.chkManualLimitPercentModifierUseCurrentPrice.Name = "chkManualLimitPercentModifierUseCurrentPrice";
+            this.chkManualLimitPercentModifierUseCurrentPrice.Size = new System.Drawing.Size(109, 17);
+            this.chkManualLimitPercentModifierUseCurrentPrice.TabIndex = 26;
+            this.chkManualLimitPercentModifierUseCurrentPrice.Text = "Use Current Price";
+            this.chkManualLimitPercentModifierUseCurrentPrice.UseVisualStyleBackColor = true;
+            this.chkManualLimitPercentModifierUseCurrentPrice.CheckedChanged += new System.EventHandler(this.chkManualLimitPercentModifierUseCurrentPrice_CheckedChanged);
+            // 
+            // btnManualLimitCancelOpenOrders
+            // 
+            this.btnManualLimitCancelOpenOrders.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnManualLimitCancelOpenOrders.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnManualLimitCancelOpenOrders.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnManualLimitCancelOpenOrders.Location = new System.Drawing.Point(134, 93);
+            this.btnManualLimitCancelOpenOrders.Name = "btnManualLimitCancelOpenOrders";
+            this.btnManualLimitCancelOpenOrders.Size = new System.Drawing.Size(120, 57);
+            this.btnManualLimitCancelOpenOrders.TabIndex = 18;
+            this.btnManualLimitCancelOpenOrders.Text = "Cancel All Orders";
+            this.btnManualLimitCancelOpenOrders.UseVisualStyleBackColor = false;
+            this.btnManualLimitCancelOpenOrders.Click += new System.EventHandler(this.btnManualLimitCancelOpenOrders_Click);
             // 
             // Bot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(662, 311);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.nudCurrentPrice);
@@ -1542,7 +1822,7 @@
             this.Controls.Add(this.ddlCandleTimes);
             this.Controls.Add(this.StatusStrip);
             this.Name = "Bot";
-            this.Text = "Bot";
+            this.Text = "BitMEX Assistant";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Bot_FormClosing);
             this.Load += new System.EventHandler(this.Bot_Load);
             this.StatusStrip.ResumeLayout(false);
@@ -1588,6 +1868,12 @@
             this.gbxPosition.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPositionLimitPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCurrentPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudManualLimitPercentModifier1)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudManualLimitPercentModifier2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudManualLimitPercentModifier3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudManualLimitPercentModifier4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1698,5 +1984,21 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.NumericUpDown nudManualLimitContracts;
         private System.Windows.Forms.Button btnManualLimitSetCurrentPrice;
+        private System.Windows.Forms.CheckBox chkManualLimitHiddenOrder;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.NumericUpDown nudManualLimitPercentModifier4;
+        private System.Windows.Forms.Button btnManualLimitPercentModifier4Up;
+        private System.Windows.Forms.Button btnManualLimitPercentModifier4Down;
+        private System.Windows.Forms.NumericUpDown nudManualLimitPercentModifier3;
+        private System.Windows.Forms.Button btnManualLimitPercentModifier3Up;
+        private System.Windows.Forms.Button btnManualLimitPercentModifier3Down;
+        private System.Windows.Forms.NumericUpDown nudManualLimitPercentModifier2;
+        private System.Windows.Forms.Button btnManualLimitPercentModifier2Up;
+        private System.Windows.Forms.Button btnManualLimitPercentModifier2Down;
+        private System.Windows.Forms.NumericUpDown nudManualLimitPercentModifier1;
+        private System.Windows.Forms.Button btnManualLimitPercentModifier1Up;
+        private System.Windows.Forms.Button btnManualLimitPercentModifier1Down;
+        private System.Windows.Forms.CheckBox chkManualLimitPercentModifierUseCurrentPrice;
+        private System.Windows.Forms.Button btnManualLimitCancelOpenOrders;
     }
 }

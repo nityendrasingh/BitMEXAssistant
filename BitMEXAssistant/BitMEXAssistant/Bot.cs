@@ -164,6 +164,12 @@ namespace BitMEXAssistant
             chkManualLimitReduceOnly.Checked = Properties.Settings.Default.ManualLimitReduceOnly;
             chkManualLimitPostOnly.Checked = Properties.Settings.Default.ManualLimitPostOnly;
             chkManualLimitCancelWhileOrdering.Checked = Properties.Settings.Default.ManualLimitCancelOpenOrders;
+            chkManualLimitHiddenOrder.Checked = Properties.Settings.Default.ManualLimitHiddenOrder;
+            nudManualLimitPercentModifier1.Value = Properties.Settings.Default.ManualLimitPercentModifier1;
+            nudManualLimitPercentModifier2.Value = Properties.Settings.Default.ManualLimitPercentModifier2;
+            nudManualLimitPercentModifier3.Value = Properties.Settings.Default.ManualLimitPercentModifier3;
+            nudManualLimitPercentModifier4.Value = Properties.Settings.Default.ManualLimitPercentModifier4;
+            chkManualLimitPercentModifierUseCurrentPrice.Checked = Properties.Settings.Default.ManualLimitPercentModifierUseCurrentPrice;
 
 
             UpdateDateAndTime();
@@ -1004,7 +1010,7 @@ namespace BitMEXAssistant
             {
                 bitmex.CancelAllOpenOrders(ActiveInstrument.Symbol);
             }
-            bitmex.LimitOrder(ActiveInstrument.Symbol, "Buy", (int)nudManualLimitContracts.Value, nudManualLimitPrice.Value, chkManualLimitReduceOnly.Checked, chkManualLimitPostOnly.Checked);
+            bitmex.LimitOrder(ActiveInstrument.Symbol, "Buy", (int)nudManualLimitContracts.Value, nudManualLimitPrice.Value, chkManualLimitReduceOnly.Checked, chkManualLimitPostOnly.Checked, chkManualLimitHiddenOrder.Checked);
                 
         }
 
@@ -1014,8 +1020,126 @@ namespace BitMEXAssistant
             {
                 bitmex.CancelAllOpenOrders(ActiveInstrument.Symbol);
             }
-            bitmex.LimitOrder(ActiveInstrument.Symbol, "Sell", (int)nudManualLimitContracts.Value, nudManualLimitPrice.Value, chkManualLimitReduceOnly.Checked, chkManualLimitPostOnly.Checked);
+            bitmex.LimitOrder(ActiveInstrument.Symbol, "Sell", (int)nudManualLimitContracts.Value, nudManualLimitPrice.Value, chkManualLimitReduceOnly.Checked, chkManualLimitPostOnly.Checked, chkManualLimitHiddenOrder.Checked);
 
+        }
+
+        private void chkManualLimitHiddenOrder_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ManualLimitHiddenOrder = chkManualLimitHiddenOrder.Checked;
+            SaveSettings();
+        }
+
+        private void nudManualLimitPercentModifier1_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ManualLimitPercentModifier1 = nudManualLimitPercentModifier1.Value;
+            SaveSettings();
+        }
+
+        private void nudManualLimitPercentModifier2_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ManualLimitPercentModifier2 = nudManualLimitPercentModifier2.Value;
+            SaveSettings();
+        }
+
+        private void nudManualLimitPercentModifier3_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ManualLimitPercentModifier3 = nudManualLimitPercentModifier3.Value;
+            SaveSettings();
+        }
+
+        private void nudManualLimitPercentModifier4_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ManualLimitPercentModifier4 = nudManualLimitPercentModifier4.Value;
+            SaveSettings();
+        }
+
+        private decimal PercentageChange(bool Increase, decimal Base, decimal Change, decimal TickSize)
+        {
+            decimal Result = 0;
+            decimal Adjustment = Base * Change;
+
+            if(Increase)
+            {
+                // increase
+                Result = Base + Adjustment;
+                
+            }
+            else
+            {
+                // decrease
+                Result = Base - Adjustment;
+            }
+
+            decimal Remainder = Result % TickSize;
+            Result = Result - Remainder; // Remove any remainder to avoid issues.
+
+            return Result;
+        }
+
+        private void UpdateManualLimitPriceFromPercentModifier(bool Increase, decimal Change)
+        {
+            Change = Change / 100; // Values are shown as %s, so must divide by 100
+
+            if (chkManualLimitPercentModifierUseCurrentPrice.Checked)
+            {
+                nudManualLimitPrice.Value = PercentageChange(Increase, nudCurrentPrice.Value, Change, ActiveInstrument.TickSize);
+            }
+            else
+            {
+                nudManualLimitPrice.Value = PercentageChange(Increase, nudManualLimitPrice.Value, Change, ActiveInstrument.TickSize);
+            }
+        }
+
+        private void btnManualLimitPercentModifier1Down_Click(object sender, EventArgs e)
+        {
+            UpdateManualLimitPriceFromPercentModifier(false, nudManualLimitPercentModifier1.Value);
+        }
+
+        private void btnManualLimitPercentModifier1Up_Click(object sender, EventArgs e)
+        {
+            UpdateManualLimitPriceFromPercentModifier(true, nudManualLimitPercentModifier1.Value);
+        }
+
+        private void btnManualLimitPercentModifier2Down_Click(object sender, EventArgs e)
+        {
+            UpdateManualLimitPriceFromPercentModifier(false, nudManualLimitPercentModifier2.Value);
+        }
+
+        private void btnManualLimitPercentModifier2Up_Click(object sender, EventArgs e)
+        {
+            UpdateManualLimitPriceFromPercentModifier(true, nudManualLimitPercentModifier2.Value);
+        }
+
+        private void btnManualLimitPercentModifier3Down_Click(object sender, EventArgs e)
+        {
+            UpdateManualLimitPriceFromPercentModifier(false, nudManualLimitPercentModifier3.Value);
+        }
+
+        private void btnManualLimitPercentModifier3Up_Click(object sender, EventArgs e)
+        {
+            UpdateManualLimitPriceFromPercentModifier(true, nudManualLimitPercentModifier3.Value);
+        }
+
+        private void btnManualLimitPercentModifier4Down_Click(object sender, EventArgs e)
+        {
+            UpdateManualLimitPriceFromPercentModifier(false, nudManualLimitPercentModifier4.Value);
+        }
+
+        private void btnManualLimitPercentModifier4Up_Click(object sender, EventArgs e)
+        {
+            UpdateManualLimitPriceFromPercentModifier(true, nudManualLimitPercentModifier4.Value);
+        }
+
+        private void chkManualLimitPercentModifierUseCurrentPrice_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ManualLimitPercentModifierUseCurrentPrice = chkManualLimitPercentModifierUseCurrentPrice.Checked;
+            SaveSettings();
+        }
+
+        private void btnManualLimitCancelOpenOrders_Click(object sender, EventArgs e)
+        {
+            bitmex.CancelAllOpenOrders(ActiveInstrument.Symbol);
         }
     }
 

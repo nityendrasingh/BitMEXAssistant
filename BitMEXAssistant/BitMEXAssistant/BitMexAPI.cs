@@ -225,7 +225,7 @@ namespace BitMEX
             return res;
         }
 
-        public string LimitOrder(string Symbol, string Side, int Quantity, decimal Price, bool ReduceOnly = false, bool PostOnly = false)
+        public string LimitOrder(string Symbol, string Side, int Quantity, decimal Price, bool ReduceOnly = false, bool PostOnly = false, bool Hidden = false)
         {
             var param = new Dictionary<string, string>();
             param["symbol"] = Symbol;
@@ -244,6 +244,10 @@ namespace BitMEX
             else if(ReduceOnly && PostOnly)
             {
                 param["execInst"] = "ReduceOnly,ParticipateDoNotInitiate";
+            }
+            if(Hidden)
+            {
+                param["displayQty"] = "0";
             }
 
 
