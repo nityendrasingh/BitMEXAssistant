@@ -1821,6 +1821,7 @@
             this.Controls.Add(this.ddlSymbol);
             this.Controls.Add(this.ddlCandleTimes);
             this.Controls.Add(this.StatusStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Bot";
             this.Text = "BitMEX Assistant";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Bot_FormClosing);

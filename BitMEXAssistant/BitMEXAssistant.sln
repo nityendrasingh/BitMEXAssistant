@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMEXAssistant", "BitMEXAssistant\BitMEXAssistant.csproj", "{423861F2-9662-46BD-BCA1-F5B88414F74B}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InstallerProject", "InstallerProject\InstallerProject.vdproj", "{65C5AC99-577A-4166-B562-89F9D136943A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{423861F2-9662-46BD-BCA1-F5B88414F74B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{423861F2-9662-46BD-BCA1-F5B88414F74B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{423861F2-9662-46BD-BCA1-F5B88414F74B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65C5AC99-577A-4166-B562-89F9D136943A}.Debug|Any CPU.ActiveCfg = Debug
+		{65C5AC99-577A-4166-B562-89F9D136943A}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

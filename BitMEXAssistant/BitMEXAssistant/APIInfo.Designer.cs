@@ -190,6 +190,7 @@
             this.Controls.Add(this.txtKey);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "APIInfo";
             this.Text = "API Information";
             this.Load += new System.EventHandler(this.APIInfo_Load);
