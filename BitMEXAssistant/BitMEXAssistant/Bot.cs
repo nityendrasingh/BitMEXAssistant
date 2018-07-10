@@ -44,13 +44,28 @@ namespace BitMEXAssistant
 
         private void Bot_Load(object sender, EventArgs e)
         {
-            InitializeDropdownsAndSettings();
-            InitializeAPI();
-            InitializePostAPIDropdownsAndSettings();
-            InitializeSymbolInformation();
+
+            APIInfo Login = new APIInfo();
+            while (!Login.APIValid)
+            {
+                Login.ShowDialog();
+            }
+
+            if(Login.APIValid)
+            {
+                InitializeDropdownsAndSettings();
+                InitializeAPI();
+                InitializePostAPIDropdownsAndSettings();
+                InitializeSymbolInformation();
 
 
-            InitializeWebSocket();
+                InitializeWebSocket();
+                tmrClientUpdates.Start(); // Start our client update timer
+            }
+                
+            
+
+            
 
             //Alert nea = new Alert();
             //nea.Symbol = "XBTUSD";

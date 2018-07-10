@@ -16,7 +16,7 @@ namespace BitMEXAssistant
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new APIInfo());
+            Application.Run(new Bot());
         }
     }
 }

@@ -17,7 +17,7 @@ namespace BitMEXAssistant
     {
 
         BitMEXApi bitmex;
-        bool APIValid = false;
+        public bool APIValid = false;
 
         public APIInfo()
         {
@@ -65,9 +65,6 @@ namespace BitMEXAssistant
                     GetAPIValidity();
                     if (APIValid)
                     {
-
-                        Bot b = new Bot();
-                        b.Show();
                         this.Hide();
                     }
                 }

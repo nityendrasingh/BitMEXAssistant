@@ -1516,7 +1516,6 @@
             // 
             // tmrClientUpdates
             // 
-            this.tmrClientUpdates.Enabled = true;
             this.tmrClientUpdates.Tick += new System.EventHandler(this.tmrClientUpdates_Tick);
             // 
             // nudCurrentPrice
