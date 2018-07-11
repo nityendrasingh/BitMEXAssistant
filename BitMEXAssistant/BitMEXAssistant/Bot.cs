@@ -37,6 +37,8 @@ namespace BitMEXAssistant
         Dictionary<string, decimal> Prices = new Dictionary<string, decimal>();
         //List<Alert> Alerts = new List<Alert>();
 
+        public static string Version = "0.0.13";
+
         public Bot()
         {
             InitializeComponent();
@@ -186,6 +188,7 @@ namespace BitMEXAssistant
             nudManualLimitPercentModifier4.Value = Properties.Settings.Default.ManualLimitPercentModifier4;
             chkManualLimitPercentModifierUseCurrentPrice.Checked = Properties.Settings.Default.ManualLimitPercentModifierUseCurrentPrice;
 
+            lblVersion.Text = "v" + Version;
 
             UpdateDateAndTime();
         }
@@ -201,6 +204,18 @@ namespace BitMEXAssistant
             try
             {
                 bitmex = new BitMEXApi(APIKey, APISecret, RealNetwork);
+
+                // Show users what network they are on.
+                if(RealNetwork)
+                {
+                    lblNetwork.Text = "Real";
+                }
+                else
+                {
+                    lblNetwork.Text = "Test";
+                }
+
+                // Get our balance
                 UpdateBalance();
 
                 // Start our HeartBeat
@@ -1155,6 +1170,11 @@ namespace BitMEXAssistant
         private void btnManualLimitCancelOpenOrders_Click(object sender, EventArgs e)
         {
             bitmex.CancelAllOpenOrders(ActiveInstrument.Symbol);
+        }
+
+        private void pbxYouTubeSubscribe_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.youtube.com/BigBits?sub_confirmation=1");
         }
     }
 
