@@ -1,6 +1,6 @@
 # BitMEX Assistant
 
-Soon to have a publicly available installation file in the project.
+Constantly working on updates, check the issues tab to see items that are potential work items.
 
 ## Features
 1. Trade any contract on BitMEX
@@ -9,6 +9,9 @@ Soon to have a publicly available installation file in the project.
 4. Automated Dollar Cost Averaging (buying/selling over time)
 5. Place scaled orders above and below current price
 6. Assisted market orders, and limit orders (including reduce only, post only and hidden orders)
+
+## Install
+You can find the installation file at https://github.com/BigBlueBit/BitMEXAssistant/tree/master/Install.
 
 ## Video Series
 Please view the video series for the journey of this application.  Start at the beginning and understand everything, or find a video pertaining to a particular area of the application you are interested.  The entire journey is being documented in this video library tutorial.
