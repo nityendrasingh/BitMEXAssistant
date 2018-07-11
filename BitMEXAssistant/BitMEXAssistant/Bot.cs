@@ -37,7 +37,7 @@ namespace BitMEXAssistant
         Dictionary<string, decimal> Prices = new Dictionary<string, decimal>();
         //List<Alert> Alerts = new List<Alert>();
 
-        public static string Version = "0.0.13";
+        public static string Version = "0.0.14";
 
         public Bot()
         {
