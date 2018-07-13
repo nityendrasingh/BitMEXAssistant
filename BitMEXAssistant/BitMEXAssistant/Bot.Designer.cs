@@ -41,7 +41,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.Heartbeat = new System.Windows.Forms.Timer(this.components);
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.TabControl = new System.Windows.Forms.TabControl();
             this.tabManual = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.btnManualLimitCancelOpenOrders = new System.Windows.Forms.Button();
@@ -76,6 +76,17 @@
             this.chkManualMarketBuyReduceOnly = new System.Windows.Forms.CheckBox();
             this.label19 = new System.Windows.Forms.Label();
             this.nudManualMarketBuyContracts = new System.Windows.Forms.NumericUpDown();
+            this.tabLimitNow = new System.Windows.Forms.TabPage();
+            this.btnLimitNowSellCancel = new System.Windows.Forms.Button();
+            this.btnLimitNowBuyCancel = new System.Windows.Forms.Button();
+            this.label24 = new System.Windows.Forms.Label();
+            this.nudLimitNowDelay = new System.Windows.Forms.NumericUpDown();
+            this.label23 = new System.Windows.Forms.Label();
+            this.nudLimitNowTicksFromCenter = new System.Windows.Forms.NumericUpDown();
+            this.btnLimitNowSell = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
+            this.btnLimitNowBuy = new System.Windows.Forms.Button();
+            this.nudLimitNowContracts = new System.Windows.Forms.NumericUpDown();
             this.tabSpread = new System.Windows.Forms.TabPage();
             this.chkSpreadCancelWhileOrdering = new System.Windows.Forms.CheckBox();
             this.btnSpreadCloseAllOpenOrders = new System.Windows.Forms.Button();
@@ -132,7 +143,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tmrDCA = new System.Windows.Forms.Timer(this.components);
             this.gbxPosition = new System.Windows.Forms.GroupBox();
-            this.nudPositionLimitPrice = new System.Windows.Forms.NumericUpDown();
+            this.label22 = new System.Windows.Forms.Label();
+            this.btnPositionMargin = new System.Windows.Forms.Button();
             this.btnPositionMarketClose = new System.Windows.Forms.Button();
             this.btnPositionLimitClose = new System.Windows.Forms.Button();
             this.textBox8 = new System.Windows.Forms.TextBox();
@@ -149,12 +161,16 @@
             this.txtPositionMarkPrice = new System.Windows.Forms.TextBox();
             this.txtPositionEntryPrice = new System.Windows.Forms.TextBox();
             this.txtPositionSize = new System.Windows.Forms.TextBox();
+            this.nudPositionLimitPrice = new System.Windows.Forms.NumericUpDown();
+            this.nudPositionMargin = new System.Windows.Forms.NumericUpDown();
             this.tmrClientUpdates = new System.Windows.Forms.Timer(this.components);
             this.nudCurrentPrice = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
             this.pbxYouTubeSubscribe = new System.Windows.Forms.PictureBox();
+            this.tmrLimitNowBuy = new System.Windows.Forms.Timer(this.components);
+            this.tmrLimitNowSell = new System.Windows.Forms.Timer(this.components);
             this.StatusStrip.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.TabControl.SuspendLayout();
             this.tabManual.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -166,6 +182,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudManualLimitContracts)).BeginInit();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudManualMarketBuyContracts)).BeginInit();
+            this.tabLimitNow.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLimitNowDelay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLimitNowTicksFromCenter)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLimitNowContracts)).BeginInit();
             this.tabSpread.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpreadSellOrderCount)).BeginInit();
@@ -189,6 +209,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbxPosition.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPositionLimitPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPositionMargin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCurrentPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxYouTubeSubscribe)).BeginInit();
             this.SuspendLayout();
@@ -203,7 +224,7 @@
             this.lblVersion});
             this.StatusStrip.Location = new System.Drawing.Point(0, 300);
             this.StatusStrip.Name = "StatusStrip";
-            this.StatusStrip.Size = new System.Drawing.Size(662, 22);
+            this.StatusStrip.Size = new System.Drawing.Size(817, 22);
             this.StatusStrip.TabIndex = 0;
             this.StatusStrip.Text = "statusStrip1";
             // 
@@ -222,7 +243,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(405, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(560, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // lblNetwork
@@ -286,18 +307,19 @@
             this.Heartbeat.Interval = 1000;
             this.Heartbeat.Tick += new System.EventHandler(this.Heartbeat_Tick);
             // 
-            // tabControl1
+            // TabControl
             // 
-            this.tabControl1.Controls.Add(this.tabManual);
-            this.tabControl1.Controls.Add(this.tabSpread);
-            this.tabControl1.Controls.Add(this.tabDCA);
-            this.tabControl1.Controls.Add(this.tabSettings);
-            this.tabControl1.Controls.Add(this.tabDonate);
-            this.tabControl1.Location = new System.Drawing.Point(12, 69);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(638, 202);
-            this.tabControl1.TabIndex = 14;
+            this.TabControl.Controls.Add(this.tabManual);
+            this.TabControl.Controls.Add(this.tabLimitNow);
+            this.TabControl.Controls.Add(this.tabSpread);
+            this.TabControl.Controls.Add(this.tabDCA);
+            this.TabControl.Controls.Add(this.tabSettings);
+            this.TabControl.Controls.Add(this.tabDonate);
+            this.TabControl.Location = new System.Drawing.Point(12, 69);
+            this.TabControl.Name = "TabControl";
+            this.TabControl.SelectedIndex = 0;
+            this.TabControl.Size = new System.Drawing.Size(793, 202);
+            this.TabControl.TabIndex = 14;
             // 
             // tabManual
             // 
@@ -305,7 +327,7 @@
             this.tabManual.Controls.Add(this.groupBox4);
             this.tabManual.Location = new System.Drawing.Point(4, 22);
             this.tabManual.Name = "tabManual";
-            this.tabManual.Size = new System.Drawing.Size(630, 176);
+            this.tabManual.Size = new System.Drawing.Size(785, 176);
             this.tabManual.TabIndex = 4;
             this.tabManual.Text = "Manual Ordering";
             this.tabManual.UseVisualStyleBackColor = true;
@@ -325,7 +347,7 @@
             this.groupBox5.Controls.Add(this.chkManualLimitReduceOnly);
             this.groupBox5.Controls.Add(this.label18);
             this.groupBox5.Controls.Add(this.nudManualLimitContracts);
-            this.groupBox5.Location = new System.Drawing.Point(196, 13);
+            this.groupBox5.Location = new System.Drawing.Point(189, 12);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(431, 160);
             this.groupBox5.TabIndex = 10;
@@ -731,7 +753,7 @@
             this.groupBox4.Controls.Add(this.chkManualMarketBuyReduceOnly);
             this.groupBox4.Controls.Add(this.label19);
             this.groupBox4.Controls.Add(this.nudManualMarketBuyContracts);
-            this.groupBox4.Location = new System.Drawing.Point(14, 13);
+            this.groupBox4.Location = new System.Drawing.Point(7, 12);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(176, 160);
             this.groupBox4.TabIndex = 9;
@@ -807,6 +829,181 @@
             0});
             this.nudManualMarketBuyContracts.ValueChanged += new System.EventHandler(this.nudManualMarketBuyContracts_ValueChanged);
             // 
+            // tabLimitNow
+            // 
+            this.tabLimitNow.Controls.Add(this.btnLimitNowSellCancel);
+            this.tabLimitNow.Controls.Add(this.btnLimitNowBuyCancel);
+            this.tabLimitNow.Controls.Add(this.label24);
+            this.tabLimitNow.Controls.Add(this.nudLimitNowDelay);
+            this.tabLimitNow.Controls.Add(this.label23);
+            this.tabLimitNow.Controls.Add(this.nudLimitNowTicksFromCenter);
+            this.tabLimitNow.Controls.Add(this.btnLimitNowSell);
+            this.tabLimitNow.Controls.Add(this.label21);
+            this.tabLimitNow.Controls.Add(this.btnLimitNowBuy);
+            this.tabLimitNow.Controls.Add(this.nudLimitNowContracts);
+            this.tabLimitNow.Location = new System.Drawing.Point(4, 22);
+            this.tabLimitNow.Name = "tabLimitNow";
+            this.tabLimitNow.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLimitNow.Size = new System.Drawing.Size(785, 176);
+            this.tabLimitNow.TabIndex = 5;
+            this.tabLimitNow.Text = "Limit Now";
+            this.tabLimitNow.UseVisualStyleBackColor = true;
+            // 
+            // btnLimitNowSellCancel
+            // 
+            this.btnLimitNowSellCancel.BackColor = System.Drawing.Color.Gold;
+            this.btnLimitNowSellCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimitNowSellCancel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnLimitNowSellCancel.Location = new System.Drawing.Point(86, 85);
+            this.btnLimitNowSellCancel.Name = "btnLimitNowSellCancel";
+            this.btnLimitNowSellCancel.Size = new System.Drawing.Size(66, 80);
+            this.btnLimitNowSellCancel.TabIndex = 30;
+            this.btnLimitNowSellCancel.Text = "Cancel Sell";
+            this.btnLimitNowSellCancel.UseVisualStyleBackColor = false;
+            this.btnLimitNowSellCancel.Visible = false;
+            this.btnLimitNowSellCancel.Click += new System.EventHandler(this.btnLimitNowSellCancel_Click);
+            // 
+            // btnLimitNowBuyCancel
+            // 
+            this.btnLimitNowBuyCancel.BackColor = System.Drawing.Color.Gold;
+            this.btnLimitNowBuyCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimitNowBuyCancel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnLimitNowBuyCancel.Location = new System.Drawing.Point(14, 85);
+            this.btnLimitNowBuyCancel.Name = "btnLimitNowBuyCancel";
+            this.btnLimitNowBuyCancel.Size = new System.Drawing.Size(66, 80);
+            this.btnLimitNowBuyCancel.TabIndex = 29;
+            this.btnLimitNowBuyCancel.Text = "Cancel Buy";
+            this.btnLimitNowBuyCancel.UseVisualStyleBackColor = false;
+            this.btnLimitNowBuyCancel.Visible = false;
+            this.btnLimitNowBuyCancel.Click += new System.EventHandler(this.btnLimitNowBuyCancel_Click);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(99, 63);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(56, 13);
+            this.label24.TabIndex = 28;
+            this.label24.Text = "Delay (ms)";
+            // 
+            // nudLimitNowDelay
+            // 
+            this.nudLimitNowDelay.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudLimitNowDelay.Location = new System.Drawing.Point(16, 59);
+            this.nudLimitNowDelay.Maximum = new decimal(new int[] {
+            600000,
+            0,
+            0,
+            0});
+            this.nudLimitNowDelay.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudLimitNowDelay.Name = "nudLimitNowDelay";
+            this.nudLimitNowDelay.Size = new System.Drawing.Size(81, 20);
+            this.nudLimitNowDelay.TabIndex = 27;
+            this.nudLimitNowDelay.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudLimitNowDelay.ValueChanged += new System.EventHandler(this.nudLimitNowDelay_ValueChanged);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(99, 37);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(50, 13);
+            this.label23.TabIndex = 26;
+            this.label23.Text = "Ticks Off";
+            // 
+            // nudLimitNowTicksFromCenter
+            // 
+            this.nudLimitNowTicksFromCenter.Location = new System.Drawing.Point(16, 33);
+            this.nudLimitNowTicksFromCenter.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nudLimitNowTicksFromCenter.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudLimitNowTicksFromCenter.Name = "nudLimitNowTicksFromCenter";
+            this.nudLimitNowTicksFromCenter.Size = new System.Drawing.Size(81, 20);
+            this.nudLimitNowTicksFromCenter.TabIndex = 25;
+            this.nudLimitNowTicksFromCenter.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudLimitNowTicksFromCenter.ValueChanged += new System.EventHandler(this.nudLimitNowTicksFromCenter_ValueChanged);
+            // 
+            // btnLimitNowSell
+            // 
+            this.btnLimitNowSell.BackColor = System.Drawing.Color.Red;
+            this.btnLimitNowSell.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimitNowSell.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnLimitNowSell.Location = new System.Drawing.Point(86, 85);
+            this.btnLimitNowSell.Name = "btnLimitNowSell";
+            this.btnLimitNowSell.Size = new System.Drawing.Size(66, 80);
+            this.btnLimitNowSell.TabIndex = 23;
+            this.btnLimitNowSell.Text = "Limit Sell Now";
+            this.btnLimitNowSell.UseVisualStyleBackColor = false;
+            this.btnLimitNowSell.Click += new System.EventHandler(this.btnLimitNowSell_Click);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(99, 11);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(52, 13);
+            this.label21.TabIndex = 24;
+            this.label21.Text = "Contracts";
+            // 
+            // btnLimitNowBuy
+            // 
+            this.btnLimitNowBuy.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnLimitNowBuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimitNowBuy.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnLimitNowBuy.Location = new System.Drawing.Point(14, 85);
+            this.btnLimitNowBuy.Name = "btnLimitNowBuy";
+            this.btnLimitNowBuy.Size = new System.Drawing.Size(66, 80);
+            this.btnLimitNowBuy.TabIndex = 21;
+            this.btnLimitNowBuy.Text = "Limit Buy Now";
+            this.btnLimitNowBuy.UseVisualStyleBackColor = false;
+            this.btnLimitNowBuy.Click += new System.EventHandler(this.btnLimitNowBuy_Click);
+            // 
+            // nudLimitNowContracts
+            // 
+            this.nudLimitNowContracts.Location = new System.Drawing.Point(16, 7);
+            this.nudLimitNowContracts.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
+            this.nudLimitNowContracts.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudLimitNowContracts.Name = "nudLimitNowContracts";
+            this.nudLimitNowContracts.Size = new System.Drawing.Size(81, 20);
+            this.nudLimitNowContracts.TabIndex = 22;
+            this.nudLimitNowContracts.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudLimitNowContracts.ValueChanged += new System.EventHandler(this.nudLimitNowContracts_ValueChanged);
+            // 
             // tabSpread
             // 
             this.tabSpread.Controls.Add(this.chkSpreadCancelWhileOrdering);
@@ -816,7 +1013,7 @@
             this.tabSpread.Controls.Add(this.btnSpreadPlaceOrders);
             this.tabSpread.Location = new System.Drawing.Point(4, 22);
             this.tabSpread.Name = "tabSpread";
-            this.tabSpread.Size = new System.Drawing.Size(630, 176);
+            this.tabSpread.Size = new System.Drawing.Size(785, 176);
             this.tabSpread.TabIndex = 2;
             this.tabSpread.Text = "Spread";
             this.tabSpread.UseVisualStyleBackColor = true;
@@ -1169,7 +1366,7 @@
             this.tabDCA.Location = new System.Drawing.Point(4, 22);
             this.tabDCA.Name = "tabDCA";
             this.tabDCA.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDCA.Size = new System.Drawing.Size(630, 176);
+            this.tabDCA.Size = new System.Drawing.Size(785, 176);
             this.tabDCA.TabIndex = 0;
             this.tabDCA.Text = "DCA";
             this.tabDCA.UseVisualStyleBackColor = true;
@@ -1427,7 +1624,7 @@
             this.tabSettings.Location = new System.Drawing.Point(4, 22);
             this.tabSettings.Name = "tabSettings";
             this.tabSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSettings.Size = new System.Drawing.Size(630, 176);
+            this.tabSettings.Size = new System.Drawing.Size(785, 176);
             this.tabSettings.TabIndex = 1;
             this.tabSettings.Text = "Settings";
             this.tabSettings.UseVisualStyleBackColor = true;
@@ -1529,7 +1726,7 @@
             this.tabDonate.Controls.Add(this.pictureBox1);
             this.tabDonate.Location = new System.Drawing.Point(4, 22);
             this.tabDonate.Name = "tabDonate";
-            this.tabDonate.Size = new System.Drawing.Size(630, 176);
+            this.tabDonate.Size = new System.Drawing.Size(785, 176);
             this.tabDonate.TabIndex = 3;
             this.tabDonate.Text = "Donate";
             this.tabDonate.UseVisualStyleBackColor = true;
@@ -1568,7 +1765,8 @@
             // 
             // gbxPosition
             // 
-            this.gbxPosition.Controls.Add(this.nudPositionLimitPrice);
+            this.gbxPosition.Controls.Add(this.label22);
+            this.gbxPosition.Controls.Add(this.btnPositionMargin);
             this.gbxPosition.Controls.Add(this.btnPositionMarketClose);
             this.gbxPosition.Controls.Add(this.btnPositionLimitClose);
             this.gbxPosition.Controls.Add(this.textBox8);
@@ -1585,43 +1783,38 @@
             this.gbxPosition.Controls.Add(this.txtPositionMarkPrice);
             this.gbxPosition.Controls.Add(this.txtPositionEntryPrice);
             this.gbxPosition.Controls.Add(this.txtPositionSize);
+            this.gbxPosition.Controls.Add(this.nudPositionLimitPrice);
+            this.gbxPosition.Controls.Add(this.nudPositionMargin);
             this.gbxPosition.Location = new System.Drawing.Point(143, 7);
             this.gbxPosition.Name = "gbxPosition";
-            this.gbxPosition.Size = new System.Drawing.Size(507, 59);
+            this.gbxPosition.Size = new System.Drawing.Size(658, 59);
             this.gbxPosition.TabIndex = 15;
             this.gbxPosition.TabStop = false;
             this.gbxPosition.Text = "Position";
             this.gbxPosition.Visible = false;
             // 
-            // nudPositionLimitPrice
+            // label22
             // 
-            this.nudPositionLimitPrice.DecimalPlaces = 1;
-            this.nudPositionLimitPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudPositionLimitPrice.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.nudPositionLimitPrice.Location = new System.Drawing.Point(386, 31);
-            this.nudPositionLimitPrice.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.nudPositionLimitPrice.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            524288});
-            this.nudPositionLimitPrice.Name = "nudPositionLimitPrice";
-            this.nudPositionLimitPrice.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.nudPositionLimitPrice.Size = new System.Drawing.Size(61, 18);
-            this.nudPositionLimitPrice.TabIndex = 19;
-            this.nudPositionLimitPrice.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            524288});
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(536, 17);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(54, 13);
+            this.label22.TabIndex = 22;
+            this.label22.Text = "0 = Cross ";
+            // 
+            // btnPositionMargin
+            // 
+            this.btnPositionMargin.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnPositionMargin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPositionMargin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnPositionMargin.Location = new System.Drawing.Point(590, 13);
+            this.btnPositionMargin.Name = "btnPositionMargin";
+            this.btnPositionMargin.Size = new System.Drawing.Size(62, 19);
+            this.btnPositionMargin.TabIndex = 21;
+            this.btnPositionMargin.Text = "Margin";
+            this.btnPositionMargin.UseVisualStyleBackColor = false;
+            this.btnPositionMargin.Click += new System.EventHandler(this.btnPositionMargin_Click);
             // 
             // btnPositionMarketClose
             // 
@@ -1641,9 +1834,9 @@
             this.btnPositionLimitClose.BackColor = System.Drawing.Color.CornflowerBlue;
             this.btnPositionLimitClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPositionLimitClose.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnPositionLimitClose.Location = new System.Drawing.Point(386, 13);
+            this.btnPositionLimitClose.Location = new System.Drawing.Point(385, 13);
             this.btnPositionLimitClose.Name = "btnPositionLimitClose";
-            this.btnPositionLimitClose.Size = new System.Drawing.Size(61, 18);
+            this.btnPositionLimitClose.Size = new System.Drawing.Size(62, 19);
             this.btnPositionLimitClose.TabIndex = 17;
             this.btnPositionLimitClose.Text = "Limit";
             this.btnPositionLimitClose.UseVisualStyleBackColor = false;
@@ -1796,6 +1989,50 @@
             this.txtPositionSize.Size = new System.Drawing.Size(55, 18);
             this.txtPositionSize.TabIndex = 0;
             // 
+            // nudPositionLimitPrice
+            // 
+            this.nudPositionLimitPrice.DecimalPlaces = 1;
+            this.nudPositionLimitPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudPositionLimitPrice.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.nudPositionLimitPrice.Location = new System.Drawing.Point(386, 31);
+            this.nudPositionLimitPrice.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.nudPositionLimitPrice.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            524288});
+            this.nudPositionLimitPrice.Name = "nudPositionLimitPrice";
+            this.nudPositionLimitPrice.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.nudPositionLimitPrice.Size = new System.Drawing.Size(61, 18);
+            this.nudPositionLimitPrice.TabIndex = 19;
+            this.nudPositionLimitPrice.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            524288});
+            // 
+            // nudPositionMargin
+            // 
+            this.nudPositionMargin.DecimalPlaces = 2;
+            this.nudPositionMargin.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudPositionMargin.Location = new System.Drawing.Point(591, 31);
+            this.nudPositionMargin.Name = "nudPositionMargin";
+            this.nudPositionMargin.Size = new System.Drawing.Size(60, 18);
+            this.nudPositionMargin.TabIndex = 20;
+            this.nudPositionMargin.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            524288});
+            // 
             // tmrClientUpdates
             // 
             this.tmrClientUpdates.Tick += new System.EventHandler(this.tmrClientUpdates_Tick);
@@ -1837,24 +2074,34 @@
             // 
             this.pbxYouTubeSubscribe.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbxYouTubeSubscribe.Image = ((System.Drawing.Image)(resources.GetObject("pbxYouTubeSubscribe.Image")));
-            this.pbxYouTubeSubscribe.Location = new System.Drawing.Point(529, 240);
+            this.pbxYouTubeSubscribe.Location = new System.Drawing.Point(668, 238);
             this.pbxYouTubeSubscribe.Name = "pbxYouTubeSubscribe";
-            this.pbxYouTubeSubscribe.Size = new System.Drawing.Size(117, 91);
+            this.pbxYouTubeSubscribe.Size = new System.Drawing.Size(137, 91);
             this.pbxYouTubeSubscribe.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxYouTubeSubscribe.TabIndex = 19;
             this.pbxYouTubeSubscribe.TabStop = false;
             this.pbxYouTubeSubscribe.Click += new System.EventHandler(this.pbxYouTubeSubscribe_Click);
+            // 
+            // tmrLimitNowBuy
+            // 
+            this.tmrLimitNowBuy.Interval = 1000;
+            this.tmrLimitNowBuy.Tick += new System.EventHandler(this.tmrLimitNowBuy_Tick);
+            // 
+            // tmrLimitNowSell
+            // 
+            this.tmrLimitNowSell.Interval = 1000;
+            this.tmrLimitNowSell.Tick += new System.EventHandler(this.tmrLimitNowSell_Tick);
             // 
             // Bot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(662, 322);
+            this.ClientSize = new System.Drawing.Size(817, 322);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.nudCurrentPrice);
             this.Controls.Add(this.gbxPosition);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.TabControl);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ddlSymbol);
@@ -1868,7 +2115,7 @@
             this.Load += new System.EventHandler(this.Bot_Load);
             this.StatusStrip.ResumeLayout(false);
             this.StatusStrip.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
+            this.TabControl.ResumeLayout(false);
             this.tabManual.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -1883,6 +2130,11 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudManualMarketBuyContracts)).EndInit();
+            this.tabLimitNow.ResumeLayout(false);
+            this.tabLimitNow.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLimitNowDelay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLimitNowTicksFromCenter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLimitNowContracts)).EndInit();
             this.tabSpread.ResumeLayout(false);
             this.tabSpread.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -1914,6 +2166,7 @@
             this.gbxPosition.ResumeLayout(false);
             this.gbxPosition.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPositionLimitPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPositionMargin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCurrentPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxYouTubeSubscribe)).EndInit();
             this.ResumeLayout(false);
@@ -1930,7 +2183,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Timer Heartbeat;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl TabControl;
         private System.Windows.Forms.TabPage tabDCA;
         private System.Windows.Forms.Label lblalskdj;
         private System.Windows.Forms.NumericUpDown nudDCASeconds;
@@ -2046,5 +2299,21 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblVersion;
         private System.Windows.Forms.PictureBox pbxYouTubeSubscribe;
+        private System.Windows.Forms.Button btnPositionMargin;
+        private System.Windows.Forms.NumericUpDown nudPositionMargin;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TabPage tabLimitNow;
+        private System.Windows.Forms.Button btnLimitNowSell;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Button btnLimitNowBuy;
+        private System.Windows.Forms.NumericUpDown nudLimitNowContracts;
+        private System.Windows.Forms.Timer tmrLimitNowBuy;
+        private System.Windows.Forms.Timer tmrLimitNowSell;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.NumericUpDown nudLimitNowTicksFromCenter;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.NumericUpDown nudLimitNowDelay;
+        private System.Windows.Forms.Button btnLimitNowBuyCancel;
+        private System.Windows.Forms.Button btnLimitNowSellCancel;
     }
 }

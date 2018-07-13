@@ -526,5 +526,41 @@ namespace BitMEXAssistant.Properties {
                 this["ManualLimitPercentModifierUseCurrentPrice"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int LimitNowContracts {
+            get {
+                return ((int)(this["LimitNowContracts"]));
+            }
+            set {
+                this["LimitNowContracts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int LimitNowTicksFromCenter {
+            get {
+                return ((int)(this["LimitNowTicksFromCenter"]));
+            }
+            set {
+                this["LimitNowTicksFromCenter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public int LimitNowDelay {
+            get {
+                return ((int)(this["LimitNowDelay"]));
+            }
+            set {
+                this["LimitNowDelay"] = value;
+            }
+        }
     }
 }

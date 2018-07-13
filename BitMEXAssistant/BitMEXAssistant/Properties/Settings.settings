@@ -128,5 +128,14 @@
     <Setting Name="ManualLimitPercentModifierUseCurrentPrice" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="LimitNowContracts" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="LimitNowTicksFromCenter" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="LimitNowDelay" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

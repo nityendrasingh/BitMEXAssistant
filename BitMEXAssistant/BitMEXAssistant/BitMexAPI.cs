@@ -269,6 +269,147 @@ namespace BitMEX
             return res;
         }
 
+        public List<Order> LimitNowOrder(string Symbol, string Side, int Quantity, decimal Price, bool ReduceOnly = false, bool PostOnly = false, bool Hidden = false)
+        {
+            var param = new Dictionary<string, string>();
+            param["symbol"] = Symbol;
+            param["side"] = Side;
+            param["orderQty"] = Quantity.ToString();
+            param["ordType"] = "Limit";
+            param["price"] = Price.ToString();
+            if (ReduceOnly && !PostOnly)
+            {
+                param["execInst"] = "ReduceOnly";
+            }
+            else if (!ReduceOnly && PostOnly)
+            {
+                param["execInst"] = "ParticipateDoNotInitiate";
+            }
+            else if (ReduceOnly && PostOnly)
+            {
+                param["execInst"] = "ReduceOnly,ParticipateDoNotInitiate";
+            }
+            if (Hidden)
+            {
+                param["displayQty"] = "0";
+            }
+
+
+            string res = Query("POST", "/order", param, true);
+            int RetryAttemptCount = 0;
+            int MaxRetries = RetryAttempts(res);
+            while (res.Contains("error") && RetryAttemptCount < MaxRetries)
+            {
+                errors.Add(res);
+                Thread.Sleep(BitMEXAssistant.Properties.Settings.Default.RetryAttemptWaitTime); // Force app to wait 500ms
+                res = Query("POST", "/order", param, true);
+                RetryAttemptCount++;
+                if (RetryAttemptCount == MaxRetries)
+                {
+                    errors.Add("Max rety attempts of " + MaxRetries.ToString() + " reached.");
+                    break;
+                }
+            }
+
+            try
+            {
+                List<Order> Result = new List<Order>();
+                Result.Add(JsonConvert.DeserializeObject<Order>(res));
+                return Result;
+            }
+            catch (Exception ex)
+            {
+                return new List<Order>();
+            }
+        }
+
+        public List<Order> LimitNowAmendOrder(string OrderId, decimal Price)
+        {
+            var param = new Dictionary<string, string>();
+            param["orderID"] = OrderId;
+            param["price"] = Price.ToString();
+
+            string res = Query("PUT", "/order", param, true);
+
+            try
+            {
+                List<Order> Result = new List<Order>();
+                if(!res.Contains("error"))
+                {
+                    Result.Add(JsonConvert.DeserializeObject<Order>(res));
+                    return Result;
+                }
+                else
+                {
+                    return new List<Order>();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                return new List<Order>();
+            }
+        }
+
+        public List<Order> CancelOrder(string OrderId)
+        {
+            var param = new Dictionary<string, string>();
+            param["orderID"] = OrderId;
+            
+            string res = Query("DELETE", "/order", param, true);
+            int RetryAttemptCount = 0;
+            int MaxRetries = RetryAttempts(res);
+            while (res.Contains("error") && RetryAttemptCount < MaxRetries)
+            {
+                errors.Add(res);
+                Thread.Sleep(BitMEXAssistant.Properties.Settings.Default.RetryAttemptWaitTime); // Force app to wait 500ms
+                res = Query("DELETE", "/order", param, true);
+                RetryAttemptCount++;
+                if (RetryAttemptCount == MaxRetries)
+                {
+                    errors.Add("Max rety attempts of " + MaxRetries.ToString() + " reached.");
+                    break;
+                }
+            }
+
+            try
+            {
+                List<Order> Result = new List<Order>();
+                Result.Add(JsonConvert.DeserializeObject<Order>(res));
+                return Result;
+            }
+            catch (Exception ex)
+            {
+                return new List<Order>();
+            }
+        }
+
+        public string ChangeMargin(string Symbol, decimal Margin)
+        {
+            var param = new Dictionary<string, string>();
+            param["symbol"] = Symbol;
+            param["leverage"] = Margin.ToString();
+
+
+
+            string res = Query("POST", "/position/leverage", param, true);
+            int RetryAttemptCount = 0;
+            int MaxRetries = RetryAttempts(res);
+            while (res.Contains("error") && RetryAttemptCount < MaxRetries)
+            {
+                errors.Add(res);
+                Thread.Sleep(BitMEXAssistant.Properties.Settings.Default.RetryAttemptWaitTime); // Force app to wait 500ms
+                res = Query("POST", "/order", param, true);
+                RetryAttemptCount++;
+                if (RetryAttemptCount == MaxRetries)
+                {
+                    errors.Add("Max rety attempts of " + MaxRetries.ToString() + " reached.");
+                    break;
+                }
+            }
+            return res;
+        }
+
         public string CancelAllOpenOrders(string symbol, string Note = "")
         {
             var param = new Dictionary<string, string>();
@@ -564,7 +705,7 @@ namespace BitMEX
     public class OrderBook
     {
         public string Side { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public int Size { get; set; }
     }
 
