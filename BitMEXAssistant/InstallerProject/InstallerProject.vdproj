@@ -52,19 +52,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1CE84DE155A8D7513E0435319545E973"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_84112F246DAF09CA5113BD3B44863690"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_25E4D52B22C0F91FC8A3D213CC361A23"
+        "OwnerKey" = "8:_CFDE31C219094EF4AED4C58D340A5EB4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -76,7 +64,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CFDE31C219094EF4AED4C58D340A5EB4"
+        "OwnerKey" = "8:_25E4D52B22C0F91FC8A3D213CC361A23"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_84112F246DAF09CA5113BD3B44863690"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_1CE84DE155A8D7513E0435319545E973"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -104,6 +104,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
         "Release"
@@ -128,6 +136,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
     }
@@ -165,6 +181,11 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
+                    "_1CE84DE155A8D7513E0435319545E973"
+                    {
+                    "Name" = "8:System.Net.Http.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -191,6 +212,11 @@
             "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_25E4D52B22C0F91FC8A3D213CC361A23"
+                    {
+                    "Name" = "8:Newtonsoft.Json.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
@@ -217,6 +243,11 @@
             "AssemblyAsmDisplayName" = "8:CsvHelper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_84112F246DAF09CA5113BD3B44863690"
+                    {
+                    "Name" = "8:CsvHelper.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:CsvHelper.dll"
             "TargetName" = "8:"
@@ -263,6 +294,11 @@
             "AssemblyAsmDisplayName" = "8:websocket-sharp-with-proxy-support, Version=1.0.2.28248, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_D2678960CDCA4F9267D8A7EB70E3E1FF"
+                    {
+                    "Name" = "8:websocket-sharp-with-proxy-support.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:websocket-sharp-with-proxy-support.dll"
             "TargetName" = "8:"
@@ -338,15 +374,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:BitMEX Assistant by BigBits"
-        "ProductCode" = "8:{E0C3EF9F-DC2A-4BC1-9614-3C2BDC31B52F}"
-        "PackageCode" = "8:{31C2A10B-751A-4271-BBAC-B3C7FA1FBA87}"
+        "ProductCode" = "8:{B1D60F11-47CD-4016-AD29-F9451157BCDC}"
+        "PackageCode" = "8:{49E97554-4A07-472A-B1C2-328BBB2C3B8F}"
         "UpgradeCode" = "8:{285279FC-5508-47C4-A0BE-4D822C6974B0}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:0.0.15"
+        "ProductVersion" = "8:0.0.16"
         "Manufacturer" = "8:BigBits"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

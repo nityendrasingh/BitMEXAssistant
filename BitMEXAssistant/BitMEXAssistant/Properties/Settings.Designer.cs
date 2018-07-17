@@ -530,36 +530,120 @@ namespace BitMEXAssistant.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int LimitNowContracts {
+        public int LimitNowBuyContracts {
             get {
-                return ((int)(this["LimitNowContracts"]));
+                return ((int)(this["LimitNowBuyContracts"]));
             }
             set {
-                this["LimitNowContracts"] = value;
+                this["LimitNowBuyContracts"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int LimitNowTicksFromCenter {
+        public int LimitNowBuyTicksFromCenter {
             get {
-                return ((int)(this["LimitNowTicksFromCenter"]));
+                return ((int)(this["LimitNowBuyTicksFromCenter"]));
             }
             set {
-                this["LimitNowTicksFromCenter"] = value;
+                this["LimitNowBuyTicksFromCenter"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1000")]
-        public int LimitNowDelay {
+        public int LimitNowBuyDelay {
             get {
-                return ((int)(this["LimitNowDelay"]));
+                return ((int)(this["LimitNowBuyDelay"]));
             }
             set {
-                this["LimitNowDelay"] = value;
+                this["LimitNowBuyDelay"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LimitNowBuyContinue {
+            get {
+                return ((bool)(this["LimitNowBuyContinue"]));
+            }
+            set {
+                this["LimitNowBuyContinue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int LimitNowSellContracts {
+            get {
+                return ((int)(this["LimitNowSellContracts"]));
+            }
+            set {
+                this["LimitNowSellContracts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int LimitNowSellTicksFromCenter {
+            get {
+                return ((int)(this["LimitNowSellTicksFromCenter"]));
+            }
+            set {
+                this["LimitNowSellTicksFromCenter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public int LimitNowSellDelay {
+            get {
+                return ((int)(this["LimitNowSellDelay"]));
+            }
+            set {
+                this["LimitNowSellDelay"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LimitNowSellContinue {
+            get {
+                return ((bool)(this["LimitNowSellContinue"]));
+            }
+            set {
+                this["LimitNowSellContinue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Best Price")]
+        public string LimitNowBuyMethod {
+            get {
+                return ((string)(this["LimitNowBuyMethod"]));
+            }
+            set {
+                this["LimitNowBuyMethod"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Best Price")]
+        public string LimitNowSellMethod {
+            get {
+                return ((string)(this["LimitNowSellMethod"]));
+            }
+            set {
+                this["LimitNowSellMethod"] = value;
             }
         }
     }

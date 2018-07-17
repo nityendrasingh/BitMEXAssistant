@@ -323,11 +323,18 @@ namespace BitMEX
             }
         }
 
-        public List<Order> LimitNowAmendOrder(string OrderId, decimal Price)
+        public List<Order> LimitNowAmendOrder(string OrderId, decimal? Price = null, int? OrderQty = null)
         {
             var param = new Dictionary<string, string>();
             param["orderID"] = OrderId;
-            param["price"] = Price.ToString();
+            if(Price != null)
+            {
+                param["price"] = Price.ToString();
+            }
+            if(OrderQty != null)
+            {
+                param["orderQty"] = OrderQty.ToString();
+            }
 
             string res = Query("PUT", "/order", param, true);
 

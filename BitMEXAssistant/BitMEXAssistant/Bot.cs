@@ -16,6 +16,7 @@ namespace BitMEXAssistant
 {
     public partial class Bot : Form
     {
+        #region Class Properties
         string APIKey = "";
         string APISecret = "";
         BitMEXApi bitmex;
@@ -36,18 +37,22 @@ namespace BitMEXAssistant
         Dictionary<string, decimal> Prices = new Dictionary<string, decimal>();
         //List<Alert> Alerts = new List<Alert>();
 
-        public static string Version = "0.0.15";
+        public static string Version = "0.0.16";
 
         string LimitNowBuyOrderId = "";
+        decimal LimitNowBuyOrderPrice = 0;
         string LimitNowSellOrderId = "";
+        decimal LimitNowSellOrderPrice = 0;
         List<OrderBook> OrderBookTopAsks = new List<OrderBook>();
         List<OrderBook> OrderBookTopBids = new List<OrderBook>();
-
+        #endregion
 
         public Bot()
         {
             InitializeComponent();
         }
+
+        #region Bot Form Events
 
         private void Bot_Load(object sender, EventArgs e)
         {
@@ -70,22 +75,17 @@ namespace BitMEXAssistant
                 InitializeWebSocket();
                 InitializeDependentSymbolInformation();
 
-                TabControl.Controls.Remove(tabLimitNow); // TODO: Remove this line
                 tmrClientUpdates.Start(); // Start our client update timer
             }
-
-
-
-
-
-            //Alert nea = new Alert();
-            //nea.Symbol = "XBTUSD";
-            //nea.Side = "Above";
-            //nea.Price = 3000m;
-            //nea.Triggered = false;
-            //Alerts.Add(nea);
         }
 
+        private void Bot_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ws.Close(); // Make sure our websocket is closed.
+        }
+        #endregion
+
+        #region Initialization
         private void InitializeWebSocket()
         {
             if (Properties.Settings.Default.Network == "Real")
@@ -256,11 +256,19 @@ namespace BitMEXAssistant
             chkManualLimitPercentModifierUseCurrentPrice.Checked = Properties.Settings.Default.ManualLimitPercentModifierUseCurrentPrice;
 
             // Limit Now
-            nudLimitNowContracts.Value = Properties.Settings.Default.LimitNowContracts;
-            nudLimitNowTicksFromCenter.Value = Properties.Settings.Default.LimitNowTicksFromCenter;
-            nudLimitNowDelay.Value = Properties.Settings.Default.LimitNowDelay;
-            tmrLimitNowBuy.Interval = Properties.Settings.Default.LimitNowDelay;
-            tmrLimitNowSell.Interval = Properties.Settings.Default.LimitNowDelay;
+            nudLimitNowBuyContracts.Value = Properties.Settings.Default.LimitNowBuyContracts;
+            nudLimitNowBuyTicksFromCenter.Value = Properties.Settings.Default.LimitNowBuyTicksFromCenter;
+            nudLimitNowBuyDelay.Value = Properties.Settings.Default.LimitNowBuyDelay;
+            chkLimitNowBuyContinue.Checked = Properties.Settings.Default.LimitNowBuyContinue;
+            tmrLimitNowBuy.Interval = Properties.Settings.Default.LimitNowBuyDelay;
+            tmrLimitNowSell.Interval = Properties.Settings.Default.LimitNowBuyDelay;
+            nudLimitNowSellContracts.Value = Properties.Settings.Default.LimitNowSellContracts;
+            nudLimitNowSellTicksFromCenter.Value = Properties.Settings.Default.LimitNowSellTicksFromCenter;
+            nudLimitNowSellDelay.Value = Properties.Settings.Default.LimitNowSellDelay;
+            chkLimitNowSellContinue.Checked = Properties.Settings.Default.LimitNowSellContinue;
+            ddlLimitNowBuyMethod.SelectedItem = Properties.Settings.Default.LimitNowBuyMethod;
+            ddlLimitNowSellMethod.SelectedItem = Properties.Settings.Default.LimitNowSellMethod;
+
 
             // Update other client items...
             lblVersion.Text = "v" + Version;
@@ -320,7 +328,39 @@ namespace BitMEXAssistant
             UpdatePositionInfo();
             InitializeSymbolSpecificData(true);
         }
+        #endregion
 
+        #region General Tools
+
+        private void SaveSettings()
+        {
+            Properties.Settings.Default.Save();
+        }
+
+        private void pbxYouTubeSubscribe_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.youtube.com/BigBits?sub_confirmation=1");
+        }
+
+        private void lblDonate_Click(object sender, EventArgs e)
+        {
+            TabControl.SelectTab("tabDonate");
+        }
+
+        private void UpdatePrice()
+        {
+            nudCurrentPrice.Value = Prices[ActiveInstrument.Symbol];
+        }
+
+        private void tmrClientUpdates_Tick(object sender, EventArgs e)
+        {
+            UpdatePrice();
+            UpdateManualMarketBuyButtons();  // Update our buy buttons on manual market buys
+            //TriggerAlerts();
+        }
+        #endregion
+
+        #region Symbol And Time Frame Tools
         private void ddlSymbol_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -373,11 +413,13 @@ namespace BitMEXAssistant
 
         }
 
-        private void SaveSettings()
+        private void UpdateDateAndTime()
         {
-            Properties.Settings.Default.Save();
+            lblUTCTime.Text = DateTime.UtcNow.ToShortDateString() + " " + DateTime.UtcNow.ToLongTimeString();
         }
+        #endregion
 
+        #region DCA
         private void UpdateDCASummary()
         {
             DCAContractsPer = Convert.ToInt32(nudDCAContracts.Value);
@@ -546,11 +588,9 @@ namespace BitMEXAssistant
             chkDCAExecuteImmediately.Enabled = !Lock;
         }
 
-        private void UpdateDateAndTime()
-        {
-            lblUTCTime.Text = DateTime.UtcNow.ToShortDateString() + " " + DateTime.UtcNow.ToLongTimeString();
-        }
+        #endregion
 
+        #region Position Manager
         private void UpdatePositionInfo()
         {
             nudPositionLimitPrice.Increment = ActiveInstrument.TickSize;
@@ -633,6 +673,14 @@ namespace BitMEXAssistant
 
         }
 
+        private void btnPositionMargin_Click(object sender, EventArgs e)
+        {
+            bitmex.ChangeMargin(ActiveInstrument.Symbol, nudPositionMargin.Value);
+            UpdatePositionInfo();
+        }
+        #endregion
+
+        #region Settings Tab
         private void chkSettingOverloadRetry_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.OverloadRetry = chkSettingOverloadRetry.Checked;
@@ -650,6 +698,9 @@ namespace BitMEXAssistant
             Properties.Settings.Default.RetryAttemptWaitTime = (int)nudSettingsRetryWaitTime.Value;
             SaveSettings();
         }
+        #endregion
+
+        #region Spread Orders
 
         private void nudSpreadBuyOrderCount_ValueChanged(object sender, EventArgs e)
         {
@@ -839,6 +890,9 @@ namespace BitMEXAssistant
             return str.ToString();
         }
 
+        #endregion
+
+        #region Export Candles
         private void ExportCandleData()
         {
             // First see if we have the file we want where we want it. To do that, we need to get the filepath to our app folder in my documents
@@ -995,58 +1049,9 @@ namespace BitMEXAssistant
         {
             ExportCandleData();
         }
+        #endregion
 
-        private void Bot_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            ws.Close(); // Make sure our websocket is closed.
-        }
-
-        private void UpdatePrice()
-        {
-            nudCurrentPrice.Value = Prices[ActiveInstrument.Symbol];
-        }
-
-        private void tmrClientUpdates_Tick(object sender, EventArgs e)
-        {
-            UpdatePrice();
-            UpdateManualMarketBuyButtons();  // Update our buy buttons on manual market buys
-            //TriggerAlerts();
-        }
-
-        private void TriggerAlerts()
-        {
-            //if(Alerts.Where(a => a.Triggered == false).Any())
-            //{
-
-            //    foreach(Alert a in Alerts)
-            //    {
-            //        a.Triggered = true;
-            //        switch (a.Side)
-            //        {
-            //            case "Above":
-            //                if(Prices[a.Symbol] > a.Price)
-            //                {
-            //                    MessageBox.Show("Alert! " + a.Symbol + " price is now above " + a.Price.ToString() + ".");
-            //                }
-            //                break;
-            //            case "Below":
-            //                if (Prices[a.Symbol] < a.Price)
-            //                {
-            //                    MessageBox.Show("Alert! " + a.Symbol + " price is now below " + a.Price.ToString() + ".");
-            //                }
-            //                break;
-            //        }
-
-
-
-            //    }
-            //}
-        }
-
-        private void label15_Click(object sender, EventArgs e)
-        {
-            TabControl.SelectTab("tabDonate");
-        }
+        #region Manual Ordering
 
         private void UpdateManualMarketBuyButtons()
         {
@@ -1250,61 +1255,28 @@ namespace BitMEXAssistant
             bitmex.CancelAllOpenOrders(ActiveInstrument.Symbol);
         }
 
-        private void pbxYouTubeSubscribe_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://www.youtube.com/BigBits?sub_confirmation=1");
-        }
+        #endregion
 
-        private void btnPositionMargin_Click(object sender, EventArgs e)
+        #region Limit Now
+        private void nudLimitNowBuyContracts_ValueChanged(object sender, EventArgs e)
         {
-            bitmex.ChangeMargin(ActiveInstrument.Symbol, nudPositionMargin.Value);
-            UpdatePositionInfo();
-        }
-
-        private void nudLimitNowContracts_ValueChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.LimitNowContracts = (int)nudLimitNowContracts.Value;
+            Properties.Settings.Default.LimitNowBuyContracts = (int)nudLimitNowBuyContracts.Value;
             SaveSettings();
         }
 
         private void btnLimitNowBuy_Click(object sender, EventArgs e)
         {
-            // Initial order
-            decimal Price = OrderBookTopAsks.OrderBy(a => a.Price).FirstOrDefault().Price - (ActiveInstrument.TickSize * nudLimitNowTicksFromCenter.Value);
-            List<Order> LimitNowOrderResult = bitmex.LimitNowOrder(ActiveInstrument.Symbol, "Buy", (int)nudLimitNowContracts.Value, Price, false, true, false);
-            btnLimitNowBuyCancel.Visible = true;
-            btnLimitNowBuy.Visible = false;
-
-            if (LimitNowOrderResult.Any())
-            {
-                // Start buy timer
-                LimitNowBuyOrderId = LimitNowOrderResult.FirstOrDefault().OrderId;
-                tmrLimitNowBuy.Start();
-            }
-
+            LimitNowStartBuying();
         }
 
         private void btnLimitNowSell_Click(object sender, EventArgs e)
         {
-            // Initial order
-            decimal Price = OrderBookTopBids.OrderByDescending(a => a.Price).FirstOrDefault().Price + (ActiveInstrument.TickSize * nudLimitNowTicksFromCenter.Value);
-            List<Order> LimitNowOrderResult = bitmex.LimitNowOrder(ActiveInstrument.Symbol, "Sell", (int)nudLimitNowContracts.Value, Price, false, true, false);
-            btnLimitNowSellCancel.Visible = true;
-            btnLimitNowSell.Visible = false;
-
-            if (LimitNowOrderResult.Any())
-            {
-                // Start buy timer
-                LimitNowSellOrderId = LimitNowOrderResult.FirstOrDefault().OrderId;
-                tmrLimitNowSell.Start();
-            }
+            LimitNowStartSelling();
         }
 
         private void tmrLimitNowBuy_Tick(object sender, EventArgs e)
         {
-
-            decimal Price = OrderBookTopAsks.OrderBy(a => a.Price).FirstOrDefault().Price - (ActiveInstrument.TickSize * nudLimitNowTicksFromCenter.Value);
-            List<Order> LimitNowOrderResult = bitmex.LimitNowAmendOrder(LimitNowBuyOrderId, Price);
+            List<Order> LimitNowOrderResult = LimitNowAmendBuying();
 
             // Timer should stop if there are no orders left to amend.
             if (LimitNowOrderResult.Any())
@@ -1312,6 +1284,7 @@ namespace BitMEXAssistant
                 if (LimitNowOrderResult.FirstOrDefault().OrdStatus == "Filled")
                 {
                     LimitNowStopBuying();
+
                 }
             }
             else
@@ -1321,11 +1294,68 @@ namespace BitMEXAssistant
             }
         }
 
+        private List<Order> LimitNowStartBuying()
+        {
+            // Initial order
+            decimal Price = LimitNowGetOrderPrice("Buy");
+            List<Order> LimitNowOrderResult = bitmex.LimitNowOrder(ActiveInstrument.Symbol, "Buy", (int)nudLimitNowBuyContracts.Value, Price, false, true, false);
+            btnLimitNowBuyCancel.Visible = true;
+            btnLimitNowBuy.Visible = false;
+
+            if (LimitNowOrderResult.Any())
+            {
+                // Start buy timer
+                LimitNowBuyOrderId = LimitNowOrderResult.FirstOrDefault().OrderId;
+                LimitNowBuyOrderPrice = Price;
+                tmrLimitNowBuy.Start();
+            }
+
+            return LimitNowOrderResult;
+        }
+
+        private List<Order> LimitNowAmendBuying()
+        {
+            decimal Price = LimitNowGetOrderPrice("Buy");
+            int Contracts = (int)nudLimitNowBuyContracts.Value;
+            List<Order> LimitNowOrderResult = new List<Order>();
+            if (Price != 0)
+            {
+                LimitNowOrderResult = bitmex.LimitNowAmendOrder(LimitNowBuyOrderId, Price, Contracts);
+                LimitNowBuyOrderPrice = Price;
+            }
+            else
+            {
+                LimitNowOrderResult.Add(new Order());
+            }
+            return LimitNowOrderResult;
+
+
+        }
+
+        private List<Order> LimitNowAmendSelling()
+        {
+            decimal Price = LimitNowGetOrderPrice("Sell");
+            int Contracts = (int)nudLimitNowSellContracts.Value;
+            List<Order> LimitNowOrderResult = new List<Order>();
+
+
+
+            if (Price != 0)
+            {
+                LimitNowOrderResult = bitmex.LimitNowAmendOrder(LimitNowSellOrderId, Price, Contracts);
+                LimitNowSellOrderPrice = Price;
+            }
+            else
+            {
+                LimitNowOrderResult.Add(new Order());
+            }
+            return LimitNowOrderResult;
+
+        }
+
         private void tmrLimitNowSell_Tick(object sender, EventArgs e)
         {
-            // During buy timer, only amend open orders
-            decimal Price = OrderBookTopBids.OrderByDescending(a => a.Price).FirstOrDefault().Price + (ActiveInstrument.TickSize * nudLimitNowTicksFromCenter.Value);
-            List<Order> LimitNowOrderResult = bitmex.LimitNowAmendOrder(LimitNowSellOrderId, Price);
+            List<Order> LimitNowOrderResult = LimitNowAmendSelling();
 
             // Timer should stop if there are no orders left to amend.
             if (LimitNowOrderResult.Any())
@@ -1333,6 +1363,7 @@ namespace BitMEXAssistant
                 if (LimitNowOrderResult.FirstOrDefault().OrdStatus == "Filled")
                 {
                     LimitNowStopSelling();
+
                 }
             }
             else
@@ -1342,30 +1373,51 @@ namespace BitMEXAssistant
             }
         }
 
-        private void nudLimitNowTicksFromCenter_ValueChanged(object sender, EventArgs e)
+        private List<Order> LimitNowStartSelling()
         {
-            Properties.Settings.Default.LimitNowTicksFromCenter = (int)nudLimitNowTicksFromCenter.Value;
+
+            // Initial order
+            decimal Price = LimitNowGetOrderPrice("Sell");
+            List <Order> LimitNowOrderResult = bitmex.LimitNowOrder(ActiveInstrument.Symbol, "Sell", (int)nudLimitNowSellContracts.Value, Price, false, true, false);
+            btnLimitNowSellCancel.Visible = true;
+            btnLimitNowSell.Visible = false;
+
+            if (LimitNowOrderResult.Any())
+            {
+                // Start buy timer
+                LimitNowSellOrderId = LimitNowOrderResult.FirstOrDefault().OrderId;
+                LimitNowSellOrderPrice = Price;
+                tmrLimitNowSell.Start();
+            }
+
+            return LimitNowOrderResult;
+        }
+
+        private void nudLimitNowBuyTicksFromCenter_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LimitNowBuyTicksFromCenter = (int)nudLimitNowBuyTicksFromCenter.Value;
             SaveSettings();
         }
 
-        private void nudLimitNowDelay_ValueChanged(object sender, EventArgs e)
+        private void nudLimitNowBuyDelay_ValueChanged(object sender, EventArgs e)
         {
-            tmrLimitNowBuy.Interval = (int)nudLimitNowDelay.Value;
-            tmrLimitNowSell.Interval = (int)nudLimitNowDelay.Value;
+            tmrLimitNowBuy.Interval = (int)nudLimitNowBuyDelay.Value;
 
-            Properties.Settings.Default.LimitNowDelay = (int)nudLimitNowDelay.Value;
+            Properties.Settings.Default.LimitNowBuyDelay = (int)nudLimitNowBuyDelay.Value;
             SaveSettings();
         }
 
         private void btnLimitNowBuyCancel_Click(object sender, EventArgs e)
         {
             bitmex.CancelOrder(LimitNowBuyOrderId);
+            chkLimitNowBuyContinue.Checked = false;
             LimitNowStopBuying();
         }
 
         private void btnLimitNowSellCancel_Click(object sender, EventArgs e)
         {
             bitmex.CancelOrder(LimitNowSellOrderId);
+            chkLimitNowSellContinue.Checked = false;
             LimitNowStopSelling();
         }
 
@@ -1376,6 +1428,11 @@ namespace BitMEXAssistant
             btnLimitNowBuyCancel.Visible = false;
             btnLimitNowBuy.Visible = true;
             LimitNowBuyOrderId = "";
+
+            if (chkLimitNowBuyContinue.Checked)
+            {
+                LimitNowStartBuying();
+            }
         }
 
         private void LimitNowStopSelling()
@@ -1385,7 +1442,172 @@ namespace BitMEXAssistant
             btnLimitNowSellCancel.Visible = false;
             btnLimitNowSell.Visible = true;
             LimitNowSellOrderId = "";
+
+            if (chkLimitNowSellContinue.Checked)
+            {
+                LimitNowStartSelling();
+            }
         }
+
+        private void chkLimitNowBuyContinue_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LimitNowBuyContinue = chkLimitNowBuyContinue.Checked;
+            SaveSettings();
+        }
+
+        private void nudLimitNowSellContracts_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LimitNowSellContracts = (int)nudLimitNowSellContracts.Value;
+            SaveSettings();
+        }
+
+        private void nudLimitNowSellTicksFromCenter_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LimitNowSellTicksFromCenter = (int)nudLimitNowSellTicksFromCenter.Value;
+            SaveSettings();
+        }
+
+        private void nudLimitNowSellDelay_ValueChanged(object sender, EventArgs e)
+        {
+            tmrLimitNowSell.Interval = (int)nudLimitNowSellDelay.Value;
+
+            Properties.Settings.Default.LimitNowSellDelay = (int)nudLimitNowSellDelay.Value;
+            SaveSettings();
+        }
+
+        private void chkLimitNowSellContinue_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LimitNowSellContinue = chkLimitNowSellContinue.Checked;
+            SaveSettings();
+        }
+
+        private void ddlLimitNowBuyMethod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LimitNowBuyMethod = (string)ddlLimitNowBuyMethod.SelectedItem;
+            SaveSettings();
+            if ((string)ddlLimitNowBuyMethod.SelectedItem == "Best Price")
+            {
+                nudLimitNowBuyTicksFromCenter.Enabled = false;
+            }
+            else if ((string)ddlLimitNowBuyMethod.SelectedItem == "Quick Fill")
+            {
+                nudLimitNowBuyTicksFromCenter.Enabled = true;
+            }
+
+        }
+
+        private void ddlLimitNowSellMethod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LimitNowSellMethod = (string)ddlLimitNowSellMethod.SelectedItem;
+            SaveSettings();
+            if ((string)ddlLimitNowSellMethod.SelectedItem == "Best Price")
+            {
+                nudLimitNowSellTicksFromCenter.Enabled = false;
+            }
+            else if ((string)ddlLimitNowSellMethod.SelectedItem == "Quick Fill")
+            {
+                nudLimitNowSellTicksFromCenter.Enabled = true;
+            }
+
+        }
+
+        private decimal LimitNowGetOrderPrice(string Side)
+        {
+            decimal Price = 0;
+            try
+            {
+                switch (Side)
+                {
+                    case "Buy":
+                        if ((string)ddlLimitNowBuyMethod.SelectedItem == "Best Price")
+                        {
+                            decimal LowestAsk = OrderBookTopAsks.OrderBy(a => a.Price).FirstOrDefault().Price;
+                            decimal HighestBid = OrderBookTopBids.OrderByDescending(a => a.Price).FirstOrDefault().Price;
+                            if (HighestBid != LimitNowBuyOrderPrice) // Our price isn't the highest in book
+                            {
+                                if (LowestAsk - HighestBid > ActiveInstrument.TickSize) // More than 1 tick size spread
+                                {
+                                    Price = HighestBid + ActiveInstrument.TickSize;
+                                }
+                                else
+                                {
+                                    Price = LowestAsk - ActiveInstrument.TickSize;
+                                }
+                            }
+
+                        }
+                        else if ((string)ddlLimitNowBuyMethod.SelectedItem == "Quick Fill")
+                        {
+                            Price = OrderBookTopAsks.OrderBy(a => a.Price).FirstOrDefault().Price - (ActiveInstrument.TickSize * nudLimitNowBuyTicksFromCenter.Value);
+                        }
+                        break;
+                    case "Sell":
+                        if ((string)ddlLimitNowBuyMethod.SelectedItem == "Best Price")
+                        {
+                            decimal LowestAsk = OrderBookTopAsks.OrderBy(a => a.Price).FirstOrDefault().Price;
+                            decimal HighestBid = OrderBookTopBids.OrderByDescending(a => a.Price).FirstOrDefault().Price;
+                            if (LowestAsk != LimitNowSellOrderPrice) // Our price isn't the highest in book
+                            {
+                                if (LowestAsk - HighestBid > ActiveInstrument.TickSize) // More than 1 tick size spread
+                                {
+                                    Price = LowestAsk - ActiveInstrument.TickSize;
+                                }
+                                else
+                                {
+                                    Price = HighestBid + ActiveInstrument.TickSize;
+                                }
+                            }
+                        }
+                        else if ((string)ddlLimitNowBuyMethod.SelectedItem == "Quick Fill")
+                        {
+                            Price = OrderBookTopBids.OrderByDescending(a => a.Price).FirstOrDefault().Price + (ActiveInstrument.TickSize * nudLimitNowSellTicksFromCenter.Value);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+            
+            return Price;
+        }
+        #endregion
+
+
+
+        private void TriggerAlerts()
+        {
+            //if(Alerts.Where(a => a.Triggered == false).Any())
+            //{
+
+            //    foreach(Alert a in Alerts)
+            //    {
+            //        a.Triggered = true;
+            //        switch (a.Side)
+            //        {
+            //            case "Above":
+            //                if(Prices[a.Symbol] > a.Price)
+            //                {
+            //                    MessageBox.Show("Alert! " + a.Symbol + " price is now above " + a.Price.ToString() + ".");
+            //                }
+            //                break;
+            //            case "Below":
+            //                if (Prices[a.Symbol] < a.Price)
+            //                {
+            //                    MessageBox.Show("Alert! " + a.Symbol + " price is now below " + a.Price.ToString() + ".");
+            //                }
+            //                break;
+            //        }
+
+
+
+            //    }
+            //}
+        }
+
     }
 
     public class Alert

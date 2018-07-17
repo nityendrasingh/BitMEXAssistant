@@ -128,14 +128,35 @@
     <Setting Name="ManualLimitPercentModifierUseCurrentPrice" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="LimitNowContracts" Type="System.Int32" Scope="User">
+    <Setting Name="LimitNowBuyContracts" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="LimitNowTicksFromCenter" Type="System.Int32" Scope="User">
+    <Setting Name="LimitNowBuyTicksFromCenter" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="LimitNowDelay" Type="System.Int32" Scope="User">
+    <Setting Name="LimitNowBuyDelay" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="LimitNowBuyContinue" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LimitNowSellContracts" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="LimitNowSellTicksFromCenter" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="LimitNowSellDelay" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="LimitNowSellContinue" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LimitNowBuyMethod" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Best Price</Value>
+    </Setting>
+    <Setting Name="LimitNowSellMethod" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Best Price</Value>
     </Setting>
   </Settings>
 </SettingsFile>
