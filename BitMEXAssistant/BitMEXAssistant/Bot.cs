@@ -37,7 +37,7 @@ namespace BitMEXAssistant
         Dictionary<string, decimal> Prices = new Dictionary<string, decimal>();
         //List<Alert> Alerts = new List<Alert>();
 
-        public static string Version = "0.0.16";
+        public static string Version = "0.0.161";
 
         string LimitNowBuyOrderId = "";
         decimal LimitNowBuyOrderPrice = 0;
@@ -56,27 +56,27 @@ namespace BitMEXAssistant
 
         private void Bot_Load(object sender, EventArgs e)
         {
+                APIInfo Login = new APIInfo();
+                while (!Login.APIValid)
+                {
+                    Login.ShowDialog();
+                }
 
-            APIInfo Login = new APIInfo();
-            while (!Login.APIValid)
-            {
-                Login.ShowDialog();
-            }
+                if (Login.APIValid)
+                {
+                    InitializeDropdownsAndSettings();
+                    InitializeAPI();
 
-            if (Login.APIValid)
-            {
-                InitializeDropdownsAndSettings();
-                InitializeAPI();
-
-                InitializePostAPIDropdownsAndSettings();
+                    InitializePostAPIDropdownsAndSettings();
 
 
-                InitializeSymbolInformation();
-                InitializeWebSocket();
-                InitializeDependentSymbolInformation();
+                    InitializeSymbolInformation();
+                    InitializeWebSocket();
+                    InitializeDependentSymbolInformation();
 
-                tmrClientUpdates.Start(); // Start our client update timer
-            }
+                    tmrClientUpdates.Start(); // Start our client update timer
+                }
+            
         }
 
         private void Bot_FormClosing(object sender, FormClosingEventArgs e)

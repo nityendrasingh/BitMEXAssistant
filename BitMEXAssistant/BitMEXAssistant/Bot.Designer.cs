@@ -2328,6 +2328,7 @@
             this.Controls.Add(this.ddlCandleTimes);
             this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.pbxYouTubeSubscribe);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Bot";
             this.Text = "BitMEX Assistant";
