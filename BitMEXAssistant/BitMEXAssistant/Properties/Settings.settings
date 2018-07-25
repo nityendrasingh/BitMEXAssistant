@@ -158,5 +158,11 @@
     <Setting Name="LimitNowSellMethod" Type="System.String" Scope="User">
       <Value Profile="(Default)">Best Price</Value>
     </Setting>
+    <Setting Name="LimitNowBuyReduceOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LimitNowSellReduceOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

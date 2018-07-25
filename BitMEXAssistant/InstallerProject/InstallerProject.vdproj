@@ -58,13 +58,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D2678960CDCA4F9267D8A7EB70E3E1FF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_25E4D52B22C0F91FC8A3D213CC361A23"
+        "OwnerKey" = "8:_1CE84DE155A8D7513E0435319545E973"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -76,7 +70,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1CE84DE155A8D7513E0435319545E973"
+        "OwnerKey" = "8:_25E4D52B22C0F91FC8A3D213CC361A23"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D2678960CDCA4F9267D8A7EB70E3E1FF"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -181,11 +181,6 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_1CE84DE155A8D7513E0435319545E973"
-                    {
-                    "Name" = "8:System.Net.Http.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -212,11 +207,6 @@
             "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_25E4D52B22C0F91FC8A3D213CC361A23"
-                    {
-                    "Name" = "8:Newtonsoft.Json.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
@@ -243,11 +233,6 @@
             "AssemblyAsmDisplayName" = "8:CsvHelper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_84112F246DAF09CA5113BD3B44863690"
-                    {
-                    "Name" = "8:CsvHelper.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CsvHelper.dll"
             "TargetName" = "8:"
@@ -294,11 +279,6 @@
             "AssemblyAsmDisplayName" = "8:websocket-sharp-with-proxy-support, Version=1.0.2.28248, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_D2678960CDCA4F9267D8A7EB70E3E1FF"
-                    {
-                    "Name" = "8:websocket-sharp-with-proxy-support.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:websocket-sharp-with-proxy-support.dll"
             "TargetName" = "8:"
@@ -374,15 +354,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:BitMEX Assistant by BigBits"
-        "ProductCode" = "8:{5B9294E0-CEFB-4CF7-8503-776B684137C2}"
-        "PackageCode" = "8:{086B68B4-452D-4AD6-9A48-9FF3A387B25F}"
+        "ProductCode" = "8:{8E685269-3934-4997-A06B-0A65AECD75F4}"
+        "PackageCode" = "8:{6AE4FAB1-BDB1-4083-92AE-C96A1D28A077}"
         "UpgradeCode" = "8:{285279FC-5508-47C4-A0BE-4D822C6974B0}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:0.0.161"
+        "ProductVersion" = "8:0.0.162"
         "Manufacturer" = "8:BigBits"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

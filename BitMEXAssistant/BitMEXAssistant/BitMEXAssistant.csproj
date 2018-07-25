@@ -101,6 +101,7 @@
   <ItemGroup>
     <Content Include="Images\BigBits.ico" />
     <Content Include="Images\qr.png" />
+    <Content Include="Images\refresh.png" />
     <Content Include="Images\Subscribe.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

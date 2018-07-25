@@ -77,7 +77,9 @@
             this.label19 = new System.Windows.Forms.Label();
             this.nudManualMarketBuyContracts = new System.Windows.Forms.NumericUpDown();
             this.tabLimitNow = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.chkLimitNowSellReduceOnly = new System.Windows.Forms.CheckBox();
             this.label29 = new System.Windows.Forms.Label();
             this.ddlLimitNowSellMethod = new System.Windows.Forms.ComboBox();
             this.chkLimitNowSellContinue = new System.Windows.Forms.CheckBox();
@@ -90,6 +92,7 @@
             this.btnLimitNowSellCancel = new System.Windows.Forms.Button();
             this.btnLimitNowSell = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.chkLimitNowBuyReduceOnly = new System.Windows.Forms.CheckBox();
             this.label28 = new System.Windows.Forms.Label();
             this.ddlLimitNowBuyMethod = new System.Windows.Forms.ComboBox();
             this.chkLimitNowBuyContinue = new System.Windows.Forms.CheckBox();
@@ -262,7 +265,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(560, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(529, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // lblNetwork
@@ -850,6 +853,7 @@
             // 
             // tabLimitNow
             // 
+            this.tabLimitNow.Controls.Add(this.label15);
             this.tabLimitNow.Controls.Add(this.groupBox8);
             this.tabLimitNow.Controls.Add(this.groupBox7);
             this.tabLimitNow.Location = new System.Drawing.Point(4, 22);
@@ -860,8 +864,17 @@
             this.tabLimitNow.Text = "Limit Now";
             this.tabLimitNow.UseVisualStyleBackColor = true;
             // 
+            // label15
+            // 
+            this.label15.Location = new System.Drawing.Point(622, 10);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(158, 158);
+            this.label15.TabIndex = 33;
+            this.label15.Text = resources.GetString("label15.Text");
+            // 
             // groupBox8
             // 
+            this.groupBox8.Controls.Add(this.chkLimitNowSellReduceOnly);
             this.groupBox8.Controls.Add(this.label29);
             this.groupBox8.Controls.Add(this.ddlLimitNowSellMethod);
             this.groupBox8.Controls.Add(this.chkLimitNowSellContinue);
@@ -880,10 +893,22 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Sell";
             // 
+            // chkLimitNowSellReduceOnly
+            // 
+            this.chkLimitNowSellReduceOnly.AutoSize = true;
+            this.chkLimitNowSellReduceOnly.Location = new System.Drawing.Point(6, 101);
+            this.chkLimitNowSellReduceOnly.Name = "chkLimitNowSellReduceOnly";
+            this.chkLimitNowSellReduceOnly.Size = new System.Drawing.Size(89, 18);
+            this.chkLimitNowSellReduceOnly.TabIndex = 33;
+            this.chkLimitNowSellReduceOnly.Text = "Reduce Only";
+            this.chkLimitNowSellReduceOnly.UseCompatibleTextRendering = true;
+            this.chkLimitNowSellReduceOnly.UseVisualStyleBackColor = true;
+            this.chkLimitNowSellReduceOnly.CheckedChanged += new System.EventHandler(this.chkLimitNowSellReduceOnly_CheckedChanged);
+            // 
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(89, 101);
+            this.label29.Location = new System.Drawing.Point(235, 108);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(43, 13);
             this.label29.TabIndex = 32;
@@ -896,7 +921,7 @@
             this.ddlLimitNowSellMethod.Items.AddRange(new object[] {
             "Best Price",
             "Quick Fill"});
-            this.ddlLimitNowSellMethod.Location = new System.Drawing.Point(5, 98);
+            this.ddlLimitNowSellMethod.Location = new System.Drawing.Point(151, 105);
             this.ddlLimitNowSellMethod.Name = "ddlLimitNowSellMethod";
             this.ddlLimitNowSellMethod.Size = new System.Drawing.Size(82, 21);
             this.ddlLimitNowSellMethod.TabIndex = 31;
@@ -905,7 +930,7 @@
             // chkLimitNowSellContinue
             // 
             this.chkLimitNowSellContinue.AutoSize = true;
-            this.chkLimitNowSellContinue.Location = new System.Drawing.Point(5, 125);
+            this.chkLimitNowSellContinue.Location = new System.Drawing.Point(6, 125);
             this.chkLimitNowSellContinue.Name = "chkLimitNowSellContinue";
             this.chkLimitNowSellContinue.Size = new System.Drawing.Size(131, 18);
             this.chkLimitNowSellContinue.TabIndex = 30;
@@ -1044,6 +1069,7 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.chkLimitNowBuyReduceOnly);
             this.groupBox7.Controls.Add(this.label28);
             this.groupBox7.Controls.Add(this.ddlLimitNowBuyMethod);
             this.groupBox7.Controls.Add(this.chkLimitNowBuyContinue);
@@ -1053,8 +1079,8 @@
             this.groupBox7.Controls.Add(this.nudLimitNowBuyTicksFromCenter);
             this.groupBox7.Controls.Add(this.nudLimitNowBuyDelay);
             this.groupBox7.Controls.Add(this.label23);
-            this.groupBox7.Controls.Add(this.btnLimitNowBuyCancel);
             this.groupBox7.Controls.Add(this.btnLimitNowBuy);
+            this.groupBox7.Controls.Add(this.btnLimitNowBuyCancel);
             this.groupBox7.Location = new System.Drawing.Point(9, 7);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(299, 158);
@@ -1062,10 +1088,22 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Buy";
             // 
+            // chkLimitNowBuyReduceOnly
+            // 
+            this.chkLimitNowBuyReduceOnly.AutoSize = true;
+            this.chkLimitNowBuyReduceOnly.Location = new System.Drawing.Point(6, 101);
+            this.chkLimitNowBuyReduceOnly.Name = "chkLimitNowBuyReduceOnly";
+            this.chkLimitNowBuyReduceOnly.Size = new System.Drawing.Size(89, 18);
+            this.chkLimitNowBuyReduceOnly.TabIndex = 32;
+            this.chkLimitNowBuyReduceOnly.Text = "Reduce Only";
+            this.chkLimitNowBuyReduceOnly.UseCompatibleTextRendering = true;
+            this.chkLimitNowBuyReduceOnly.UseVisualStyleBackColor = true;
+            this.chkLimitNowBuyReduceOnly.CheckedChanged += new System.EventHandler(this.chkLimitNowBuyReduceOnly_CheckedChanged);
+            // 
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(89, 101);
+            this.label28.Location = new System.Drawing.Point(235, 108);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(43, 13);
             this.label28.TabIndex = 31;
@@ -1078,7 +1116,7 @@
             this.ddlLimitNowBuyMethod.Items.AddRange(new object[] {
             "Best Price",
             "Quick Fill"});
-            this.ddlLimitNowBuyMethod.Location = new System.Drawing.Point(5, 98);
+            this.ddlLimitNowBuyMethod.Location = new System.Drawing.Point(151, 105);
             this.ddlLimitNowBuyMethod.Name = "ddlLimitNowBuyMethod";
             this.ddlLimitNowBuyMethod.Size = new System.Drawing.Size(82, 21);
             this.ddlLimitNowBuyMethod.TabIndex = 20;
@@ -1087,7 +1125,7 @@
             // chkLimitNowBuyContinue
             // 
             this.chkLimitNowBuyContinue.AutoSize = true;
-            this.chkLimitNowBuyContinue.Location = new System.Drawing.Point(5, 125);
+            this.chkLimitNowBuyContinue.Location = new System.Drawing.Point(6, 125);
             this.chkLimitNowBuyContinue.Name = "chkLimitNowBuyContinue";
             this.chkLimitNowBuyContinue.Size = new System.Drawing.Size(132, 18);
             this.chkLimitNowBuyContinue.TabIndex = 30;
@@ -2556,5 +2594,8 @@
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.ComboBox ddlLimitNowSellMethod;
         private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.CheckBox chkLimitNowSellReduceOnly;
+        private System.Windows.Forms.CheckBox chkLimitNowBuyReduceOnly;
+        private System.Windows.Forms.Label label15;
     }
 }

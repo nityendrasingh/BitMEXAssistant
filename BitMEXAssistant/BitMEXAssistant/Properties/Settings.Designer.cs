@@ -646,5 +646,29 @@ namespace BitMEXAssistant.Properties {
                 this["LimitNowSellMethod"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LimitNowBuyReduceOnly {
+            get {
+                return ((bool)(this["LimitNowBuyReduceOnly"]));
+            }
+            set {
+                this["LimitNowBuyReduceOnly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LimitNowSellReduceOnly {
+            get {
+                return ((bool)(this["LimitNowSellReduceOnly"]));
+            }
+            set {
+                this["LimitNowSellReduceOnly"] = value;
+            }
+        }
     }
 }
