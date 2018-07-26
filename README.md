@@ -3,7 +3,9 @@
 Constantly working on updates, check the issues tab to see items that are potential work items.
 
 ![alt text](https://i.imgur.com/KsO31kL.png "Desktop Shortcut")
+
 ![alt text](https://i.imgur.com/SEqQkKF.png "API Login")
+
 ![alt text](https://i.imgur.com/Itwz0nS.png "Application")
 
 ## Features
