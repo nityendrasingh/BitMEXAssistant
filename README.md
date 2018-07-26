@@ -2,13 +2,21 @@
 
 Constantly working on updates, check the issues tab to see items that are potential work items.
 
+![alt text](https://i.imgur.com/KsO31kL.png "Desktop Shortcut")
+
+![alt text](https://i.imgur.com/SEqQkKF.png "API Login")
+
+![alt text](https://i.imgur.com/Itwz0nS.png "Application")
+
 ## Features
-1. Trade any contract on BitMEX
+1. Trade any contract available on BitMEX
 2. Download entire candle history available for any contract by BitMEX API
-3. Uses Websockets to keep the current price of all contracts
+3. Uses Websockets to monitor a live data feed directly from BitMEX
 4. Automated Dollar Cost Averaging (buying/selling over time)
 5. Place scaled orders above and below current price
 6. Assisted market orders, and limit orders (including reduce only, post only and hidden orders)
+7. Automated Limit Orders (ALO/Limit Now)
+8. System overload protection on orders
 
 ## Install
 You can find the installation file at https://github.com/BigBlueBit/BitMEXAssistant/tree/master/Install.
