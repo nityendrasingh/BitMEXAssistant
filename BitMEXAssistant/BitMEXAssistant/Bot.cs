@@ -162,6 +162,10 @@ namespace BitMEXAssistant
                             string howdy = "stop code here"; // TODO: replace later
                         }
                     }
+                    else if (Message.ContainsKey("info") && Message.ContainsKey("docs"))
+                    {
+                        lblSettingsWebsocketInfo.Text = "Websocket Info: " + Message["info"].ToString() + " " + Message["docs"].ToString();
+                    }
                 }
                 catch (Exception ex)
                 {

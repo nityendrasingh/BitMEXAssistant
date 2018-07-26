@@ -186,6 +186,7 @@
             this.pbxYouTubeSubscribe = new System.Windows.Forms.PictureBox();
             this.tmrLimitNowBuy = new System.Windows.Forms.Timer(this.components);
             this.tmrLimitNowSell = new System.Windows.Forms.Timer(this.components);
+            this.lblSettingsWebsocketInfo = new System.Windows.Forms.Label();
             this.StatusStrip.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.tabManual.SuspendLayout();
@@ -265,7 +266,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(529, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(560, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // lblNetwork
@@ -1873,6 +1874,7 @@
             // 
             // tabSettings
             // 
+            this.tabSettings.Controls.Add(this.lblSettingsWebsocketInfo);
             this.tabSettings.Controls.Add(this.btnExportCandles);
             this.tabSettings.Controls.Add(this.label8);
             this.tabSettings.Controls.Add(this.nudSettingsRetryWaitTime);
@@ -2350,6 +2352,15 @@
             this.tmrLimitNowSell.Interval = 1000;
             this.tmrLimitNowSell.Tick += new System.EventHandler(this.tmrLimitNowSell_Tick);
             // 
+            // lblSettingsWebsocketInfo
+            // 
+            this.lblSettingsWebsocketInfo.AutoSize = true;
+            this.lblSettingsWebsocketInfo.Location = new System.Drawing.Point(6, 157);
+            this.lblSettingsWebsocketInfo.Name = "lblSettingsWebsocketInfo";
+            this.lblSettingsWebsocketInfo.Size = new System.Drawing.Size(89, 13);
+            this.lblSettingsWebsocketInfo.TabIndex = 6;
+            this.lblSettingsWebsocketInfo.Text = "Websocket Info: ";
+            // 
             // Bot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2597,5 +2608,6 @@
         private System.Windows.Forms.CheckBox chkLimitNowSellReduceOnly;
         private System.Windows.Forms.CheckBox chkLimitNowBuyReduceOnly;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label lblSettingsWebsocketInfo;
     }
 }
