@@ -28,179 +28,222 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(APIInfo));
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtKey = new System.Windows.Forms.TextBox();
-            this.txtSecret = new System.Windows.Forms.TextBox();
-            this.btnValidate = new System.Windows.Forms.Button();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.lblAPIStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbNetworkTest = new System.Windows.Forms.RadioButton();
-            this.rbNetworkReal = new System.Windows.Forms.RadioButton();
-            this.label3 = new System.Windows.Forms.Label();
-            this.chkConsent = new System.Windows.Forms.CheckBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.statusStrip1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.label1 = new MetroFramework.Controls.MetroLabel();
+            this.label2 = new MetroFramework.Controls.MetroLabel();
+            this.txtKey = new MetroFramework.Controls.MetroTextBox();
+            this.txtSecret = new MetroFramework.Controls.MetroTextBox();
+            this.btnValidate = new MetroFramework.Controls.MetroButton();
+            this.rbNetworkTest = new MetroFramework.Controls.MetroRadioButton();
+            this.rbNetworkReal = new MetroFramework.Controls.MetroRadioButton();
+            this.chkConsent = new MetroFramework.Controls.MetroCheckBox();
+            this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.lblAPIStatus = new MetroFramework.Controls.MetroLabel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 15);
+            this.label1.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.label1.Location = new System.Drawing.Point(34, 70);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(28, 13);
+            this.label1.Size = new System.Drawing.Size(38, 19);
             this.label1.TabIndex = 0;
             this.label1.Text = "Key:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 40);
+            this.label2.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.label2.Location = new System.Drawing.Point(16, 99);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
+            this.label2.Size = new System.Drawing.Size(55, 19);
             this.label2.TabIndex = 1;
             this.label2.Text = "Secret:";
             // 
             // txtKey
             // 
-            this.txtKey.Location = new System.Drawing.Point(59, 12);
+            // 
+            // 
+            // 
+            this.txtKey.CustomButton.Image = null;
+            this.txtKey.CustomButton.Location = new System.Drawing.Point(387, 2);
+            this.txtKey.CustomButton.Name = "";
+            this.txtKey.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.txtKey.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtKey.CustomButton.TabIndex = 1;
+            this.txtKey.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtKey.CustomButton.UseSelectable = true;
+            this.txtKey.CustomButton.Visible = false;
+            this.txtKey.Lines = new string[] {
+        "AKL23@LWLJCMQPQIOSCU3829"};
+            this.txtKey.Location = new System.Drawing.Point(70, 66);
+            this.txtKey.MaxLength = 32767;
             this.txtKey.Name = "txtKey";
             this.txtKey.PasswordChar = '*';
-            this.txtKey.Size = new System.Drawing.Size(391, 20);
+            this.txtKey.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtKey.SelectedText = "";
+            this.txtKey.SelectionLength = 0;
+            this.txtKey.SelectionStart = 0;
+            this.txtKey.ShortcutsEnabled = true;
+            this.txtKey.Size = new System.Drawing.Size(415, 30);
             this.txtKey.TabIndex = 2;
             this.txtKey.Text = "AKL23@LWLJCMQPQIOSCU3829";
+            this.txtKey.UseSelectable = true;
+            this.txtKey.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtKey.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtKey.TextChanged += new System.EventHandler(this.txtKey_TextChanged);
             // 
             // txtSecret
             // 
-            this.txtSecret.Location = new System.Drawing.Point(59, 37);
+            // 
+            // 
+            // 
+            this.txtSecret.CustomButton.Image = null;
+            this.txtSecret.CustomButton.Location = new System.Drawing.Point(387, 2);
+            this.txtSecret.CustomButton.Name = "";
+            this.txtSecret.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.txtSecret.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtSecret.CustomButton.TabIndex = 1;
+            this.txtSecret.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtSecret.CustomButton.UseSelectable = true;
+            this.txtSecret.CustomButton.Visible = false;
+            this.txtSecret.Lines = new string[] {
+        "AKL23@LWLJCMQPQIOSCU3829"};
+            this.txtSecret.Location = new System.Drawing.Point(70, 95);
+            this.txtSecret.MaxLength = 32767;
             this.txtSecret.Name = "txtSecret";
             this.txtSecret.PasswordChar = '*';
-            this.txtSecret.Size = new System.Drawing.Size(391, 20);
+            this.txtSecret.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtSecret.SelectedText = "";
+            this.txtSecret.SelectionLength = 0;
+            this.txtSecret.SelectionStart = 0;
+            this.txtSecret.ShortcutsEnabled = true;
+            this.txtSecret.Size = new System.Drawing.Size(415, 30);
             this.txtSecret.TabIndex = 3;
             this.txtSecret.Text = "AKL23@LWLJCMQPQIOSCU3829";
+            this.txtSecret.UseSelectable = true;
+            this.txtSecret.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtSecret.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtSecret.TextChanged += new System.EventHandler(this.txtSecret_TextChanged);
             // 
             // btnValidate
             // 
-            this.btnValidate.Location = new System.Drawing.Point(454, 10);
+            this.btnValidate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btnValidate.Location = new System.Drawing.Point(469, 66);
             this.btnValidate.Name = "btnValidate";
-            this.btnValidate.Size = new System.Drawing.Size(63, 50);
+            this.btnValidate.Size = new System.Drawing.Size(78, 59);
             this.btnValidate.TabIndex = 4;
             this.btnValidate.Text = "Validate";
-            this.btnValidate.UseVisualStyleBackColor = true;
+            this.btnValidate.UseSelectable = true;
             this.btnValidate.Click += new System.EventHandler(this.btnValidate_Click);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblAPIStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 152);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(523, 22);
-            this.statusStrip1.TabIndex = 5;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // lblAPIStatus
-            // 
-            this.lblAPIStatus.Name = "lblAPIStatus";
-            this.lblAPIStatus.Size = new System.Drawing.Size(199, 17);
-            this.lblAPIStatus.Text = "Please enter your API key and secret.";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.rbNetworkTest);
-            this.groupBox1.Controls.Add(this.rbNetworkReal);
-            this.groupBox1.Location = new System.Drawing.Point(455, 63);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(0);
-            this.groupBox1.Size = new System.Drawing.Size(61, 83);
-            this.groupBox1.TabIndex = 7;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Network";
             // 
             // rbNetworkTest
             // 
             this.rbNetworkTest.AutoSize = true;
-            this.rbNetworkTest.Location = new System.Drawing.Point(8, 39);
+            this.rbNetworkTest.Location = new System.Drawing.Point(553, 97);
             this.rbNetworkTest.Name = "rbNetworkTest";
-            this.rbNetworkTest.Size = new System.Drawing.Size(46, 17);
+            this.rbNetworkTest.Size = new System.Drawing.Size(44, 15);
             this.rbNetworkTest.TabIndex = 1;
             this.rbNetworkTest.Text = "Test";
-            this.rbNetworkTest.UseVisualStyleBackColor = true;
+            this.rbNetworkTest.UseSelectable = true;
             this.rbNetworkTest.CheckedChanged += new System.EventHandler(this.rbNetworkTest_CheckedChanged);
             // 
             // rbNetworkReal
             // 
             this.rbNetworkReal.AutoSize = true;
             this.rbNetworkReal.Checked = true;
-            this.rbNetworkReal.Location = new System.Drawing.Point(8, 16);
+            this.rbNetworkReal.Location = new System.Drawing.Point(553, 74);
             this.rbNetworkReal.Name = "rbNetworkReal";
-            this.rbNetworkReal.Size = new System.Drawing.Size(47, 17);
+            this.rbNetworkReal.Size = new System.Drawing.Size(45, 15);
             this.rbNetworkReal.TabIndex = 0;
             this.rbNetworkReal.TabStop = true;
             this.rbNetworkReal.Text = "Real";
-            this.rbNetworkReal.UseVisualStyleBackColor = true;
+            this.rbNetworkReal.UseSelectable = true;
             this.rbNetworkReal.CheckedChanged += new System.EventHandler(this.rbNetworkReal_CheckedChanged);
-            // 
-            // label3
-            // 
-            this.label3.Location = new System.Drawing.Point(6, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(427, 60);
-            this.label3.TabIndex = 8;
-            this.label3.Text = resources.GetString("label3.Text");
             // 
             // chkConsent
             // 
             this.chkConsent.AutoSize = true;
-            this.chkConsent.Location = new System.Drawing.Point(109, 54);
+            this.chkConsent.Location = new System.Drawing.Point(73, 175);
             this.chkConsent.Name = "chkConsent";
-            this.chkConsent.Size = new System.Drawing.Size(85, 17);
+            this.chkConsent.Size = new System.Drawing.Size(89, 15);
             this.chkConsent.TabIndex = 9;
             this.chkConsent.Text = "I understand";
-            this.chkConsent.UseVisualStyleBackColor = true;
+            this.chkConsent.UseSelectable = true;
             this.chkConsent.CheckedChanged += new System.EventHandler(this.chkConsent_CheckedChanged);
             // 
-            // groupBox2
+            // metroStyleManager1
             // 
-            this.groupBox2.Controls.Add(this.chkConsent);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(13, 63);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(439, 83);
-            this.groupBox2.TabIndex = 10;
-            this.groupBox2.TabStop = false;
+            this.metroStyleManager1.Owner = this;
+            this.metroStyleManager1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            // 
+            // lblAPIStatus
+            // 
+            this.lblAPIStatus.AutoSize = true;
+            this.lblAPIStatus.ForeColor = System.Drawing.Color.Gold;
+            this.lblAPIStatus.Location = new System.Drawing.Point(4, 202);
+            this.lblAPIStatus.Name = "lblAPIStatus";
+            this.lblAPIStatus.Size = new System.Drawing.Size(127, 19);
+            this.lblAPIStatus.TabIndex = 11;
+            this.lblAPIStatus.Text = "API Validation Status";
+            this.lblAPIStatus.UseCustomBackColor = true;
+            this.lblAPIStatus.UseCustomForeColor = true;
+            // 
+            // label4
+            // 
+            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label4.Location = new System.Drawing.Point(70, 128);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(477, 44);
+            this.label4.TabIndex = 12;
+            this.label4.Text = resources.GetString("label4.Text");
+            // 
+            // metroButton1
+            // 
+            this.metroButton1.BackColor = System.Drawing.Color.Red;
+            this.metroButton1.ForeColor = System.Drawing.Color.Black;
+            this.metroButton1.Location = new System.Drawing.Point(568, 12);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(42, 23);
+            this.metroButton1.TabIndex = 13;
+            this.metroButton1.Text = "EXIT";
+            this.metroButton1.UseCustomBackColor = true;
+            this.metroButton1.UseCustomForeColor = true;
+            this.metroButton1.UseSelectable = true;
+            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
             // 
             // APIInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(523, 174);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.statusStrip1);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(618, 225);
+            this.ControlBox = false;
+            this.Controls.Add(this.metroButton1);
+            this.Controls.Add(this.rbNetworkTest);
+            this.Controls.Add(this.chkConsent);
+            this.Controls.Add(this.rbNetworkReal);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblAPIStatus);
             this.Controls.Add(this.btnValidate);
             this.Controls.Add(this.txtSecret);
             this.Controls.Add(this.txtKey);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "APIInfo";
+            this.Resizable = false;
             this.Text = "API Information";
+            this.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.Load += new System.EventHandler(this.APIInfo_Load);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -208,19 +251,18 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtKey;
-        private System.Windows.Forms.TextBox txtSecret;
-        private System.Windows.Forms.Button btnValidate;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel lblAPIStatus;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rbNetworkTest;
-        private System.Windows.Forms.RadioButton rbNetworkReal;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckBox chkConsent;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private MetroFramework.Controls.MetroLabel label1;
+        private MetroFramework.Controls.MetroLabel label2;
+        private MetroFramework.Controls.MetroTextBox txtKey;
+        private MetroFramework.Controls.MetroTextBox txtSecret;
+        private MetroFramework.Controls.MetroButton btnValidate;
+        private MetroFramework.Controls.MetroRadioButton rbNetworkTest;
+        private MetroFramework.Controls.MetroRadioButton rbNetworkReal;
+        private MetroFramework.Controls.MetroCheckBox chkConsent;
+        private MetroFramework.Components.MetroStyleManager metroStyleManager1;
+        private MetroFramework.Controls.MetroLabel lblAPIStatus;
+        private System.Windows.Forms.Label label4;
+        private MetroFramework.Controls.MetroButton metroButton1;
     }
 }
 

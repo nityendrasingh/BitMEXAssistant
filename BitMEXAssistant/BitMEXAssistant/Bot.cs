@@ -12,10 +12,11 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using WebSocketSharp;
+using MetroFramework.Forms;
 
 namespace BitMEXAssistant
 {
-    public partial class Bot : Form
+    public partial class Bot : MetroForm
     {
         #region Class Properties
         string APIKey = "";
@@ -46,6 +47,8 @@ namespace BitMEXAssistant
         decimal LimitNowSellOrderPrice = 0;
         List<OrderBook> OrderBookTopAsks = new List<OrderBook>();
         List<OrderBook> OrderBookTopBids = new List<OrderBook>();
+        Position SymbolPosition = new Position();
+        decimal Balance = 0;
         #endregion
 
         public Bot()
@@ -57,11 +60,18 @@ namespace BitMEXAssistant
 
         private void Bot_Load(object sender, EventArgs e)
         {
+
             APIInfo Login = new APIInfo();
+
             while (!Login.APIValid)
             {
                 Login.ShowDialog();
+                if(Login.FormClosed)
+                {
+                    this.Close();
+                }
             }
+            
 
             if (Login.APIValid)
             {
@@ -82,7 +92,10 @@ namespace BitMEXAssistant
 
         private void Bot_FormClosing(object sender, FormClosingEventArgs e)
         {
-            ws.Close(); // Make sure our websocket is closed.
+            if(ws != null)
+            {
+                ws.Close(); // Make sure our websocket is closed.
+            }
         }
         #endregion
 
@@ -159,7 +172,52 @@ namespace BitMEXAssistant
                         }
                         else if ((string)Message["table"] == "position")
                         {
-                            string howdy = "stop code here"; // TODO: replace later
+                            // PARSE
+                            if (Message.ContainsKey("data"))
+                            {
+                                JArray TD = (JArray)Message["data"];
+                                if (TD.Any())
+                                {
+                                    if(TD.Children().LastOrDefault()["symbol"] != null)
+                                    {
+                                        SymbolPosition.Symbol = (string)TD.Children().LastOrDefault()["symbol"];
+                                    }
+                                    if (TD.Children().LastOrDefault()["currentQty"] != null)
+                                    {
+                                        SymbolPosition.CurrentQty = (int?)TD.Children().LastOrDefault()["currentQty"];
+
+                                    }
+                                    if (TD.Children().LastOrDefault()["avgEntryPrice"] != null)
+                                    {
+                                        SymbolPosition.AvgEntryPrice = (decimal?)TD.Children().LastOrDefault()["avgEntryPrice"];
+
+                                    }
+                                    if(TD.Children().LastOrDefault()["markPrice"] != null)
+                                    {
+                                        SymbolPosition.MarkPrice = (decimal?)TD.Children().LastOrDefault()["markPrice"];
+
+                                    }
+                                    if (TD.Children().LastOrDefault()["liquidationPrice"] != null)
+                                    {
+                                        SymbolPosition.LiquidationPrice = (decimal?)TD.Children().LastOrDefault()["liquidationPrice"];
+                                    }
+                                    if(TD.Children().LastOrDefault()["leverage"] != null)
+                                    {
+                                        SymbolPosition.Leverage = (decimal?)TD.Children().LastOrDefault()["leverage"];
+
+                                    }
+                                    if(TD.Children().LastOrDefault()["unrealisedPnl"] != null)
+                                    {
+                                        SymbolPosition.UnrealisedPnl = (decimal?)TD.Children().LastOrDefault()["unrealisedPnl"];
+                                    }
+                                    if(TD.Children().LastOrDefault()["unrealisedPnlPcnt"] != null)
+                                    {
+                                        SymbolPosition.UnrealisedPnlPcnt = (decimal?)TD.Children().LastOrDefault()["unrealisedPnlPcnt"];
+
+                                    }
+
+                                }
+                            }
                         }
                     }
                     else if (Message.ContainsKey("info") && Message.ContainsKey("docs"))
@@ -192,6 +250,35 @@ namespace BitMEXAssistant
 
         }
 
+        private void UpdatePositionInfo()
+        {
+            if (SymbolPosition.CurrentQty != 0)
+            {
+                txtPositionSize.Text = SymbolPosition.CurrentQty.ToString();
+                txtPositionEntryPrice.Text = SymbolPosition.AvgEntryPrice.ToString();
+                txtPositionMarkPrice.Text = SymbolPosition.MarkPrice.ToString();
+                txtPositionLiquidation.Text = SymbolPosition.LiquidationPrice.ToString();
+                txtPositionMargin.Text = SymbolPosition.Leverage.ToString();
+                txtPositionUnrealizedPnL.Text = SymbolPosition.UsefulUnrealisedPnl.ToString();
+                txtPositionUnrealizedPnLPercent.Text = SymbolPosition.UnrealisedPnlPcnt.ToString() + "%";
+                if (nudPositionLimitPrice.Value == 0m) // Only updates when default value is present
+                {
+                    nudPositionLimitPrice.Value = Convert.ToDecimal(((int)Math.Floor((double)SymbolPosition.MarkPrice)).ToString() + ".0");
+                }
+
+            }
+            else
+            {
+                txtPositionSize.Text = "0";
+                txtPositionEntryPrice.Text = "0";
+                txtPositionMarkPrice.Text = "0";
+                txtPositionLiquidation.Text = "0";
+                txtPositionMargin.Text = "0";
+                txtPositionUnrealizedPnL.Text = "0";
+                txtPositionUnrealizedPnLPercent.Text = "0";
+            }
+        }
+
         private void InitializeSymbolSpecificData(bool FirstLoad = false)
         {
             if (!FirstLoad)
@@ -212,7 +299,6 @@ namespace BitMEXAssistant
             ws.Send("{\"op\": \"subscribe\", \"args\": [\"orderBook10:" + ActiveInstrument.Symbol + "\"]}");
             // Subscribe to position for new symbol
             ws.Send("{\"op\": \"subscribe\", \"args\": [\"position:" + ActiveInstrument.Symbol + "\"]}");
-            UpdatePositionInfo();
             UpdateFormsForTickSize(ActiveInstrument.TickSize, ActiveInstrument.DecimalPlacesInTickSize);
 
         }
@@ -297,8 +383,20 @@ namespace BitMEXAssistant
 
 
             // Update other client items...
-            lblVersion.Text = "v" + Version;
-            UpdateDateAndTime();
+            UpdateNetworkAndVersion();
+            UpdateBalanceAndTime();
+        }
+
+        private void UpdateNetworkAndVersion()
+        {
+            if (RealNetwork)
+            {
+                lblNetworkAndVersion.Text = "Real" + " v" + Version;
+            }
+            else
+            {
+                lblNetworkAndVersion.Text = "Test" + " v" + Version;
+            }
         }
 
         private void InitializePostAPIDropdownsAndSettings()
@@ -314,14 +412,7 @@ namespace BitMEXAssistant
                 bitmex = new BitMEXApi(APIKey, APISecret, RealNetwork);
 
                 // Show users what network they are on.
-                if (RealNetwork)
-                {
-                    lblNetwork.Text = "Real";
-                }
-                else
-                {
-                    lblNetwork.Text = "Test";
-                }
+                UpdateNetworkAndVersion();
 
                 // Start our HeartBeat
                 Heartbeat.Start();
@@ -348,10 +439,9 @@ namespace BitMEXAssistant
             ddlSymbol.SelectedIndex = 0;
             ActiveInstrument = ActiveInstruments[0];
 
-            UpdatePositionInfo();
             InitializeSymbolSpecificData(true);
             // Get our balance
-            UpdateBalance();
+            UpdateBalanceAndTime();
         }
         #endregion
 
@@ -381,6 +471,7 @@ namespace BitMEXAssistant
         {
             UpdatePrice();
             UpdateManualMarketBuyButtons();  // Update our buy buttons on manual market buys
+            UpdatePositionInfo();
             //TriggerAlerts();
         }
         #endregion
@@ -417,40 +508,33 @@ namespace BitMEXAssistant
         {
             Timeframe = ddlCandleTimes.SelectedItem.ToString();
         }
-
-        private void UpdateBalance()
-        {
-            try
-            {
-                string Balance = bitmex.GetAccountBalance().ToString();
-                string USDValue = String.Format("{0:C}", Math.Round((Prices[ActiveInstrument.Symbol] * Convert.ToDecimal(Balance)), 2));
-                lblBalance.Text = "Balance: " + Balance + " | " + USDValue;
-
-            }
-            catch (Exception ex)
-            {
-                lblBalance.Text = "Balance: Error";
-            }
-        }
-
         private void Heartbeat_Tick(object sender, EventArgs e)
         {
             if (DateTime.UtcNow.Second == 0)
             {
                 //Update our balance each minute
-                UpdateBalance();
-                UpdatePositionInfo();
+                UpdateBalanceAndTime();
             }
 
             // Update the time every second.
-            UpdateDateAndTime();
+            //UpdateBalanceAndTime();  // TODO, when i get user balance from websocket, we can then update every 1/10th a second.
 
 
         }
 
-        private void UpdateDateAndTime()
+        private void UpdateBalanceAndTime()
         {
-            lblUTCTime.Text = DateTime.UtcNow.ToShortDateString() + " " + DateTime.UtcNow.ToLongTimeString();
+            try
+            {
+                string Balance = bitmex.GetAccountBalance().ToString();
+                string USDValue = String.Format("{0:C}", Math.Round((Prices[ActiveInstrument.Symbol] * Convert.ToDecimal(Balance)), 2));
+                lblBalanceAndTime.Text = "Balance: " + Balance + " | " + USDValue + "     " + DateTime.UtcNow.ToShortDateString() + " " + DateTime.UtcNow.ToLongTimeString();
+
+            }
+            catch (Exception ex)
+            {
+                lblBalanceAndTime.Text = "Balance: Error" + "     " + DateTime.UtcNow.ToShortDateString() + " " + DateTime.UtcNow.ToLongTimeString();
+            }
         }
         #endregion
 
@@ -626,36 +710,8 @@ namespace BitMEXAssistant
         #endregion
 
         #region Position Manager
-        private void UpdatePositionInfo()
-        {
-            nudPositionLimitPrice.Increment = ActiveInstrument.TickSize;
-            List<Position> Positions = bitmex.GetOpenPositions(ActiveInstrument.Symbol);
-            if (Positions.Any())
-            {
-                gbxPosition.Visible = true;
-                txtPositionSize.Text = Positions[0].CurrentQty.ToString();
-                txtPositionEntryPrice.Text = Positions[0].AvgEntryPrice.ToString();
-                txtPositionMarkPrice.Text = Positions[0].MarkPrice.ToString();
-                txtPositionLiquidation.Text = Positions[0].LiquidationPrice.ToString();
-                txtPositionMargin.Text = Positions[0].Leverage.ToString();
-                txtPositionUnrealizedPnL.Text = Positions[0].UsefulUnrealisedPnl.ToString();
-                txtPositionUnrealizedPnLPercent.Text = Positions[0].UnrealisedPnlPcnt.ToString() + "%";
-                if (nudPositionLimitPrice.Value == 0m) // Only updates when default value is present
-                {
-                    nudPositionLimitPrice.Value = Convert.ToDecimal(((int)Math.Floor((double)Positions[0].MarkPrice)).ToString() + ".0");
-                }
-
-            }
-            else
-            {
-                gbxPosition.Visible = false;
-            }
-
-        }
-
         private void btnPositionMarketClose_Click(object sender, EventArgs e)
         {
-            UpdatePositionInfo(); // Make sure info is up to date as possible.
 
             int Size = Convert.ToInt32(txtPositionSize.Text);
             string Side = "Buy";
@@ -671,7 +727,6 @@ namespace BitMEXAssistant
                 Size = (int)Math.Abs((decimal)Size); // Makes sure size is positive number
             }
             bitmex.MarketOrder(ActiveInstrument.Symbol, Side, Size, true);
-            UpdatePositionInfo(); // Update our position information again.
         }
 
         private void btnPositionLimitClose_Click(object sender, EventArgs e)
@@ -695,11 +750,6 @@ namespace BitMEXAssistant
                     Size = (int)Math.Abs((decimal)Size); // Makes sure size is positive number
                 }
                 bitmex.LimitOrder(ActiveInstrument.Symbol, Side, Size, Price, true);
-
-                UpdatePositionInfo(); // Make sure info is up to date as possible.
-
-
-
             }
             catch (Exception ex)
             {
@@ -711,7 +761,6 @@ namespace BitMEXAssistant
         private void btnPositionMargin_Click(object sender, EventArgs e)
         {
             bitmex.ChangeMargin(ActiveInstrument.Symbol, nudPositionMargin.Value);
-            UpdatePositionInfo();
         }
         #endregion
 
@@ -1654,6 +1703,16 @@ namespace BitMEXAssistant
         {
             Properties.Settings.Default.LimitNowSellReduceOnly = chkLimitNowSellReduceOnly.Checked;
             SaveSettings();
+        }
+
+        private void Bot_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.youtube.com/BigBits?sub_confirmation=1");
         }
     }
 

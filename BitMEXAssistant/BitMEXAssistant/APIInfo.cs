@@ -10,14 +10,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 
 namespace BitMEXAssistant
 {
-    public partial class APIInfo : Form
+    public partial class APIInfo : MetroForm
     {
 
         BitMEXApi bitmex;
         public bool APIValid = false;
+        public bool FormClosed = false;
 
         public APIInfo()
         {
@@ -65,7 +67,7 @@ namespace BitMEXAssistant
                     GetAPIValidity();
                     if (APIValid)
                     {
-                        this.Hide();
+                        this.Visible = false;
                     }
                 }
                 catch (Exception ex)
@@ -73,6 +75,7 @@ namespace BitMEXAssistant
                     // If it shoots an error, API is invalid.
                     APIValid = false;
                     lblAPIStatus.Text = "API info is invalid!";
+                    lblAPIStatus.ForeColor = Color.Red;
                 }
             }
             else
@@ -93,17 +96,20 @@ namespace BitMEXAssistant
                 {
                     APIValid = true;
                     lblAPIStatus.Text = "API info valid.";
+                    lblAPIStatus.ForeColor = Color.Green;
                 }
                 else
                 {
                     APIValid = false;
                     lblAPIStatus.Text = "API info is invalid!";
+                    lblAPIStatus.ForeColor = Color.Red;
                 }
             }
             catch (Exception ex)
             {
                 APIValid = false;
                 lblAPIStatus.Text = "API info is invalid!";
+                lblAPIStatus.ForeColor = Color.Red;
             }
         }
 
@@ -179,6 +185,12 @@ namespace BitMEXAssistant
         {
             Properties.Settings.Default.Consent = chkConsent.Checked;
             SaveSettings();
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            FormClosed = true;
+            this.Visible = false;
         }
     }
 

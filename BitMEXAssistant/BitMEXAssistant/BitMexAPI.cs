@@ -822,25 +822,35 @@ namespace BitMEX
     public class Position
     {
         public DateTime TimeStamp { get; set; }
-        public double? Leverage { get; set; }
+        public decimal? Leverage { get; set; }
         public int? CurrentQty { get; set; }
-        public double? CurrentCost { get; set; }
+        public decimal? CurrentCost { get; set; }
         public bool IsOpen { get; set; }
-        public double? MarkPrice { get; set; }
-        public double? MarkValue { get; set; }
-        public double? UnrealisedPnl { get; set; }
-        public double? UnrealisedPnlPcnt { get; set; }
-        public double? UnrealisedRoePcnt { get; set; }
-        public double? AvgEntryPrice { get; set; }
-        public double? BreakEvenPrice { get; set; }
-        public double? LiquidationPrice { get; set; }
-        public double? RealizedPnl { get; set; }
+        public decimal? MarkPrice { get; set; }
+        public decimal? MarkValue { get; set; }
+        public decimal? UnrealisedPnl { get; set; }
+        public decimal? UnrealisedPnlPcnt { get; set; }
+        public decimal? UnrealisedRoePcnt { get; set; }
+        public decimal? AvgEntryPrice { get; set; }
+        public decimal? BreakEvenPrice { get; set; }
+        public decimal? LiquidationPrice { get; set; }
+        public decimal? RealizedPnl { get; set; }
 
         public string Symbol { get; set; }
 
-        public double? UsefulUnrealisedPnl
+        public decimal? UsefulUnrealisedPnl
         {
-            get { return Math.Round(((double)UnrealisedPnl / 100000000), 4); }
+            get
+            {
+                if(UnrealisedPnl!= null)
+                {
+                    return Math.Round(((decimal)UnrealisedPnl / 100000000), 4);
+                }
+                else
+                {
+                    return 0;
+                }
+            }
         }
     }
 
