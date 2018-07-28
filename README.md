@@ -6,7 +6,7 @@ Constantly working on updates, check the issues tab to see items that are potent
 
 ![alt text](https://i.imgur.com/A2A4Kfx.png "API Login")
 
-![alt text](https://i.imgur.com/Itwz0nS.png "Application")
+![alt text](https://i.imgur.com/jwmHXRp.png "Application")
 
 ## Features
 1. Trade any contract available on BitMEX
