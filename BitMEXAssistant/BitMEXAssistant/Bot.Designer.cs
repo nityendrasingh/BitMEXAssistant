@@ -141,6 +141,11 @@
             this.btnDCASell = new MetroFramework.Controls.MetroButton();
             this.btnDCABuy = new MetroFramework.Controls.MetroButton();
             this.btnDCAStop = new MetroFramework.Controls.MetroButton();
+            this.tabStops = new MetroFramework.Controls.MetroTabPage();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.ddlStopMethod = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.tabSettings = new MetroFramework.Controls.MetroTabPage();
             this.lblSettingsWebsocketInfo = new MetroFramework.Controls.MetroLabel();
             this.btnExportCandles = new MetroFramework.Controls.MetroButton();
@@ -226,6 +231,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudDCASeconds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDCATimes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDCAMinutes)).BeginInit();
+            this.tabStops.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSettingsRetryWaitTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSettingsOverloadRetryAttempts)).BeginInit();
@@ -298,11 +305,12 @@
             this.TabControl.Controls.Add(this.tabLimitNow);
             this.TabControl.Controls.Add(this.tabSpread);
             this.TabControl.Controls.Add(this.tabDCA);
+            this.TabControl.Controls.Add(this.tabStops);
             this.TabControl.Controls.Add(this.tabSettings);
             this.TabControl.Controls.Add(this.tabDonate);
             this.TabControl.Location = new System.Drawing.Point(0, 125);
             this.TabControl.Name = "TabControl";
-            this.TabControl.SelectedIndex = 0;
+            this.TabControl.SelectedIndex = 4;
             this.TabControl.Size = new System.Drawing.Size(857, 351);
             this.TabControl.TabIndex = 14;
             this.TabControl.UseSelectable = true;
@@ -1881,6 +1889,62 @@
             this.btnDCAStop.Visible = false;
             this.btnDCAStop.Click += new System.EventHandler(this.btnDCAStop_Click);
             // 
+            // tabStops
+            // 
+            this.tabStops.Controls.Add(this.metroLabel3);
+            this.tabStops.Controls.Add(this.ddlStopMethod);
+            this.tabStops.Controls.Add(this.metroLabel2);
+            this.tabStops.Controls.Add(this.numericUpDown1);
+            this.tabStops.HorizontalScrollbarBarColor = true;
+            this.tabStops.HorizontalScrollbarHighlightOnWheel = false;
+            this.tabStops.HorizontalScrollbarSize = 10;
+            this.tabStops.Location = new System.Drawing.Point(4, 38);
+            this.tabStops.Name = "tabStops";
+            this.tabStops.Size = new System.Drawing.Size(849, 309);
+            this.tabStops.TabIndex = 6;
+            this.tabStops.Text = "Stops";
+            this.tabStops.VerticalScrollbarBarColor = true;
+            this.tabStops.VerticalScrollbarHighlightOnWheel = false;
+            this.tabStops.VerticalScrollbarSize = 10;
+            // 
+            // metroLabel3
+            // 
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.Location = new System.Drawing.Point(180, 113);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(86, 19);
+            this.metroLabel3.TabIndex = 22;
+            this.metroLabel3.Text = "Stop Method";
+            // 
+            // ddlStopMethod
+            // 
+            this.ddlStopMethod.FormattingEnabled = true;
+            this.ddlStopMethod.ItemHeight = 23;
+            this.ddlStopMethod.Items.AddRange(new object[] {
+            "Limit",
+            "Market"});
+            this.ddlStopMethod.Location = new System.Drawing.Point(92, 113);
+            this.ddlStopMethod.Name = "ddlStopMethod";
+            this.ddlStopMethod.Size = new System.Drawing.Size(82, 29);
+            this.ddlStopMethod.TabIndex = 21;
+            this.ddlStopMethod.UseSelectable = true;
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(170, 72);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(88, 19);
+            this.metroLabel2.TabIndex = 3;
+            this.metroLabel2.Text = "Stop Distance";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(92, 72);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(72, 20);
+            this.numericUpDown1.TabIndex = 2;
+            // 
             // tabSettings
             // 
             this.tabSettings.Controls.Add(this.lblSettingsWebsocketInfo);
@@ -2662,7 +2726,7 @@
             this.lblDonate.Location = new System.Drawing.Point(403, 485);
             this.lblDonate.Name = "lblDonate";
             this.lblDonate.Size = new System.Drawing.Size(319, 19);
-            this.lblDonate.Style = MetroFramework.MetroColorStyle.Green;
+            this.lblDonate.Style = MetroFramework.MetroColorStyle.Yellow;
             this.lblDonate.TabIndex = 18;
             this.lblDonate.Text = "Please consider donating BTC to support this project.";
             this.lblDonate.UseStyleColors = true;
@@ -2887,6 +2951,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudDCASeconds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDCATimes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDCAMinutes)).EndInit();
+            this.tabStops.ResumeLayout(false);
+            this.tabStops.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabSettings.ResumeLayout(false);
             this.tabSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSettingsRetryWaitTime)).EndInit();
@@ -3066,5 +3133,10 @@
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label15;
+        private MetroFramework.Controls.MetroTabPage tabStops;
+        private MetroFramework.Controls.MetroLabel metroLabel3;
+        private MetroFramework.Controls.MetroComboBox ddlStopMethod;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
