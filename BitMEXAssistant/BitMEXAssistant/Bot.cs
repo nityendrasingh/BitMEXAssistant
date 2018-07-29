@@ -49,6 +49,9 @@ namespace BitMEXAssistant
         List<OrderBook> OrderBookTopBids = new List<OrderBook>();
         Position SymbolPosition = new Position();
         decimal Balance = 0;
+
+        decimal TrailingStopPrice = 0;
+        decimal TrailingStopExtremePrice = 0;
         #endregion
 
         public Bot()
@@ -128,6 +131,21 @@ namespace BitMEXAssistant
                                     decimal Price = (decimal)TD.Children().LastOrDefault()["price"];
                                     string Symbol = (string)TD.Children().LastOrDefault()["symbol"];
                                     Prices[Symbol] = Price;
+
+                                    // Necessary for trailing stops
+                                    if(SymbolPosition.CurrentQty > 0)
+                                    {
+                                        if(Price > SymbolPosition.HighestPriceSinceOpen)
+                                        {
+                                            SymbolPosition.HighestPriceSinceOpen = Price;
+                                            // TODO: set trailing stop price
+                                        }
+                                        else if(Price < SymbolPosition.LowestPriceSinceOpen)
+                                        {
+                                            SymbolPosition.LowestPriceSinceOpen = Price;
+                                            // TODO: set trailing stop price
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -1713,6 +1731,24 @@ namespace BitMEXAssistant
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://www.youtube.com/BigBits?sub_confirmation=1");
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            // TODO: TRAILING STOP
+
+            // 1 - When getting price updates from websocket - set the highest/lowest price since position was opened, otherwise have it set to 0 and not shown
+            //       - Also, when getting price updates, show the expected stop price
+            //       - Also, perform the logic for the closing order
+            //             -- Market, just initiate the market order if current price is past stop
+            //             -- Limit
+            //                   -- Make sure the limit order is at the correct price (only do this every so often, too many API calls)
+
+            // Side note: possibly add the high/low price property to the position itself.
+            //   Also, set the decimal places etc in the NUD when getting symbol info
+            //   Add the settings, load them on initialization, save them on changes
+            
+
         }
     }
 

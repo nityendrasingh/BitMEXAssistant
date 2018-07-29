@@ -835,6 +835,8 @@ namespace BitMEX
         public decimal? BreakEvenPrice { get; set; }
         public decimal? LiquidationPrice { get; set; }
         public decimal? RealizedPnl { get; set; }
+        public decimal? HighestPriceSinceOpen { get; set; }
+        public decimal? LowestPriceSinceOpen { get; set; }
 
         public string Symbol { get; set; }
 

@@ -194,6 +194,11 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+            this.chkStopTrailingEnabled = new MetroFramework.Controls.MetroCheckBox();
             this.TabControl.SuspendLayout();
             this.tabManual.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -245,6 +250,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.pnlPosition.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // ddlCandleTimes
@@ -1891,10 +1898,7 @@
             // 
             // tabStops
             // 
-            this.tabStops.Controls.Add(this.metroLabel3);
-            this.tabStops.Controls.Add(this.ddlStopMethod);
-            this.tabStops.Controls.Add(this.metroLabel2);
-            this.tabStops.Controls.Add(this.numericUpDown1);
+            this.tabStops.Controls.Add(this.groupBox9);
             this.tabStops.HorizontalScrollbarBarColor = true;
             this.tabStops.HorizontalScrollbarHighlightOnWheel = false;
             this.tabStops.HorizontalScrollbarSize = 10;
@@ -1910,11 +1914,11 @@
             // metroLabel3
             // 
             this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(180, 113);
+            this.metroLabel3.Location = new System.Drawing.Point(99, 46);
             this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(86, 19);
+            this.metroLabel3.Size = new System.Drawing.Size(76, 19);
             this.metroLabel3.TabIndex = 22;
-            this.metroLabel3.Text = "Stop Method";
+            this.metroLabel3.Text = "Order Type";
             // 
             // ddlStopMethod
             // 
@@ -1923,7 +1927,7 @@
             this.ddlStopMethod.Items.AddRange(new object[] {
             "Limit",
             "Market"});
-            this.ddlStopMethod.Location = new System.Drawing.Point(92, 113);
+            this.ddlStopMethod.Location = new System.Drawing.Point(11, 46);
             this.ddlStopMethod.Name = "ddlStopMethod";
             this.ddlStopMethod.Size = new System.Drawing.Size(82, 29);
             this.ddlStopMethod.TabIndex = 21;
@@ -1932,15 +1936,15 @@
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(170, 72);
+            this.metroLabel2.Location = new System.Drawing.Point(89, 19);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(88, 19);
+            this.metroLabel2.Size = new System.Drawing.Size(57, 19);
             this.metroLabel2.TabIndex = 3;
-            this.metroLabel2.Text = "Stop Distance";
+            this.metroLabel2.Text = "Distance";
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(92, 72);
+            this.numericUpDown1.Location = new System.Drawing.Point(11, 19);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(72, 20);
             this.numericUpDown1.TabIndex = 2;
@@ -2874,6 +2878,75 @@
             this.label31.Size = new System.Drawing.Size(857, 4);
             this.label31.TabIndex = 27;
             // 
+            // groupBox9
+            // 
+            this.groupBox9.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox9.Controls.Add(this.chkStopTrailingEnabled);
+            this.groupBox9.Controls.Add(this.metroLabel4);
+            this.groupBox9.Controls.Add(this.numericUpDown2);
+            this.groupBox9.Controls.Add(this.metroButton1);
+            this.groupBox9.Controls.Add(this.numericUpDown1);
+            this.groupBox9.Controls.Add(this.ddlStopMethod);
+            this.groupBox9.Controls.Add(this.metroLabel2);
+            this.groupBox9.Controls.Add(this.metroLabel3);
+            this.groupBox9.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBox9.Location = new System.Drawing.Point(319, 54);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(383, 220);
+            this.groupBox9.TabIndex = 23;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Trailing Stop";
+            // 
+            // metroButton1
+            // 
+            this.metroButton1.Location = new System.Drawing.Point(6, 129);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(75, 23);
+            this.metroButton1.TabIndex = 23;
+            this.metroButton1.Text = "Start";
+            this.metroButton1.UseSelectable = true;
+            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown2.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.numericUpDown2.Location = new System.Drawing.Point(11, 81);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            -1530494977,
+            232830,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            -1486618625,
+            232830643,
+            0,
+            -2147483648});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.ReadOnly = true;
+            this.numericUpDown2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.numericUpDown2.Size = new System.Drawing.Size(95, 29);
+            this.numericUpDown2.TabIndex = 28;
+            // 
+            // metroLabel4
+            // 
+            this.metroLabel4.AutoSize = true;
+            this.metroLabel4.Location = new System.Drawing.Point(112, 81);
+            this.metroLabel4.Name = "metroLabel4";
+            this.metroLabel4.Size = new System.Drawing.Size(113, 19);
+            this.metroLabel4.TabIndex = 29;
+            this.metroLabel4.Text = "Update Limit (ms)";
+            // 
+            // chkStopTrailingEnabled
+            // 
+            this.chkStopTrailingEnabled.AutoSize = true;
+            this.chkStopTrailingEnabled.Location = new System.Drawing.Point(7, 159);
+            this.chkStopTrailingEnabled.Name = "chkStopTrailingEnabled";
+            this.chkStopTrailingEnabled.Size = new System.Drawing.Size(65, 15);
+            this.chkStopTrailingEnabled.TabIndex = 30;
+            this.chkStopTrailingEnabled.Text = "Enabled";
+            this.chkStopTrailingEnabled.UseSelectable = true;
+            // 
             // Bot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2952,7 +3025,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudDCATimes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDCAMinutes)).EndInit();
             this.tabStops.ResumeLayout(false);
-            this.tabStops.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabSettings.ResumeLayout(false);
             this.tabSettings.PerformLayout();
@@ -2968,6 +3040,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.pnlPosition.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3138,5 +3213,10 @@
         private MetroFramework.Controls.MetroComboBox ddlStopMethod;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private MetroFramework.Controls.MetroLabel metroLabel4;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private MetroFramework.Controls.MetroButton metroButton1;
+        private MetroFramework.Controls.MetroCheckBox chkStopTrailingEnabled;
     }
 }
