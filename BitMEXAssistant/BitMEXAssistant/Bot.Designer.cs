@@ -322,7 +322,7 @@
             this.TabControl.Controls.Add(this.tabDonate);
             this.TabControl.Location = new System.Drawing.Point(0, 125);
             this.TabControl.Name = "TabControl";
-            this.TabControl.SelectedIndex = 4;
+            this.TabControl.SelectedIndex = 1;
             this.TabControl.Size = new System.Drawing.Size(857, 351);
             this.TabControl.TabIndex = 14;
             this.TabControl.UseSelectable = true;
@@ -892,8 +892,8 @@
             this.groupBox8.Controls.Add(this.nudLimitNowSellTicksFromCenter);
             this.groupBox8.Controls.Add(this.nudLimitNowSellDelay);
             this.groupBox8.Controls.Add(this.label27);
-            this.groupBox8.Controls.Add(this.btnLimitNowSellCancel);
             this.groupBox8.Controls.Add(this.btnLimitNowSell);
+            this.groupBox8.Controls.Add(this.btnLimitNowSellCancel);
             this.groupBox8.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.groupBox8.Location = new System.Drawing.Point(254, 7);
             this.groupBox8.Name = "groupBox8";
@@ -1071,6 +1071,7 @@
             this.btnLimitNowSell.TabIndex = 23;
             this.btnLimitNowSell.Text = "Limit Sell Now";
             this.btnLimitNowSell.UseSelectable = true;
+            this.btnLimitNowSell.Click += new System.EventHandler(this.btnLimitNowSell_Click);
             // 
             // groupBox7
             // 

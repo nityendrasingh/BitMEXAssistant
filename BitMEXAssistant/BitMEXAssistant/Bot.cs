@@ -39,7 +39,7 @@ namespace BitMEXAssistant
         Dictionary<string, decimal> Prices = new Dictionary<string, decimal>();
         //List<Alert> Alerts = new List<Alert>();
 
-        public static string Version = "0.0.163";
+        public static string Version = "0.0.1631";
 
         string LimitNowBuyOrderId = "";
         decimal LimitNowBuyOrderPrice = 0;
@@ -1931,7 +1931,6 @@ namespace BitMEXAssistant
                 }
             }
         }
-        
     }
 
     public class Alert
