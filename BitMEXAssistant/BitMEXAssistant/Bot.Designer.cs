@@ -142,10 +142,18 @@
             this.btnDCABuy = new MetroFramework.Controls.MetroButton();
             this.btnDCAStop = new MetroFramework.Controls.MetroButton();
             this.tabStops = new MetroFramework.Controls.MetroTabPage();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.ddlStopMethod = new MetroFramework.Controls.MetroComboBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.chkStopTrailingCloseInFull = new MetroFramework.Controls.MetroCheckBox();
+            this.chkTrailingStopEnabled = new MetroFramework.Controls.MetroToggle();
+            this.nudStopTrailingLimitOffset = new System.Windows.Forms.NumericUpDown();
+            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+            this.nudStopTrailingQty = new System.Windows.Forms.NumericUpDown();
+            this.lblStopTraillingPrice = new MetroFramework.Controls.MetroLabel();
+            this.nudStopTrailingPrice = new System.Windows.Forms.NumericUpDown();
+            this.ddlStopTrailingMethod = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.tabSettings = new MetroFramework.Controls.MetroTabPage();
             this.lblSettingsWebsocketInfo = new MetroFramework.Controls.MetroLabel();
             this.btnExportCandles = new MetroFramework.Controls.MetroButton();
@@ -194,11 +202,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
-            this.chkStopTrailingEnabled = new MetroFramework.Controls.MetroCheckBox();
+            this.lblStopTrailingLimitOffsetPrice = new MetroFramework.Controls.MetroLabel();
             this.TabControl.SuspendLayout();
             this.tabManual.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -237,7 +241,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudDCATimes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDCAMinutes)).BeginInit();
             this.tabStops.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStopTrailingLimitOffset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStopTrailingQty)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStopTrailingPrice)).BeginInit();
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSettingsRetryWaitTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSettingsOverloadRetryAttempts)).BeginInit();
@@ -250,8 +257,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.pnlPosition.SuspendLayout();
-            this.groupBox9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // ddlCandleTimes
@@ -1911,43 +1916,130 @@
             this.tabStops.VerticalScrollbarHighlightOnWheel = false;
             this.tabStops.VerticalScrollbarSize = 10;
             // 
-            // metroLabel3
+            // groupBox9
             // 
-            this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(99, 46);
-            this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(76, 19);
-            this.metroLabel3.TabIndex = 22;
-            this.metroLabel3.Text = "Order Type";
+            this.groupBox9.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox9.Controls.Add(this.lblStopTrailingLimitOffsetPrice);
+            this.groupBox9.Controls.Add(this.chkStopTrailingCloseInFull);
+            this.groupBox9.Controls.Add(this.chkTrailingStopEnabled);
+            this.groupBox9.Controls.Add(this.nudStopTrailingLimitOffset);
+            this.groupBox9.Controls.Add(this.metroLabel6);
+            this.groupBox9.Controls.Add(this.metroLabel5);
+            this.groupBox9.Controls.Add(this.nudStopTrailingQty);
+            this.groupBox9.Controls.Add(this.lblStopTraillingPrice);
+            this.groupBox9.Controls.Add(this.nudStopTrailingPrice);
+            this.groupBox9.Controls.Add(this.ddlStopTrailingMethod);
+            this.groupBox9.Controls.Add(this.metroLabel2);
+            this.groupBox9.Controls.Add(this.metroLabel3);
+            this.groupBox9.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBox9.Location = new System.Drawing.Point(3, 3);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(383, 220);
+            this.groupBox9.TabIndex = 23;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Trailing Stop";
             // 
-            // ddlStopMethod
+            // chkStopTrailingCloseInFull
             // 
-            this.ddlStopMethod.FormattingEnabled = true;
-            this.ddlStopMethod.ItemHeight = 23;
-            this.ddlStopMethod.Items.AddRange(new object[] {
+            this.chkStopTrailingCloseInFull.AutoSize = true;
+            this.chkStopTrailingCloseInFull.Location = new System.Drawing.Point(153, 24);
+            this.chkStopTrailingCloseInFull.Name = "chkStopTrailingCloseInFull";
+            this.chkStopTrailingCloseInFull.Size = new System.Drawing.Size(87, 15);
+            this.chkStopTrailingCloseInFull.TabIndex = 38;
+            this.chkStopTrailingCloseInFull.Text = "Close In Full";
+            this.chkStopTrailingCloseInFull.UseSelectable = true;
+            // 
+            // chkTrailingStopEnabled
+            // 
+            this.chkTrailingStopEnabled.AutoSize = true;
+            this.chkTrailingStopEnabled.Location = new System.Drawing.Point(7, 132);
+            this.chkTrailingStopEnabled.Name = "chkTrailingStopEnabled";
+            this.chkTrailingStopEnabled.Size = new System.Drawing.Size(80, 17);
+            this.chkTrailingStopEnabled.TabIndex = 37;
+            this.chkTrailingStopEnabled.Text = "Off";
+            this.chkTrailingStopEnabled.UseSelectable = true;
+            this.chkTrailingStopEnabled.CheckedChanged += new System.EventHandler(this.chkTrailingStopEnabled_CheckedChanged);
+            // 
+            // nudStopTrailingLimitOffset
+            // 
+            this.nudStopTrailingLimitOffset.Location = new System.Drawing.Point(5, 106);
+            this.nudStopTrailingLimitOffset.Name = "nudStopTrailingLimitOffset";
+            this.nudStopTrailingLimitOffset.Size = new System.Drawing.Size(72, 20);
+            this.nudStopTrailingLimitOffset.TabIndex = 35;
+            // 
+            // metroLabel6
+            // 
+            this.metroLabel6.AutoSize = true;
+            this.metroLabel6.Location = new System.Drawing.Point(83, 106);
+            this.metroLabel6.Name = "metroLabel6";
+            this.metroLabel6.Size = new System.Drawing.Size(76, 19);
+            this.metroLabel6.TabIndex = 36;
+            this.metroLabel6.Text = "Limit Offset";
+            // 
+            // metroLabel5
+            // 
+            this.metroLabel5.AutoSize = true;
+            this.metroLabel5.Location = new System.Drawing.Point(83, 19);
+            this.metroLabel5.Name = "metroLabel5";
+            this.metroLabel5.Size = new System.Drawing.Size(64, 19);
+            this.metroLabel5.TabIndex = 34;
+            this.metroLabel5.Text = "Contracts";
+            // 
+            // nudStopTrailingQty
+            // 
+            this.nudStopTrailingQty.Location = new System.Drawing.Point(6, 19);
+            this.nudStopTrailingQty.Name = "nudStopTrailingQty";
+            this.nudStopTrailingQty.Size = new System.Drawing.Size(74, 20);
+            this.nudStopTrailingQty.TabIndex = 33;
+            // 
+            // lblStopTraillingPrice
+            // 
+            this.lblStopTraillingPrice.AutoSize = true;
+            this.lblStopTraillingPrice.Location = new System.Drawing.Point(280, 82);
+            this.lblStopTraillingPrice.Name = "lblStopTraillingPrice";
+            this.lblStopTraillingPrice.Size = new System.Drawing.Size(83, 19);
+            this.lblStopTraillingPrice.TabIndex = 32;
+            this.lblStopTraillingPrice.Text = "metroLabel5";
+            // 
+            // nudStopTrailingPrice
+            // 
+            this.nudStopTrailingPrice.Location = new System.Drawing.Point(5, 45);
+            this.nudStopTrailingPrice.Name = "nudStopTrailingPrice";
+            this.nudStopTrailingPrice.Size = new System.Drawing.Size(72, 20);
+            this.nudStopTrailingPrice.TabIndex = 2;
+            this.nudStopTrailingPrice.ValueChanged += new System.EventHandler(this.nudStopTrailingPrice_ValueChanged);
+            // 
+            // ddlStopTrailingMethod
+            // 
+            this.ddlStopTrailingMethod.FormattingEnabled = true;
+            this.ddlStopTrailingMethod.ItemHeight = 23;
+            this.ddlStopTrailingMethod.Items.AddRange(new object[] {
             "Limit",
             "Market"});
-            this.ddlStopMethod.Location = new System.Drawing.Point(11, 46);
-            this.ddlStopMethod.Name = "ddlStopMethod";
-            this.ddlStopMethod.Size = new System.Drawing.Size(82, 29);
-            this.ddlStopMethod.TabIndex = 21;
-            this.ddlStopMethod.UseSelectable = true;
+            this.ddlStopTrailingMethod.Location = new System.Drawing.Point(5, 72);
+            this.ddlStopTrailingMethod.Name = "ddlStopTrailingMethod";
+            this.ddlStopTrailingMethod.Size = new System.Drawing.Size(82, 29);
+            this.ddlStopTrailingMethod.TabIndex = 21;
+            this.ddlStopTrailingMethod.UseSelectable = true;
+            this.ddlStopTrailingMethod.SelectedIndexChanged += new System.EventHandler(this.ddlStopTrailingMethod_SelectedIndexChanged);
             // 
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(89, 19);
+            this.metroLabel2.Location = new System.Drawing.Point(83, 45);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(57, 19);
+            this.metroLabel2.Size = new System.Drawing.Size(32, 19);
             this.metroLabel2.TabIndex = 3;
-            this.metroLabel2.Text = "Distance";
+            this.metroLabel2.Text = "Trail";
             // 
-            // numericUpDown1
+            // metroLabel3
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(11, 19);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(72, 20);
-            this.numericUpDown1.TabIndex = 2;
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.Location = new System.Drawing.Point(93, 72);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(76, 19);
+            this.metroLabel3.TabIndex = 22;
+            this.metroLabel3.Text = "Order Type";
             // 
             // tabSettings
             // 
@@ -2878,74 +2970,14 @@
             this.label31.Size = new System.Drawing.Size(857, 4);
             this.label31.TabIndex = 27;
             // 
-            // groupBox9
+            // lblStopTrailingLimitOffsetPrice
             // 
-            this.groupBox9.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox9.Controls.Add(this.chkStopTrailingEnabled);
-            this.groupBox9.Controls.Add(this.metroLabel4);
-            this.groupBox9.Controls.Add(this.numericUpDown2);
-            this.groupBox9.Controls.Add(this.metroButton1);
-            this.groupBox9.Controls.Add(this.numericUpDown1);
-            this.groupBox9.Controls.Add(this.ddlStopMethod);
-            this.groupBox9.Controls.Add(this.metroLabel2);
-            this.groupBox9.Controls.Add(this.metroLabel3);
-            this.groupBox9.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox9.Location = new System.Drawing.Point(319, 54);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(383, 220);
-            this.groupBox9.TabIndex = 23;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Trailing Stop";
-            // 
-            // metroButton1
-            // 
-            this.metroButton1.Location = new System.Drawing.Point(6, 129);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(75, 23);
-            this.metroButton1.TabIndex = 23;
-            this.metroButton1.Text = "Start";
-            this.metroButton1.UseSelectable = true;
-            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown2.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.numericUpDown2.Location = new System.Drawing.Point(11, 81);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            -1530494977,
-            232830,
-            0,
-            0});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
-            -1486618625,
-            232830643,
-            0,
-            -2147483648});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.ReadOnly = true;
-            this.numericUpDown2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.numericUpDown2.Size = new System.Drawing.Size(95, 29);
-            this.numericUpDown2.TabIndex = 28;
-            // 
-            // metroLabel4
-            // 
-            this.metroLabel4.AutoSize = true;
-            this.metroLabel4.Location = new System.Drawing.Point(112, 81);
-            this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(113, 19);
-            this.metroLabel4.TabIndex = 29;
-            this.metroLabel4.Text = "Update Limit (ms)";
-            // 
-            // chkStopTrailingEnabled
-            // 
-            this.chkStopTrailingEnabled.AutoSize = true;
-            this.chkStopTrailingEnabled.Location = new System.Drawing.Point(7, 159);
-            this.chkStopTrailingEnabled.Name = "chkStopTrailingEnabled";
-            this.chkStopTrailingEnabled.Size = new System.Drawing.Size(65, 15);
-            this.chkStopTrailingEnabled.TabIndex = 30;
-            this.chkStopTrailingEnabled.Text = "Enabled";
-            this.chkStopTrailingEnabled.UseSelectable = true;
+            this.lblStopTrailingLimitOffsetPrice.AutoSize = true;
+            this.lblStopTrailingLimitOffsetPrice.Location = new System.Drawing.Point(280, 129);
+            this.lblStopTrailingLimitOffsetPrice.Name = "lblStopTrailingLimitOffsetPrice";
+            this.lblStopTrailingLimitOffsetPrice.Size = new System.Drawing.Size(83, 19);
+            this.lblStopTrailingLimitOffsetPrice.TabIndex = 39;
+            this.lblStopTrailingLimitOffsetPrice.Text = "metroLabel7";
             // 
             // Bot
             // 
@@ -3025,7 +3057,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudDCATimes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDCAMinutes)).EndInit();
             this.tabStops.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStopTrailingLimitOffset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStopTrailingQty)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStopTrailingPrice)).EndInit();
             this.tabSettings.ResumeLayout(false);
             this.tabSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSettingsRetryWaitTime)).EndInit();
@@ -3040,9 +3076,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.pnlPosition.ResumeLayout(false);
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3210,13 +3243,17 @@
         private System.Windows.Forms.Label label15;
         private MetroFramework.Controls.MetroTabPage tabStops;
         private MetroFramework.Controls.MetroLabel metroLabel3;
-        private MetroFramework.Controls.MetroComboBox ddlStopMethod;
+        private MetroFramework.Controls.MetroComboBox ddlStopTrailingMethod;
         private MetroFramework.Controls.MetroLabel metroLabel2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown nudStopTrailingPrice;
         private System.Windows.Forms.GroupBox groupBox9;
-        private MetroFramework.Controls.MetroLabel metroLabel4;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private MetroFramework.Controls.MetroButton metroButton1;
-        private MetroFramework.Controls.MetroCheckBox chkStopTrailingEnabled;
+        private MetroFramework.Controls.MetroLabel lblStopTraillingPrice;
+        private System.Windows.Forms.NumericUpDown nudStopTrailingLimitOffset;
+        private MetroFramework.Controls.MetroLabel metroLabel6;
+        private MetroFramework.Controls.MetroLabel metroLabel5;
+        private System.Windows.Forms.NumericUpDown nudStopTrailingQty;
+        private MetroFramework.Controls.MetroToggle chkTrailingStopEnabled;
+        private MetroFramework.Controls.MetroCheckBox chkStopTrailingCloseInFull;
+        private MetroFramework.Controls.MetroLabel lblStopTrailingLimitOffsetPrice;
     }
 }

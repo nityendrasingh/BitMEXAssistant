@@ -377,6 +377,41 @@ namespace BitMEX
             }
         }
 
+        public List<Order> TrailingStopAmendOrder(string OrderId, decimal? Price = null, int? OrderQty = null)
+        {
+            var param = new Dictionary<string, string>();
+            param["orderID"] = OrderId;
+            if (Price != null)
+            {
+                param["price"] = Price.ToString();
+            }
+            if (OrderQty != null)
+            {
+                param["orderQty"] = OrderQty.ToString();
+            }
+
+            string res = Query("PUT", "/order", param, true);
+
+            try
+            {
+                List<Order> Result = new List<Order>();
+                if (!res.Contains("error"))
+                {
+                    Result.Add(JsonConvert.DeserializeObject<Order>(res));
+                    return Result;
+                }
+                else
+                {
+                    return new List<Order>();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return new List<Order>();
+            }
+        }
+
         public List<Order> CancelOrder(string OrderId)
         {
             var param = new Dictionary<string, string>();
@@ -837,6 +872,7 @@ namespace BitMEX
         public decimal? RealizedPnl { get; set; }
         public decimal? HighestPriceSinceOpen { get; set; }
         public decimal? LowestPriceSinceOpen { get; set; }
+        public decimal? TrailingStopPrice { get; set; }
 
         public string Symbol { get; set; }
 
