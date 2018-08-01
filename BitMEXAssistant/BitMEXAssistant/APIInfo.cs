@@ -67,7 +67,19 @@ namespace BitMEXAssistant
                     GetAPIValidity();
                     if (APIValid)
                     {
-                        this.Visible = false;
+                        // Check permissions for the API Key.
+                        bool hasPermission = bitmex.GetAPIKeyPermissions();
+
+                        if (hasPermission)
+                        {
+                            this.Visible = false;
+                        }
+                        else
+                        {
+                            APIValid = false;
+                            lblAPIStatus.Text = "API info does not have correct permissions!";
+                            lblAPIStatus.ForeColor = Color.Red;
+                        }
                     }
                 }
                 catch (Exception ex)
