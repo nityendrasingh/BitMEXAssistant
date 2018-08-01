@@ -1,5 +1,6 @@
 ﻿//using ServiceStack.Text;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -661,6 +662,36 @@ namespace BitMEX
                 // default wallet balance doesn't show the decimal places like it should.
             }
 
+        }
+
+        // Get API Key Permissions
+        public bool GetAPIKeyPermissions()
+        {
+            string res = Query("GET", "/apiKey", null, true);
+            if (res.Contains("error"))
+            {
+                return false;
+            }
+            else
+            {
+                JArray json = JArray.Parse(res);
+                foreach (JObject api_key in json)
+                {
+                    string key = api_key.GetValue("id").ToString();
+                    if (key == this.apiKey)
+                    {
+                        JToken permissions = api_key.GetValue("permissions");
+                        foreach (JToken permission in permissions)
+                        {
+                            if (permission.ToString() == "order")
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                return false;
+            }
         }
 
         public List<SimpleCandle> GetCandleHistory(string symbol, string size, DateTime Start = new DateTime())
