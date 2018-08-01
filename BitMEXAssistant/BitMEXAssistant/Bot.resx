@@ -126,6 +126,9 @@
   <data name="label30.Text" xml:space="preserve">
     <value>Limit Now orders can execute very quickly.  Please be very mindful that BitMEX rate limits API calls, so setting your delay to a small value is a sure fire way to get flagged by BitMEX.  This means you must be careful that you don't make too many requests, which can result in a suspended BitMEX account.  This is a very advanced feature.</value>
   </data>
+  <metadata name="MetroToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>920, 15</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -141,9 +144,6 @@
   </data>
   <metadata name="tmrDCA.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>233, 17</value>
-  </metadata>
-  <metadata name="MetroToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>920, 15</value>
   </metadata>
   <metadata name="tmrClientUpdates.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>328, 17</value>
@@ -2708,7 +2708,4 @@
         F4iB1RgAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="MetroToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>920, 15</value>
-  </metadata>
 </root>

@@ -12,7 +12,7 @@ namespace BitMEXAssistant.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -668,6 +668,78 @@ namespace BitMEXAssistant.Properties {
             }
             set {
                 this["LimitNowSellReduceOnly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int TrailingStopContracts {
+            get {
+                return ((int)(this["TrailingStopContracts"]));
+            }
+            set {
+                this["TrailingStopContracts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public decimal TrailingStopTrail {
+            get {
+                return ((decimal)(this["TrailingStopTrail"]));
+            }
+            set {
+                this["TrailingStopTrail"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Limit")]
+        public string TrailingStopMethod {
+            get {
+                return ((string)(this["TrailingStopMethod"]));
+            }
+            set {
+                this["TrailingStopMethod"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public decimal TrailingStopLimitOffset {
+            get {
+                return ((decimal)(this["TrailingStopLimitOffset"]));
+            }
+            set {
+                this["TrailingStopLimitOffset"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool TrailingStopCloseInFull {
+            get {
+                return ((bool)(this["TrailingStopCloseInFull"]));
+            }
+            set {
+                this["TrailingStopCloseInFull"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public decimal XBTUSDReferencePrice {
+            get {
+                return ((decimal)(this["XBTUSDReferencePrice"]));
+            }
+            set {
+                this["XBTUSDReferencePrice"] = value;
             }
         }
     }

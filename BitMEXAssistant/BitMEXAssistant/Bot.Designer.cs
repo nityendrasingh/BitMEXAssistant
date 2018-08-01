@@ -83,8 +83,8 @@
             this.nudLimitNowSellTicksFromCenter = new System.Windows.Forms.NumericUpDown();
             this.nudLimitNowSellDelay = new System.Windows.Forms.NumericUpDown();
             this.label27 = new MetroFramework.Controls.MetroLabel();
-            this.btnLimitNowSellCancel = new MetroFramework.Controls.MetroButton();
             this.btnLimitNowSell = new MetroFramework.Controls.MetroButton();
+            this.btnLimitNowSellCancel = new MetroFramework.Controls.MetroButton();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.chkLimitNowBuyReduceOnly = new MetroFramework.Controls.MetroCheckBox();
             this.label28 = new MetroFramework.Controls.MetroLabel();
@@ -143,14 +143,17 @@
             this.btnDCAStop = new MetroFramework.Controls.MetroButton();
             this.tabStops = new MetroFramework.Controls.MetroTabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.lblTrailingStopLimitPricePreviewLabel = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+            this.lblStopTrailingLimitOffsetPrice = new MetroFramework.Controls.MetroLabel();
             this.chkStopTrailingCloseInFull = new MetroFramework.Controls.MetroCheckBox();
             this.chkTrailingStopEnabled = new MetroFramework.Controls.MetroToggle();
             this.nudStopTrailingLimitOffset = new System.Windows.Forms.NumericUpDown();
-            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+            this.lblTrailingStopLimitOffset = new MetroFramework.Controls.MetroLabel();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
-            this.nudStopTrailingQty = new System.Windows.Forms.NumericUpDown();
+            this.nudStopTrailingContracts = new System.Windows.Forms.NumericUpDown();
             this.lblStopTraillingPrice = new MetroFramework.Controls.MetroLabel();
-            this.nudStopTrailingPrice = new System.Windows.Forms.NumericUpDown();
+            this.nudStopTrailingTrail = new System.Windows.Forms.NumericUpDown();
             this.ddlStopTrailingMethod = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
@@ -163,7 +166,7 @@
             this.chkSettingOverloadRetry = new MetroFramework.Controls.MetroCheckBox();
             this.nudSettingsOverloadRetryAttempts = new System.Windows.Forms.NumericUpDown();
             this.tabDonate = new MetroFramework.Controls.MetroTabPage();
-            this.label17 = new MetroFramework.Controls.MetroLabel();
+            this.lblDonateAddress = new MetroFramework.Controls.MetroLabel();
             this.label16 = new MetroFramework.Controls.MetroLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tmrDCA = new System.Windows.Forms.Timer(this.components);
@@ -202,7 +205,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
-            this.lblStopTrailingLimitOffsetPrice = new MetroFramework.Controls.MetroLabel();
             this.TabControl.SuspendLayout();
             this.tabManual.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -243,8 +245,8 @@
             this.tabStops.SuspendLayout();
             this.groupBox9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudStopTrailingLimitOffset)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudStopTrailingQty)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudStopTrailingPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStopTrailingContracts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStopTrailingTrail)).BeginInit();
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSettingsRetryWaitTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSettingsOverloadRetryAttempts)).BeginInit();
@@ -268,9 +270,9 @@
             "5m",
             "1h",
             "1d"});
-            this.ddlCandleTimes.Location = new System.Drawing.Point(412, 34);
+            this.ddlCandleTimes.Location = new System.Drawing.Point(438, 34);
             this.ddlCandleTimes.Name = "ddlCandleTimes";
-            this.ddlCandleTimes.Size = new System.Drawing.Size(95, 29);
+            this.ddlCandleTimes.Size = new System.Drawing.Size(57, 29);
             this.ddlCandleTimes.TabIndex = 10;
             this.ddlCandleTimes.UseSelectable = true;
             this.ddlCandleTimes.SelectedIndexChanged += new System.EventHandler(this.ddlCandleTimes_SelectedIndexChanged);
@@ -300,7 +302,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.label2.Location = new System.Drawing.Point(412, 12);
+            this.label2.Location = new System.Drawing.Point(438, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 19);
             this.label2.TabIndex = 13;
@@ -322,7 +324,7 @@
             this.TabControl.Controls.Add(this.tabDonate);
             this.TabControl.Location = new System.Drawing.Point(0, 125);
             this.TabControl.Name = "TabControl";
-            this.TabControl.SelectedIndex = 1;
+            this.TabControl.SelectedIndex = 4;
             this.TabControl.Size = new System.Drawing.Size(857, 351);
             this.TabControl.TabIndex = 14;
             this.TabControl.UseSelectable = true;
@@ -1048,6 +1050,18 @@
             this.label27.TabIndex = 26;
             this.label27.Text = "Ticks Off";
             // 
+            // btnLimitNowSell
+            // 
+            this.btnLimitNowSell.BackColor = System.Drawing.Color.Red;
+            this.btnLimitNowSell.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnLimitNowSell.Location = new System.Drawing.Point(165, 19);
+            this.btnLimitNowSell.Name = "btnLimitNowSell";
+            this.btnLimitNowSell.Size = new System.Drawing.Size(66, 80);
+            this.btnLimitNowSell.TabIndex = 23;
+            this.btnLimitNowSell.Text = "Limit Sell Now";
+            this.btnLimitNowSell.UseSelectable = true;
+            this.btnLimitNowSell.Click += new System.EventHandler(this.btnLimitNowSell_Click);
+            // 
             // btnLimitNowSellCancel
             // 
             this.btnLimitNowSellCancel.BackColor = System.Drawing.Color.Gold;
@@ -1060,18 +1074,6 @@
             this.btnLimitNowSellCancel.UseSelectable = true;
             this.btnLimitNowSellCancel.Visible = false;
             this.btnLimitNowSellCancel.Click += new System.EventHandler(this.btnLimitNowSellCancel_Click);
-            // 
-            // btnLimitNowSell
-            // 
-            this.btnLimitNowSell.BackColor = System.Drawing.Color.Red;
-            this.btnLimitNowSell.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnLimitNowSell.Location = new System.Drawing.Point(165, 19);
-            this.btnLimitNowSell.Name = "btnLimitNowSell";
-            this.btnLimitNowSell.Size = new System.Drawing.Size(66, 80);
-            this.btnLimitNowSell.TabIndex = 23;
-            this.btnLimitNowSell.Text = "Limit Sell Now";
-            this.btnLimitNowSell.UseSelectable = true;
-            this.btnLimitNowSell.Click += new System.EventHandler(this.btnLimitNowSell_Click);
             // 
             // groupBox7
             // 
@@ -1920,95 +1922,141 @@
             // groupBox9
             // 
             this.groupBox9.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox9.Controls.Add(this.lblTrailingStopLimitPricePreviewLabel);
+            this.groupBox9.Controls.Add(this.metroLabel4);
             this.groupBox9.Controls.Add(this.lblStopTrailingLimitOffsetPrice);
             this.groupBox9.Controls.Add(this.chkStopTrailingCloseInFull);
             this.groupBox9.Controls.Add(this.chkTrailingStopEnabled);
             this.groupBox9.Controls.Add(this.nudStopTrailingLimitOffset);
-            this.groupBox9.Controls.Add(this.metroLabel6);
+            this.groupBox9.Controls.Add(this.lblTrailingStopLimitOffset);
             this.groupBox9.Controls.Add(this.metroLabel5);
-            this.groupBox9.Controls.Add(this.nudStopTrailingQty);
+            this.groupBox9.Controls.Add(this.nudStopTrailingContracts);
             this.groupBox9.Controls.Add(this.lblStopTraillingPrice);
-            this.groupBox9.Controls.Add(this.nudStopTrailingPrice);
+            this.groupBox9.Controls.Add(this.nudStopTrailingTrail);
             this.groupBox9.Controls.Add(this.ddlStopTrailingMethod);
             this.groupBox9.Controls.Add(this.metroLabel2);
             this.groupBox9.Controls.Add(this.metroLabel3);
             this.groupBox9.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox9.Location = new System.Drawing.Point(3, 3);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(383, 220);
+            this.groupBox9.Size = new System.Drawing.Size(265, 269);
             this.groupBox9.TabIndex = 23;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Trailing Stop";
             // 
+            // lblTrailingStopLimitPricePreviewLabel
+            // 
+            this.lblTrailingStopLimitPricePreviewLabel.AutoSize = true;
+            this.lblTrailingStopLimitPricePreviewLabel.Location = new System.Drawing.Point(134, 199);
+            this.lblTrailingStopLimitPricePreviewLabel.Name = "lblTrailingStopLimitPricePreviewLabel";
+            this.lblTrailingStopLimitPricePreviewLabel.Size = new System.Drawing.Size(70, 19);
+            this.lblTrailingStopLimitPricePreviewLabel.TabIndex = 41;
+            this.lblTrailingStopLimitPricePreviewLabel.Text = "Limit Price";
+            // 
+            // metroLabel4
+            // 
+            this.metroLabel4.AutoSize = true;
+            this.metroLabel4.Location = new System.Drawing.Point(3, 199);
+            this.metroLabel4.Name = "metroLabel4";
+            this.metroLabel4.Size = new System.Drawing.Size(83, 19);
+            this.metroLabel4.TabIndex = 40;
+            this.metroLabel4.Text = "Trigger Price";
+            // 
+            // lblStopTrailingLimitOffsetPrice
+            // 
+            this.lblStopTrailingLimitOffsetPrice.AutoSize = true;
+            this.lblStopTrailingLimitOffsetPrice.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.lblStopTrailingLimitOffsetPrice.Location = new System.Drawing.Point(134, 218);
+            this.lblStopTrailingLimitOffsetPrice.Name = "lblStopTrailingLimitOffsetPrice";
+            this.lblStopTrailingLimitOffsetPrice.Size = new System.Drawing.Size(72, 25);
+            this.lblStopTrailingLimitOffsetPrice.TabIndex = 39;
+            this.lblStopTrailingLimitOffsetPrice.Text = "4564.65";
+            // 
             // chkStopTrailingCloseInFull
             // 
             this.chkStopTrailingCloseInFull.AutoSize = true;
-            this.chkStopTrailingCloseInFull.Location = new System.Drawing.Point(153, 24);
+            this.chkStopTrailingCloseInFull.Location = new System.Drawing.Point(18, 45);
             this.chkStopTrailingCloseInFull.Name = "chkStopTrailingCloseInFull";
             this.chkStopTrailingCloseInFull.Size = new System.Drawing.Size(87, 15);
             this.chkStopTrailingCloseInFull.TabIndex = 38;
             this.chkStopTrailingCloseInFull.Text = "Close In Full";
             this.chkStopTrailingCloseInFull.UseSelectable = true;
+            this.chkStopTrailingCloseInFull.CheckedChanged += new System.EventHandler(this.chkStopTrailingCloseInFull_CheckedChanged);
             // 
             // chkTrailingStopEnabled
             // 
             this.chkTrailingStopEnabled.AutoSize = true;
-            this.chkTrailingStopEnabled.Location = new System.Drawing.Point(7, 132);
+            this.chkTrailingStopEnabled.Location = new System.Drawing.Point(6, 169);
             this.chkTrailingStopEnabled.Name = "chkTrailingStopEnabled";
             this.chkTrailingStopEnabled.Size = new System.Drawing.Size(80, 17);
+            this.chkTrailingStopEnabled.Style = MetroFramework.MetroColorStyle.Blue;
             this.chkTrailingStopEnabled.TabIndex = 37;
             this.chkTrailingStopEnabled.Text = "Off";
             this.chkTrailingStopEnabled.UseSelectable = true;
+            this.chkTrailingStopEnabled.UseStyleColors = true;
             this.chkTrailingStopEnabled.CheckedChanged += new System.EventHandler(this.chkTrailingStopEnabled_CheckedChanged);
             // 
             // nudStopTrailingLimitOffset
             // 
-            this.nudStopTrailingLimitOffset.Location = new System.Drawing.Point(5, 106);
+            this.nudStopTrailingLimitOffset.Location = new System.Drawing.Point(6, 143);
+            this.nudStopTrailingLimitOffset.Maximum = new decimal(new int[] {
+            1410065408,
+            2,
+            0,
+            0});
+            this.nudStopTrailingLimitOffset.Minimum = new decimal(new int[] {
+            1410065408,
+            2,
+            0,
+            -2147483648});
             this.nudStopTrailingLimitOffset.Name = "nudStopTrailingLimitOffset";
-            this.nudStopTrailingLimitOffset.Size = new System.Drawing.Size(72, 20);
+            this.nudStopTrailingLimitOffset.Size = new System.Drawing.Size(82, 20);
             this.nudStopTrailingLimitOffset.TabIndex = 35;
+            this.nudStopTrailingLimitOffset.ValueChanged += new System.EventHandler(this.nudStopTrailingLimitOffset_ValueChanged);
             // 
-            // metroLabel6
+            // lblTrailingStopLimitOffset
             // 
-            this.metroLabel6.AutoSize = true;
-            this.metroLabel6.Location = new System.Drawing.Point(83, 106);
-            this.metroLabel6.Name = "metroLabel6";
-            this.metroLabel6.Size = new System.Drawing.Size(76, 19);
-            this.metroLabel6.TabIndex = 36;
-            this.metroLabel6.Text = "Limit Offset";
+            this.lblTrailingStopLimitOffset.AutoSize = true;
+            this.lblTrailingStopLimitOffset.Location = new System.Drawing.Point(94, 144);
+            this.lblTrailingStopLimitOffset.Name = "lblTrailingStopLimitOffset";
+            this.lblTrailingStopLimitOffset.Size = new System.Drawing.Size(76, 19);
+            this.lblTrailingStopLimitOffset.TabIndex = 36;
+            this.lblTrailingStopLimitOffset.Text = "Limit Offset";
             // 
             // metroLabel5
             // 
             this.metroLabel5.AutoSize = true;
-            this.metroLabel5.Location = new System.Drawing.Point(83, 19);
+            this.metroLabel5.Location = new System.Drawing.Point(94, 20);
             this.metroLabel5.Name = "metroLabel5";
             this.metroLabel5.Size = new System.Drawing.Size(64, 19);
             this.metroLabel5.TabIndex = 34;
             this.metroLabel5.Text = "Contracts";
             // 
-            // nudStopTrailingQty
+            // nudStopTrailingContracts
             // 
-            this.nudStopTrailingQty.Location = new System.Drawing.Point(6, 19);
-            this.nudStopTrailingQty.Name = "nudStopTrailingQty";
-            this.nudStopTrailingQty.Size = new System.Drawing.Size(74, 20);
-            this.nudStopTrailingQty.TabIndex = 33;
+            this.nudStopTrailingContracts.Location = new System.Drawing.Point(6, 19);
+            this.nudStopTrailingContracts.Name = "nudStopTrailingContracts";
+            this.nudStopTrailingContracts.Size = new System.Drawing.Size(82, 20);
+            this.nudStopTrailingContracts.TabIndex = 33;
+            this.nudStopTrailingContracts.ValueChanged += new System.EventHandler(this.nudStopTrailingContracts_ValueChanged);
             // 
             // lblStopTraillingPrice
             // 
             this.lblStopTraillingPrice.AutoSize = true;
-            this.lblStopTraillingPrice.Location = new System.Drawing.Point(280, 82);
+            this.lblStopTraillingPrice.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.lblStopTraillingPrice.Location = new System.Drawing.Point(6, 218);
             this.lblStopTraillingPrice.Name = "lblStopTraillingPrice";
-            this.lblStopTraillingPrice.Size = new System.Drawing.Size(83, 19);
+            this.lblStopTraillingPrice.Size = new System.Drawing.Size(72, 25);
             this.lblStopTraillingPrice.TabIndex = 32;
-            this.lblStopTraillingPrice.Text = "metroLabel5";
+            this.lblStopTraillingPrice.Text = "4654.65";
             // 
-            // nudStopTrailingPrice
+            // nudStopTrailingTrail
             // 
-            this.nudStopTrailingPrice.Location = new System.Drawing.Point(5, 45);
-            this.nudStopTrailingPrice.Name = "nudStopTrailingPrice";
-            this.nudStopTrailingPrice.Size = new System.Drawing.Size(72, 20);
-            this.nudStopTrailingPrice.TabIndex = 2;
-            this.nudStopTrailingPrice.ValueChanged += new System.EventHandler(this.nudStopTrailingPrice_ValueChanged);
+            this.nudStopTrailingTrail.Location = new System.Drawing.Point(6, 82);
+            this.nudStopTrailingTrail.Name = "nudStopTrailingTrail";
+            this.nudStopTrailingTrail.Size = new System.Drawing.Size(82, 20);
+            this.nudStopTrailingTrail.TabIndex = 2;
+            this.nudStopTrailingTrail.ValueChanged += new System.EventHandler(this.nudStopTrailingPrice_ValueChanged);
             // 
             // ddlStopTrailingMethod
             // 
@@ -2017,7 +2065,7 @@
             this.ddlStopTrailingMethod.Items.AddRange(new object[] {
             "Limit",
             "Market"});
-            this.ddlStopTrailingMethod.Location = new System.Drawing.Point(5, 72);
+            this.ddlStopTrailingMethod.Location = new System.Drawing.Point(6, 108);
             this.ddlStopTrailingMethod.Name = "ddlStopTrailingMethod";
             this.ddlStopTrailingMethod.Size = new System.Drawing.Size(82, 29);
             this.ddlStopTrailingMethod.TabIndex = 21;
@@ -2027,7 +2075,7 @@
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(83, 45);
+            this.metroLabel2.Location = new System.Drawing.Point(94, 83);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(32, 19);
             this.metroLabel2.TabIndex = 3;
@@ -2036,7 +2084,7 @@
             // metroLabel3
             // 
             this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(93, 72);
+            this.metroLabel3.Location = new System.Drawing.Point(94, 113);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(76, 19);
             this.metroLabel3.TabIndex = 22;
@@ -2165,7 +2213,7 @@
             // 
             // tabDonate
             // 
-            this.tabDonate.Controls.Add(this.label17);
+            this.tabDonate.Controls.Add(this.lblDonateAddress);
             this.tabDonate.Controls.Add(this.label16);
             this.tabDonate.Controls.Add(this.pictureBox1);
             this.tabDonate.HorizontalScrollbarBarColor = true;
@@ -2180,19 +2228,23 @@
             this.tabDonate.VerticalScrollbarHighlightOnWheel = false;
             this.tabDonate.VerticalScrollbarSize = 10;
             // 
-            // label17
+            // lblDonateAddress
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(171, 149);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(295, 19);
-            this.label17.TabIndex = 2;
-            this.label17.Text = "BTC: 33biFCDFEZn3hLJcGKLR5Muu9oeRWBAFEX";
+            this.lblDonateAddress.AutoSize = true;
+            this.lblDonateAddress.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblDonateAddress.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.lblDonateAddress.Location = new System.Drawing.Point(171, 141);
+            this.lblDonateAddress.Name = "lblDonateAddress";
+            this.lblDonateAddress.Size = new System.Drawing.Size(327, 19);
+            this.lblDonateAddress.TabIndex = 2;
+            this.lblDonateAddress.Text = "BTC: 33biFCDFEZn3hLJcGKLR5Muu9oeRWBAFEX";
+            this.MetroToolTip.SetToolTip(this.lblDonateAddress, "Click to Copy");
+            this.lblDonateAddress.Click += new System.EventHandler(this.lblDonateAddress_Click);
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(171, 129);
+            this.label16.Location = new System.Drawing.Point(171, 121);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(376, 19);
             this.label16.TabIndex = 1;
@@ -2812,7 +2864,7 @@
             this.nudCurrentPrice.Name = "nudCurrentPrice";
             this.nudCurrentPrice.ReadOnly = true;
             this.nudCurrentPrice.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.nudCurrentPrice.Size = new System.Drawing.Size(95, 29);
+            this.nudCurrentPrice.Size = new System.Drawing.Size(123, 29);
             this.nudCurrentPrice.TabIndex = 17;
             // 
             // lblDonate
@@ -2971,15 +3023,6 @@
             this.label31.Size = new System.Drawing.Size(857, 4);
             this.label31.TabIndex = 27;
             // 
-            // lblStopTrailingLimitOffsetPrice
-            // 
-            this.lblStopTrailingLimitOffsetPrice.AutoSize = true;
-            this.lblStopTrailingLimitOffsetPrice.Location = new System.Drawing.Point(280, 129);
-            this.lblStopTrailingLimitOffsetPrice.Name = "lblStopTrailingLimitOffsetPrice";
-            this.lblStopTrailingLimitOffsetPrice.Size = new System.Drawing.Size(83, 19);
-            this.lblStopTrailingLimitOffsetPrice.TabIndex = 39;
-            this.lblStopTrailingLimitOffsetPrice.Text = "metroLabel7";
-            // 
             // Bot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3061,8 +3104,8 @@
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudStopTrailingLimitOffset)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudStopTrailingQty)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudStopTrailingPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStopTrailingContracts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStopTrailingTrail)).EndInit();
             this.tabSettings.ResumeLayout(false);
             this.tabSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSettingsRetryWaitTime)).EndInit();
@@ -3160,7 +3203,7 @@
         private System.Windows.Forms.Timer tmrClientUpdates;
         private System.Windows.Forms.NumericUpDown nudCurrentPrice;
         private MetroFramework.Controls.MetroTabPage tabDonate;
-        private MetroFramework.Controls.MetroLabel label17;
+        private MetroFramework.Controls.MetroLabel lblDonateAddress;
         private MetroFramework.Controls.MetroLabel label16;
         private System.Windows.Forms.PictureBox pictureBox1;
         private MetroFramework.Controls.MetroLabel lblDonate;
@@ -3246,15 +3289,17 @@
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroComboBox ddlStopTrailingMethod;
         private MetroFramework.Controls.MetroLabel metroLabel2;
-        private System.Windows.Forms.NumericUpDown nudStopTrailingPrice;
+        private System.Windows.Forms.NumericUpDown nudStopTrailingTrail;
         private System.Windows.Forms.GroupBox groupBox9;
         private MetroFramework.Controls.MetroLabel lblStopTraillingPrice;
         private System.Windows.Forms.NumericUpDown nudStopTrailingLimitOffset;
-        private MetroFramework.Controls.MetroLabel metroLabel6;
+        private MetroFramework.Controls.MetroLabel lblTrailingStopLimitOffset;
         private MetroFramework.Controls.MetroLabel metroLabel5;
-        private System.Windows.Forms.NumericUpDown nudStopTrailingQty;
+        private System.Windows.Forms.NumericUpDown nudStopTrailingContracts;
         private MetroFramework.Controls.MetroToggle chkTrailingStopEnabled;
         private MetroFramework.Controls.MetroCheckBox chkStopTrailingCloseInFull;
         private MetroFramework.Controls.MetroLabel lblStopTrailingLimitOffsetPrice;
+        private MetroFramework.Controls.MetroLabel lblTrailingStopLimitPricePreviewLabel;
+        private MetroFramework.Controls.MetroLabel metroLabel4;
     }
 }
