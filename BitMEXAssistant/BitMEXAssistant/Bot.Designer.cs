@@ -169,6 +169,7 @@
             this.lblDonateAddress = new MetroFramework.Controls.MetroLabel();
             this.label16 = new MetroFramework.Controls.MetroLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tabVideos = new System.Windows.Forms.TabPage();
             this.tmrDCA = new System.Windows.Forms.Timer(this.components);
             this.btnPositionMargin = new MetroFramework.Controls.MetroButton();
             this.btnPositionMarketClose = new MetroFramework.Controls.MetroButton();
@@ -205,6 +206,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
+            this.YouTubeVideoBrowser = new System.Windows.Forms.WebBrowser();
             this.TabControl.SuspendLayout();
             this.tabManual.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -322,10 +324,11 @@
             this.TabControl.Controls.Add(this.tabStops);
             this.TabControl.Controls.Add(this.tabSettings);
             this.TabControl.Controls.Add(this.tabDonate);
+            this.TabControl.Controls.Add(this.tabVideos);
             this.TabControl.Location = new System.Drawing.Point(0, 125);
             this.TabControl.Name = "TabControl";
-            this.TabControl.SelectedIndex = 4;
-            this.TabControl.Size = new System.Drawing.Size(857, 351);
+            this.TabControl.SelectedIndex = 0;
+            this.TabControl.Size = new System.Drawing.Size(857, 394);
             this.TabControl.TabIndex = 14;
             this.TabControl.UseSelectable = true;
             // 
@@ -338,7 +341,7 @@
             this.tabManual.HorizontalScrollbarSize = 10;
             this.tabManual.Location = new System.Drawing.Point(4, 38);
             this.tabManual.Name = "tabManual";
-            this.tabManual.Size = new System.Drawing.Size(849, 309);
+            this.tabManual.Size = new System.Drawing.Size(849, 352);
             this.tabManual.TabIndex = 4;
             this.tabManual.Text = "Manual Ordering";
             this.tabManual.UseVisualStyleBackColor = true;
@@ -2260,6 +2263,14 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // tabVideos
+            // 
+            this.tabVideos.Location = new System.Drawing.Point(4, 38);
+            this.tabVideos.Name = "tabVideos";
+            this.tabVideos.Size = new System.Drawing.Size(849, 309);
+            this.tabVideos.TabIndex = 7;
+            this.tabVideos.Text = "Videos";
+            // 
             // tmrDCA
             // 
             this.tmrDCA.Tick += new System.EventHandler(this.tmrDCA_Tick);
@@ -2872,7 +2883,7 @@
             this.lblDonate.AutoSize = true;
             this.lblDonate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblDonate.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblDonate.Location = new System.Drawing.Point(403, 485);
+            this.lblDonate.Location = new System.Drawing.Point(403, 528);
             this.lblDonate.Name = "lblDonate";
             this.lblDonate.Size = new System.Drawing.Size(319, 19);
             this.lblDonate.Style = MetroFramework.MetroColorStyle.Yellow;
@@ -2939,7 +2950,7 @@
             // lblBalanceAndTime
             // 
             this.lblBalanceAndTime.AutoSize = true;
-            this.lblBalanceAndTime.Location = new System.Drawing.Point(20, 485);
+            this.lblBalanceAndTime.Location = new System.Drawing.Point(4, 528);
             this.lblBalanceAndTime.Name = "lblBalanceAndTime";
             this.lblBalanceAndTime.Size = new System.Drawing.Size(83, 19);
             this.lblBalanceAndTime.Style = MetroFramework.MetroColorStyle.Teal;
@@ -2950,7 +2961,7 @@
             // lblNetworkAndVersion
             // 
             this.lblNetworkAndVersion.AutoSize = true;
-            this.lblNetworkAndVersion.Location = new System.Drawing.Point(755, 485);
+            this.lblNetworkAndVersion.Location = new System.Drawing.Point(755, 528);
             this.lblNetworkAndVersion.Name = "lblNetworkAndVersion";
             this.lblNetworkAndVersion.Size = new System.Drawing.Size(83, 19);
             this.lblNetworkAndVersion.Style = MetroFramework.MetroColorStyle.Teal;
@@ -3018,16 +3029,23 @@
             // 
             this.label31.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.label31.ForeColor = System.Drawing.Color.White;
-            this.label31.Location = new System.Drawing.Point(0, 476);
+            this.label31.Location = new System.Drawing.Point(0, 519);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(857, 4);
             this.label31.TabIndex = 27;
+            // 
+            // YouTubeVideoBrowser
+            // 
+            this.YouTubeVideoBrowser.Location = new System.Drawing.Point(0, 0);
+            this.YouTubeVideoBrowser.Name = "YouTubeVideoBrowser";
+            this.YouTubeVideoBrowser.Size = new System.Drawing.Size(250, 250);
+            this.YouTubeVideoBrowser.TabIndex = 0;
             // 
             // Bot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(857, 511);
+            this.ClientSize = new System.Drawing.Size(857, 554);
             this.Controls.Add(this.label31);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.label15);
@@ -3301,5 +3319,7 @@
         private MetroFramework.Controls.MetroLabel lblStopTrailingLimitOffsetPrice;
         private MetroFramework.Controls.MetroLabel lblTrailingStopLimitPricePreviewLabel;
         private MetroFramework.Controls.MetroLabel metroLabel4;
+        private System.Windows.Forms.TabPage tabVideos;
+        private System.Windows.Forms.WebBrowser YouTubeVideoBrowser;
     }
 }

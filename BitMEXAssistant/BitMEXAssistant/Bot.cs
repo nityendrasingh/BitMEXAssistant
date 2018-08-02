@@ -37,10 +37,11 @@ namespace BitMEXAssistant
         string DCASide = "Buy";
 
         WebSocket ws;
+        DateTime WebScocketLastMessage = new DateTime();
         Dictionary<string, decimal> Prices = new Dictionary<string, decimal>();
         //List<Alert> Alerts = new List<Alert>();
 
-        public static string Version = "0.0.1631";
+        public static string Version = "0.0.164";
 
         string LimitNowBuyOrderId = "";
         decimal LimitNowBuyOrderPrice = 0;
@@ -50,7 +51,8 @@ namespace BitMEXAssistant
         List<OrderBook> OrderBookTopBids = new List<OrderBook>();
         Position SymbolPosition = new Position();
         decimal Balance = 0;
-        decimal XBTUSDReferencePrice = 0;
+
+        string TrailingStopMethod = "Limit";
         #endregion
 
         public Bot()
@@ -89,12 +91,40 @@ namespace BitMEXAssistant
                 InitializePostSymbolInfoSettings();
                 InitializeWalletWebSocket();
 
+                InitializeVideoPlaylist();
+
 
                 tmrClientUpdates.Start(); // Start our client update timer
 
-                //this.TabControl.TabPages.Remove(this.tabStops);
+                
             }
 
+        }
+
+        private void InitializeVideoPlaylist()
+        {
+            if (YouTubeVideoBrowser != null) // the YouTubeVideoBrowser is a member variable of the form
+            {
+                YouTubeVideoBrowser.Dispose();
+            }
+                
+            YouTubeVideoBrowser = new System.Windows.Forms.WebBrowser();
+            YouTubeVideoBrowser.Location = new System.Drawing.Point(0, 0);
+            YouTubeVideoBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            YouTubeVideoBrowser.Name = "YouTubeVideoBrowser";
+            YouTubeVideoBrowser.Dock = DockStyle.Fill;
+            YouTubeVideoBrowser.TabIndex = 0;
+
+            tabVideos.Controls.Add(YouTubeVideoBrowser);
+
+            var embed = "<html><head>" +
+            "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/>" +
+            "</head><body style=\"background-color: #111111;\">" +
+            "<iframe width=\"560\" height=\"315\" src=\"{0}\"" +
+            "frameborder = \"0\" allow = \"autoplay; encrypted-media\" allowfullscreen></iframe>" +
+            "</body></html>";
+            var url = "https://www.youtube.com/embed/videoseries?list=PLM0BBafRCnRNy7aj0ZXy3zsg0HFNj1t0M";
+            YouTubeVideoBrowser.DocumentText = string.Format(embed, url);
         }
 
         private void InitializeWalletWebSocket()
@@ -126,6 +156,7 @@ namespace BitMEXAssistant
 
             ws.OnMessage += (sender, e) =>
             {
+                WebScocketLastMessage = DateTime.UtcNow;
                 try
                 {
                     JObject Message = JObject.Parse(e.Data);
@@ -144,7 +175,7 @@ namespace BitMEXAssistant
 
                                     // Necessary for trailing stops
                                     UpdateTrailingStopData(ActiveInstrument.Symbol, Prices[ActiveInstrument.Symbol]);
-                                    if (SymbolPosition.Symbol == Symbol && SymbolPosition.CurrentQty > 0 && chkTrailingStopEnabled.Checked)
+                                    if (SymbolPosition.Symbol == Symbol && SymbolPosition.CurrentQty != 0 && chkTrailingStopEnabled.Checked)
                                     {
                                         ProcessTrailingStop(Symbol, Price);
                                     }
@@ -264,10 +295,6 @@ namespace BitMEXAssistant
                         string WebSocketInfo = "Websocket Info: " + Message["info"].ToString() + " " + Message["docs"].ToString();
                         UpdateWebSocketInfo(WebSocketInfo);
                     }
-                    //else if (Message.ContainsKey("success")) // can check new subscription stopping here
-                    //{
-                    //    string hello = "stop here";
-                    //}
                 }
                 catch (Exception ex)
                 {
@@ -298,7 +325,7 @@ namespace BitMEXAssistant
 
         private void UpdateWebSocketInfo(string WebSocketInfo)
         {
-            lblSettingsWebsocketInfo.Invoke(new Action( () => lblSettingsWebsocketInfo.Text = WebSocketInfo));
+            lblSettingsWebsocketInfo.Invoke(new Action(() => lblSettingsWebsocketInfo.Text = WebSocketInfo));
         }
 
         private void UpdatePositionInfo()
@@ -527,7 +554,6 @@ namespace BitMEXAssistant
             UpdatePrice();
             UpdateManualMarketBuyButtons();  // Update our buy buttons on manual market buys
             UpdatePositionInfo();
-            UpdateTrailingStopData(ActiveInstrument.Symbol, Prices[ActiveInstrument.Symbol]);
             //TriggerAlerts();
         }
         #endregion
@@ -561,7 +587,6 @@ namespace BitMEXAssistant
 
             nudManualLimitPrice.DecimalPlaces = Decimals;
             nudManualLimitPrice.Increment = TickSize;
-            nudManualLimitPrice.Value = Math.Round(nudManualLimitPrice.Value, Decimals);
 
             nudStopTrailingTrail.DecimalPlaces = Decimals;
             nudStopTrailingTrail.Increment = TickSize;
@@ -585,22 +610,27 @@ namespace BitMEXAssistant
             }
 
             // Update the time every second.
-            //UpdateBalanceAndTime();  // TODO, when i get user balance from websocket, we can then update every 1/10th a second.
+            UpdateBalanceAndTime();
 
+            if (((TimeSpan)(DateTime.UtcNow - WebScocketLastMessage)).TotalSeconds > 5)
+            {
+                ws.Ping();
+            }
 
         }
 
         private void UpdateBalanceAndTime()
         {
+            int HoursInFuture = 0;
             try
             {
-                string USDValue = (Prices[ActiveInstrument.Symbol] * Convert.ToDecimal(Balance)).ToString("C", new CultureInfo("en-US"));
-                lblBalanceAndTime.Invoke(new Action(() => lblBalanceAndTime.Text = "Balance: " + Math.Round(Balance, 8).ToString() + " | " + USDValue + "     " + DateTime.UtcNow.ToShortDateString() + " " + DateTime.UtcNow.ToLongTimeString()));
+                string USDValue = (Prices["XBTUSD"] * Balance).ToString("C", new CultureInfo("en-US"));
+                lblBalanceAndTime.Invoke(new Action(() => lblBalanceAndTime.Text = "Balance: " + Math.Round(Balance, 8).ToString() + " | " + USDValue + "     " + DateTime.UtcNow.ToShortDateString() + " " + DateTime.UtcNow.AddHours(HoursInFuture).ToLongTimeString()));
 
             }
             catch (Exception ex)
             {
-                lblBalanceAndTime.Invoke(new Action(() => lblBalanceAndTime.Text = "Balance: Error     " + DateTime.UtcNow.ToShortDateString() + " " + DateTime.UtcNow.ToLongTimeString()));
+                lblBalanceAndTime.Invoke(new Action(() => lblBalanceAndTime.Text = "Balance: Error     " + DateTime.UtcNow.ToShortDateString() + " " + DateTime.UtcNow.AddHours(HoursInFuture).ToLongTimeString()));
             }
         }
         #endregion
@@ -1789,30 +1819,6 @@ namespace BitMEXAssistant
             System.Diagnostics.Process.Start("https://www.youtube.com/BigBits?sub_confirmation=1");
         }
 
-        //private void btnStopsTrailingStart_Click(object sender, sdf EventArgs e)
-        //{
-        //    // TODO: TRAILING STOP
-        //    ddlStopTrailingMethod.Enabled = false;
-
-        //    // Setup
-        //    SymbolPosition.HighestPriceSinceOpen = -1;
-        //    SymbolPosition.LowestPriceSinceOpen = 9999999999999999999;
-        //    lblStopTrailingPriceHigh.Visible = false;
-        //    lblStopTrailingPriceLow.Visible = false;
-        //    lblStopTraillingPrice.Visible = false;
-
-        //    // 1 + When getting price updates from websocket - set the highest/lowest price since position was opened, otherwise have it set to 0 and not shown
-        //    //       + Also, when getting price updates, show the expected stop price
-        //    //       + Also, perform the logic for the closing order
-        //    //             ++ Market, just initiate the market order if current price is past stop
-        //    //             -- Limit - start limit buying here, check on it in the timer!
-        //    //                   -- Make sure the limit order is at the correct price (only do this every so often, too many API calls)
-
-            // TODO:
-            //   Also, set the decimal places etc in the NUD when getting symbol info
-            //   Add the settings, load them on initialization, save them on changes
-
-        //}
 
         private void TrailingStopLimitOrder()
         {
@@ -1846,16 +1852,17 @@ namespace BitMEXAssistant
 
         }
 
-       
 
-       
+
+
 
         private void ddlStopTrailingMethod_SelectedIndexChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.TrailingStopMethod = (string)ddlStopTrailingMethod.SelectedItem;
             SaveSettings();
+            TrailingStopMethod = (string)ddlStopTrailingMethod.SelectedItem;
 
-            if((string)ddlStopTrailingMethod.SelectedItem == "Limit")
+            if (TrailingStopMethod == "Limit")
             {
                 nudStopTrailingLimitOffset.Visible = true;
                 lblTrailingStopLimitOffset.Visible = true;
@@ -1884,8 +1891,8 @@ namespace BitMEXAssistant
         }
 
         private void UpdateTrailingStopData(string Symbol, decimal Price)
-        { 
-             if(SymbolPosition.HighestPriceSinceOpen == null)
+        {
+            if (SymbolPosition.HighestPriceSinceOpen == null)
             {
                 SymbolPosition.HighestPriceSinceOpen = Price;
             }
@@ -1896,19 +1903,19 @@ namespace BitMEXAssistant
 
 
             if (Price > SymbolPosition.HighestPriceSinceOpen)
-                {
-                    SymbolPosition.HighestPriceSinceOpen = Price;
-                }
-                if (Price < SymbolPosition.LowestPriceSinceOpen)
-                {
-                    SymbolPosition.LowestPriceSinceOpen = Price;
-                }
+            {
+                SymbolPosition.HighestPriceSinceOpen = Price;
+            }
+            if (Price < SymbolPosition.LowestPriceSinceOpen)
+            {
+                SymbolPosition.LowestPriceSinceOpen = Price;
+            }
 
-            
+
 
             if (SymbolPosition.CurrentQty > 0)
             {
-                
+
 
                 if (chkTrailingStopEnabled.Checked)
                 {
@@ -1925,7 +1932,7 @@ namespace BitMEXAssistant
             else if (SymbolPosition.CurrentQty < 0)
             {
                 // Short, so set stop price = lowest + distance
-               if (chkTrailingStopEnabled.Checked)
+                if (chkTrailingStopEnabled.Checked)
                 {
                     SymbolPosition.TrailingStopPrice = (decimal)SymbolPosition.LowestPriceSinceOpen + nudStopTrailingTrail.Value;
                 }
@@ -1946,7 +1953,7 @@ namespace BitMEXAssistant
 
         private void ProcessTrailingStop(string Symbol, decimal Price)
         {
-           
+
 
             // Lets also check to see if we need to execute a market sell
             //   LIMIT STOPS are handled with the timer.
@@ -1955,7 +1962,7 @@ namespace BitMEXAssistant
                 // We are long - close if price comes back to and below trailing stop
                 if (Price <= SymbolPosition.TrailingStopPrice)
                 {
-                    if ((string)ddlStopTrailingMethod.SelectedItem == "Market")
+                    if (TrailingStopMethod == "Market")
                     {
                         if (chkStopTrailingCloseInFull.Checked)
                         {
@@ -1966,9 +1973,9 @@ namespace BitMEXAssistant
                             bitmex.MarketOrder(Symbol, "Sell", (int)nudStopTrailingContracts.Value);
                         }
                     }
-                    else if ((string)ddlStopTrailingMethod.SelectedItem == "Limit")
+                    else if (TrailingStopMethod == "Limit")
                     {
-                            TrailingStopLimitOrder();
+                        TrailingStopLimitOrder();
 
                     }
                     chkTrailingStopEnabled.Invoke(new Action(() => chkTrailingStopEnabled.Checked = false));
@@ -1979,7 +1986,7 @@ namespace BitMEXAssistant
                 // We are short - close if price comes back to and above trailing stop
                 if (Price >= SymbolPosition.TrailingStopPrice)
                 {
-                    if ((string)ddlStopTrailingMethod.SelectedItem == "Market")
+                    if (TrailingStopMethod == "Market")
                     {
                         if (chkStopTrailingCloseInFull.Checked)
                         {
@@ -1990,9 +1997,9 @@ namespace BitMEXAssistant
                             bitmex.MarketOrder(Symbol, "Buy", (int)nudStopTrailingContracts.Value);
                         }
                     }
-                    else if ((string)ddlStopTrailingMethod.SelectedItem == "Limit")
+                    else if (TrailingStopMethod == "Limit")
                     {
-                            TrailingStopLimitOrder();
+                        TrailingStopLimitOrder();
                     }
                     chkTrailingStopEnabled.Invoke(new Action(() => chkTrailingStopEnabled.Checked = false));
                 }
@@ -2002,9 +2009,9 @@ namespace BitMEXAssistant
 
         private void chkTrailingStopEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            if(chkTrailingStopEnabled.Checked)
+            if (chkTrailingStopEnabled.Checked)
             {
-                if(SymbolPosition.CurrentQty != 0)
+                if (SymbolPosition.CurrentQty != 0)
                 {
                     SymbolPosition.HighestPriceSinceOpen = Prices[ActiveInstrument.Symbol];
                     SymbolPosition.LowestPriceSinceOpen = Prices[ActiveInstrument.Symbol];
@@ -2013,7 +2020,7 @@ namespace BitMEXAssistant
                 {
                     chkTrailingStopEnabled.Checked = false;
                 }
-                
+
             }
 
         }
@@ -2042,7 +2049,7 @@ namespace BitMEXAssistant
             Properties.Settings.Default.TrailingStopCloseInFull = chkStopTrailingCloseInFull.Checked;
             SaveSettings();
 
-            if(chkStopTrailingCloseInFull.Checked)
+            if (chkStopTrailingCloseInFull.Checked)
             {
                 nudStopTrailingContracts.Enabled = false;
             }

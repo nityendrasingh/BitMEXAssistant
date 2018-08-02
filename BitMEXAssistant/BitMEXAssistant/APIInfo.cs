@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework.Forms;
+using ToastNotifications;
 
 namespace BitMEXAssistant
 {
@@ -72,6 +73,8 @@ namespace BitMEXAssistant
 
                         if (hasPermission)
                         {
+                            Notification Test = new Notification("API Valid", "You were able to successfully log in with your API Key and Secret", 5, FormAnimator.AnimationMethod.Fade, FormAnimator.AnimationDirection.Down);
+                            Test.Show();
                             this.Visible = false;
                         }
                         else
