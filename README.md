@@ -4,19 +4,20 @@ Constantly working on updates, check the issues tab to see items that are potent
 
 ![alt text](https://i.imgur.com/KsO31kL.png "Desktop Shortcut")
 
-![alt text](https://i.imgur.com/A2A4Kfx.png "API Login")
+![alt text](https://i.imgur.com/HqPpJLJ.png "API Login")
 
-![alt text](https://i.imgur.com/jwmHXRp.png "Application")
+![alt text](https://i.imgur.com/4jKmrgW.png "Application")
 
 ## Features
 1. Trade any contract available on BitMEX
-2. Download entire candle history available for any contract by BitMEX API
-3. Uses Websockets to monitor a live data feed directly from BitMEX
+2. Automated Limit Orders (ALO/Limit Now)
+3. System overload protection on orders
 4. Automated Dollar Cost Averaging (buying/selling over time)
 5. Place scaled orders above and below current price
 6. Assisted market orders, and limit orders (including reduce only, post only and hidden orders)
-7. Automated Limit Orders (ALO/Limit Now)
-8. System overload protection on orders
+7. Download entire candle history available for any contract by BitMEX API
+8. Uses Websockets to monitor a live data feed directly from BitMEX
+9. Live assisted Trailing Stops with Limit and Market Orders
 
 ## Install
 You can find the installation file at https://github.com/BigBlueBit/BitMEXAssistant/tree/master/Install.
