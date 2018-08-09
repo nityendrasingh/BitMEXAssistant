@@ -278,6 +278,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\twitter.png" />
     <None Include="Images\Subscribe" />
     <Content Include="Images\BigBits.ico" />
     <Content Include="Images\qr.png" />

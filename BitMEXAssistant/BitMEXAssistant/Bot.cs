@@ -2058,6 +2058,11 @@ namespace BitMEXAssistant
                 nudStopTrailingContracts.Enabled = true;
             }
         }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://twitter.com/BigBitsYouTube");
+        }
     }
 
     public class Alert

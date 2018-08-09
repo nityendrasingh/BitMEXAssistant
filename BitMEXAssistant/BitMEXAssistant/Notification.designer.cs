@@ -76,9 +76,11 @@ namespace ToastNotifications
             this.Controls.Add(this.labelBody);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Notification";
+            this.Resizable = false;
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Style = MetroFramework.MetroColorStyle.Red;
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.TopMost = true;
             this.Activated += new System.EventHandler(this.Notification_Activated);

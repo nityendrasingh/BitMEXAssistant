@@ -42,6 +42,7 @@
             this.lblAPIStatus = new MetroFramework.Controls.MetroLabel();
             this.label4 = new System.Windows.Forms.Label();
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -217,6 +218,17 @@
             this.metroButton1.UseSelectable = true;
             this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
             // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(349, 202);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(261, 19);
+            this.metroLabel1.Style = MetroFramework.MetroColorStyle.White;
+            this.metroLabel1.TabIndex = 14;
+            this.metroLabel1.Text = "This application is not affiliated with BitMEX";
+            this.metroLabel1.UseStyleColors = true;
+            // 
             // APIInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -224,6 +236,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(618, 225);
             this.ControlBox = false;
+            this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.rbNetworkTest);
             this.Controls.Add(this.chkConsent);
@@ -240,6 +253,7 @@
             this.MinimizeBox = false;
             this.Name = "APIInfo";
             this.Resizable = false;
+            this.Style = MetroFramework.MetroColorStyle.Red;
             this.Text = "API Information";
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.Load += new System.EventHandler(this.APIInfo_Load);
@@ -263,6 +277,7 @@
         private MetroFramework.Controls.MetroLabel lblAPIStatus;
         private System.Windows.Forms.Label label4;
         private MetroFramework.Controls.MetroButton metroButton1;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
     }
 }
 
