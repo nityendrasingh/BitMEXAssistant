@@ -28,6 +28,7 @@ namespace BitMEXAssistant
         string Timeframe = "1m";
         bool RealNetwork = false;
 
+        string DCASelectedSymbol = "";
         int DCACounter = 0;
         int DCAContractsPer = 0;
         int DCAHours = 0;
@@ -638,6 +639,7 @@ namespace BitMEXAssistant
         #region DCA
         private void UpdateDCASummary()
         {
+            DCASelectedSymbol = ActiveInstrument.Symbol;
             DCAContractsPer = Convert.ToInt32(nudDCAContracts.Value);
             DCAHours = Convert.ToInt32(nudDCAHours.Value);
             DCAMinutes = Convert.ToInt32(nudDCAMinutes.Value);
@@ -736,6 +738,8 @@ namespace BitMEXAssistant
             tmrDCA.Start(); // Start the timer.
             pgbDCA.Value = 0;
             LockDCA();
+
+            // Execute first order immediately
             if (chkDCAExecuteImmediately.Checked)
             {
                 DCAAction();
@@ -752,6 +756,8 @@ namespace BitMEXAssistant
             tmrDCA.Start(); // Start the timer.
             pgbDCA.Value = 0;
             LockDCA();
+
+            // Execute first order immediately
             if (chkDCAExecuteImmediately.Checked)
             {
                 DCAAction();
@@ -774,7 +780,7 @@ namespace BitMEXAssistant
         private void DCAAction()
         {
             DCACounter++;
-            bitmex.MarketOrder(ActiveInstrument.Symbol, DCASide, DCAContractsPer, chkDCAReduceOnly.Checked);
+            bitmex.MarketOrder(DCASelectedSymbol, DCASide, DCAContractsPer, chkDCAReduceOnly.Checked);
 
             double Percent = ((double)DCACounter / (double)DCATimes) * 100;
             pgbDCA.Value = Convert.ToInt32(Math.Round(Percent));
