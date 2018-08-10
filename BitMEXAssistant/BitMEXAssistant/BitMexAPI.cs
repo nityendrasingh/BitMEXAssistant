@@ -252,7 +252,7 @@ namespace BitMEX
             param["side"] = Side;
             param["orderQty"] = Quantity.ToString();
             param["ordType"] = "Limit";
-            param["price"] = Price.ToString();
+            param["price"] = Price.ToString().Replace(",",".");
             if (ReduceOnly && !PostOnly)
             {
                 param["execInst"] = "ReduceOnly";
@@ -296,7 +296,7 @@ namespace BitMEX
             param["side"] = Side;
             param["orderQty"] = Quantity.ToString();
             param["ordType"] = "Limit";
-            param["price"] = Price.ToString();
+            param["price"] = Price.ToString().Replace(",",".");
             if (ReduceOnly && !PostOnly)
             {
                 param["execInst"] = "ReduceOnly";
@@ -349,7 +349,7 @@ namespace BitMEX
             param["orderID"] = OrderId;
             if(Price != null)
             {
-                param["price"] = Price.ToString();
+                param["price"] = Price.ToString().Replace(",",".");
             }
             if(OrderQty != null)
             {
@@ -384,7 +384,7 @@ namespace BitMEX
             param["orderID"] = OrderId;
             if (Price != null)
             {
-                param["price"] = Price.ToString();
+                param["price"] = Price.ToString().Replace(",",".");
             }
             if (OrderQty != null)
             {

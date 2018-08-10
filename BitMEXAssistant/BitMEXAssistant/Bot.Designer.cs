@@ -334,6 +334,7 @@
             this.TabControl.Size = new System.Drawing.Size(857, 394);
             this.TabControl.Style = MetroFramework.MetroColorStyle.White;
             this.TabControl.TabIndex = 14;
+            this.TabControl.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.TabControl.UseSelectable = true;
             this.TabControl.UseStyleColors = true;
             // 
@@ -1923,6 +1924,7 @@
             this.tabStops.Size = new System.Drawing.Size(849, 352);
             this.tabStops.TabIndex = 6;
             this.tabStops.Text = "Stops";
+            this.tabStops.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.tabStops.VerticalScrollbarBarColor = true;
             this.tabStops.VerticalScrollbarHighlightOnWheel = false;
             this.tabStops.VerticalScrollbarSize = 10;
@@ -2816,6 +2818,7 @@
             this.txtPositionSize.Style = MetroFramework.MetroColorStyle.Red;
             this.txtPositionSize.TabIndex = 0;
             this.txtPositionSize.UseSelectable = true;
+            this.txtPositionSize.UseStyleColors = true;
             this.txtPositionSize.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtPositionSize.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 

@@ -42,7 +42,7 @@ namespace BitMEXAssistant
         Dictionary<string, decimal> Prices = new Dictionary<string, decimal>();
         //List<Alert> Alerts = new List<Alert>();
 
-        public static string Version = "0.0.164";
+        public static string Version = "0.0.17";
 
         string LimitNowBuyOrderId = "";
         decimal LimitNowBuyOrderPrice = 0;
@@ -782,7 +782,7 @@ namespace BitMEXAssistant
             DCACounter++;
             bitmex.MarketOrder(DCASelectedSymbol, DCASide, DCAContractsPer, chkDCAReduceOnly.Checked);
 
-            double Percent = ((double)DCACounter / (double)DCATimes) * 100;
+            decimal Percent = (DCACounter / DCATimes) * 100;
             pgbDCA.Value = Convert.ToInt32(Math.Round(Percent));
 
             if (DCACounter == DCATimes)
